@@ -26,7 +26,7 @@ public class VitalSigns {
     public VitalSigns(String vitals_Id, float bodyTemperature, int pulseRate, int respiratoryRate, String bloodPressure, int oxygenSaturation, int painScale) {
         this.vitals_Id = vitals_Id;
         this.bodyTemperature = bodyTemperature;
-        this.pulseRate = pulseRate;0
+        this.pulseRate = pulseRate;
         this.respiratoryRate = respiratoryRate;
         this.bloodPressure = bloodPressure;
         this.oxygenSaturation = oxygenSaturation;

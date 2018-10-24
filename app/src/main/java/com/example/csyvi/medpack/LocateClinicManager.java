@@ -30,7 +30,7 @@ import static android.content.Context.LOCATION_SERVICE;
 /**
  * The type Locate clinic manager.
  */
-public class LocateClinicManager {
+    public class LocateClinicManager {
     private Context mContext;
     private LatLng user_LatLng;
     private LocationManager locationManager;
@@ -44,7 +44,7 @@ public class LocateClinicManager {
      * This method will instantiate Context and Geocoder objects
      * @param mContext
      */
-    private LocateClinicManager(Context mContext) {
+    public LocateClinicManager(Context mContext) {
         this.mContext = mContext;
         geocoder = new Geocoder(mContext);
 
@@ -59,7 +59,7 @@ public class LocateClinicManager {
     /**
      * Call the other methods to retrieve locations' details
      */
-    private void userLocation() {
+    public void userLocation() {
         final LocationListener locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
