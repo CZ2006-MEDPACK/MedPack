@@ -49,5 +49,8 @@
         <activity
             android:name=".ScanVitalSigns">
         </activity>
+        <activity
+            android:name=".MeasureVitalSignsManager">
+        </activity>
     </application>
 </manifest>

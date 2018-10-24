@@ -23,10 +23,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ScanVitalSigns.class);
-                Log.d("debugMEDPACK", "tesT");
+                //Log.d("debugMEDPACK", "tesT");
                 getActivity().startActivity(intent);
-                // error starts after starting this activity
-                Log.d("debugMEDPACK", "tesT2");
             }
         });
 

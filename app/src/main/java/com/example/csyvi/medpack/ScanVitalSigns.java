@@ -1,5 +1,8 @@
 package com.example.csyvi.medpack;
 
+import android.app.FragmentManager;
+import android.content.Intent;
+import android.icu.util.Measure;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,7 +17,7 @@ import io.netopen.hotbitmapgg.library.view.RingProgressBar;
 /**
  * The type Scan vital signs.
  */
-public class ScanVitalSigns extends AppCompatActivity {
+public class ScanVitalSigns extends AppCompatActivity  {
 
     /**
      * The Text view.
@@ -22,7 +25,6 @@ public class ScanVitalSigns extends AppCompatActivity {
     TextView textView;
     Button scanButton;
     Button submitButton;
-
     /**
      * The Ring progress bar 1.
      */
@@ -106,7 +108,13 @@ public class ScanVitalSigns extends AppCompatActivity {
             }
         });
 
-
-
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ScanVitalSigns.this, MeasureVitalSignsManager.class);
+                intent.putExtra("sessionID","submitVitals");
+                startActivity(intent);
+            }
+        });
     }
 }
