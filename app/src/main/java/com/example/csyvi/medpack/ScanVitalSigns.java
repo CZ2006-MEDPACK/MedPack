@@ -20,6 +20,9 @@ public class ScanVitalSigns extends AppCompatActivity {
      * The Text view.
      */
     TextView textView;
+    Button scanButton;
+    Button submitButton;
+
     /**
      * The Ring progress bar 1.
      */
@@ -44,6 +47,12 @@ public class ScanVitalSigns extends AppCompatActivity {
                     progress++;
                     ringProgressBar1.setProgress(progress);
                 }
+
+                if(progress == 100)
+                {
+                    progress = 0;
+                    ringProgressBar1.setProgress(0);
+                }
             }
         }
     };
@@ -54,17 +63,24 @@ public class ScanVitalSigns extends AppCompatActivity {
         setContentView(R.layout.measurevitalsigns_scanningvitalsigns);
 
         textView = findViewById(R.id.progressText);
-        Button scanButton = findViewById(R.id.scanButton);
+        scanButton = findViewById(R.id.scanButton);
+        submitButton = findViewById(R.id.submitButton);
+        scanButton.setVisibility(View.VISIBLE);
+        submitButton.setVisibility(View.INVISIBLE);
         scanButton.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
                 textView.setText("Scanning ...");
+                submitButton.setVisibility(View.INVISIBLE);
+                scanButton.setVisibility(View.INVISIBLE);
                 ringProgressBar1 = findViewById(R.id.progress_bar_1);
                 ringProgressBar1.setOnProgressListener(new RingProgressBar.OnProgressListener( ) {
                     @Override
                     public void progressToComplete() {
-
-                        Toast.makeText(ScanVitalSigns.this,"Scanning Completed!", Toast.LENGTH_SHORT).show();
+                        textView.setText("Scan Completed!!");
+                        submitButton.setVisibility(View.VISIBLE);
+                        scanButton.setText("Rescan Vital Signs");
+                        scanButton.setVisibility(View.VISIBLE);
                     }
                 });
 
