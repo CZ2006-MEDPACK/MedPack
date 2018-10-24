@@ -7,12 +7,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * The type My page adapter.
+ */
 public class MyPageAdapter extends PagerAdapter {
 
     private LayoutInflater inflater;
     private int[] layouts;
     private Context context;
 
+    /**
+     * Instantiates a new My page adapter.
+     *
+     * @param layouts the layouts
+     * @param context the context
+     */
     public MyPageAdapter(int[] layouts, Context context) {
         this.layouts = layouts;
         this.context = context;

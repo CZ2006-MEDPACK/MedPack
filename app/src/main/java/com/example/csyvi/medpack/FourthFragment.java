@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * The type Fourth fragment.
+ */
 public class FourthFragment extends Fragment {
 
     @Override

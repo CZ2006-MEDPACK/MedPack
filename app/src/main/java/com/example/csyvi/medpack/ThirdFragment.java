@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+/**
+ * The type Third fragment.
+ */
 public class ThirdFragment extends Fragment {
 
     @Override

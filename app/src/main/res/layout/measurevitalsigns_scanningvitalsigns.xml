@@ -20,7 +20,7 @@
         app:max="100"
         app:ringColor="@color/colorPrimary"
         app:ringProgressColor="@color/colorAccent"
-        app:ringWidth="3dp"
+        app:ringWidth="5dp"
         app:style="STROKE"
         app:textColor="@color/colorPrimary"
         app:textIsShow="true"
@@ -29,10 +29,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Place finger on the back of your phone to scan ..."
+        android:text="Place finger and tap on 'Scan' button to scan for your Vital Signs .. ..."
         android:layout_alignTop="@id/progress_bar_1"
         android:layout_marginTop="170dp"
-        android:layout_marginLeft="35dp"/>
+        android:layout_marginLeft="35dp"
+        android:id="@+id/progressText"/>
 
     <Button
         android:layout_width="match_parent"

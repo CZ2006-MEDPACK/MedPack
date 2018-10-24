@@ -27,7 +27,10 @@ import java.util.List;
 
 import static android.content.Context.LOCATION_SERVICE;
 
-public class AppointmentManager {
+/**
+ * The type Locate clinic manager.
+ */
+public class LocateClinicManager {
     private Context mContext;
     private LatLng user_LatLng;
     private LocationManager locationManager;
@@ -37,7 +40,11 @@ public class AppointmentManager {
     private ArrayList<Clinic> clinicList = new ArrayList<>();
     private Geocoder geocoder;
 
-    public AppointmentManager(Context mContext) {
+    /**
+     * This method will instantiate Context and Geocoder objects
+     * @param mContext
+     */
+    private LocateClinicManager(Context mContext) {
         this.mContext = mContext;
         geocoder = new Geocoder(mContext);
 
@@ -49,7 +56,10 @@ public class AppointmentManager {
         }
     }
 
-    public void userLocation() {
+    /**
+     * Call the other methods to retrieve locations' details
+     */
+    private void userLocation() {
         final LocationListener locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
@@ -83,7 +93,10 @@ public class AppointmentManager {
         locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, locationListener, null);
     }
 
-    public void calculatingDirection(){
+    /**
+     *
+     */
+    private void calculatingDirection(){
         int counter = 0;
         if (user_LatLng.longitude < 103.819839){
             direction.add("West");
@@ -108,7 +121,10 @@ public class AppointmentManager {
             direction.add("Northeast");
     }
 
-    public void locatingName (){
+    /**
+     * This method will read the file and locate the name
+     */
+    private void locatingName (){
         for (String s: direction) {
             BufferedReader reader = null;
             try {
@@ -137,7 +153,10 @@ public class AppointmentManager {
         }
     }
 
-    public void siteRetrieve() {
+    /**
+     * This method will retrieve clinic details (excluding longitude & latitude) from SingHealth and insert into arraylist
+     */
+    private void siteRetrieve() {
 
         ArrayList<String> clinicName = new ArrayList<>();
 
@@ -221,7 +240,10 @@ public class AppointmentManager {
 //        }
     }
 
-    public void latLngChecker(){
+    /**
+     * This method will extract the latitude and longitude
+     */
+    private void latLngChecker(){
         List<Address> list;
         int z = 0;
         for (Clinic a : clinicList) {
