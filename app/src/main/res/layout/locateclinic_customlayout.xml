@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/clinicName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="26dp"
+        android:text="Clinic Name" />
+
+    <TextView
+        android:id="@+id/clinicAddress"
+        android:layout_width="264dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/clinicName"
+        android:layout_marginTop="54dp"
+        android:text="Clinic Address" />
+
+    <TextView
+        android:id="@+id/clinicContactNo"
+        android:layout_width="264dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/clinicName"
+        android:layout_marginTop="86dp"
+        android:text="Clinic Contact No" />
+
+    <TextView
+        android:id="@+id/clinicoperatinghours"
+        android:layout_width="265dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/clinicName"
+        android:layout_marginTop="115dp"
+        android:text="Operaing Hours" />
+</RelativeLayout>

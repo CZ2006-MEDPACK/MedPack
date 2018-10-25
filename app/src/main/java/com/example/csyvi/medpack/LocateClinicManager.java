@@ -1,6 +1,7 @@
 package com.example.csyvi.medpack;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -9,8 +10,17 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -30,7 +40,7 @@ import static android.content.Context.LOCATION_SERVICE;
 /**
  * The type Locate clinic manager.
  */
-    public class LocateClinicManager {
+    public class LocateClinicManager extends Fragment {
     private Context mContext;
     private LatLng user_LatLng;
     private LocationManager locationManager;
@@ -40,10 +50,60 @@ import static android.content.Context.LOCATION_SERVICE;
     private ArrayList<Clinic> clinicList = new ArrayList<>();
     private Geocoder geocoder;
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.locateclinic, container, false);
+
+        ListView listView = view.findViewById(R.id.listView);
+        CustomAdapter customAdapter = new CustomAdapter();
+        listView.setAdapter(customAdapter);
+
+        return view;
+    }
+
+    class CustomAdapter extends BaseAdapter{
+        @Override
+        public int getCount() {
+            return 0;
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            view = getLayoutInflater().inflate(R.layout.locateclinic_customlayout,null);
+
+            TextView textView_clinicname = view.findViewById(R.id.clinicName);
+            TextView textView_clinicaddress = view.findViewById(R.id.clinicAddress);
+            TextView textView_cliniccontactno = view.findViewById(R.id.clinicContactNo);
+            TextView textView_clinicoperatinghours = view.findViewById(R.id.clinicoperatinghours);
+
+            textView_clinicname.setText(clinicList.get(i).getName());
+            textView_clinicaddress.setText(clinicList.get(i).getName());
+            textView_cliniccontactno.setText(clinicList.get(i).getName());
+            textView_clinicoperatinghours.setText(clinicList.get(i).getOperating_hour());
+
+            return null;
+        }
+    }
+
+    public LocateClinicManager()
+    {
+    }
+
     /**
      * This method will instantiate Context and Geocoder objects
      * @param mContext
      */
+    @SuppressLint("ValidFragment")
     public LocateClinicManager(Context mContext) {
         this.mContext = mContext;
         geocoder = new Geocoder(mContext);
