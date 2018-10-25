@@ -21,8 +21,8 @@ public class VitalSignsFragment extends Fragment {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new LocateClinicManager()).commit();
+                //getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                       // new LocateClinicManager()).commit();
             }
         });
 

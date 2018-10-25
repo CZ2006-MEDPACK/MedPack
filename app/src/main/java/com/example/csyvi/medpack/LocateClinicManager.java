@@ -40,7 +40,7 @@ import static android.content.Context.LOCATION_SERVICE;
 /**
  * The type Locate clinic manager.
  */
-    public class LocateClinicManager extends Fragment {
+    public class LocateClinicManager  {
     private Context mContext;
     private LatLng user_LatLng;
     private LocationManager locationManager;
@@ -49,55 +49,6 @@ import static android.content.Context.LOCATION_SERVICE;
     private ArrayList<String> storage = new ArrayList<>();
     private ArrayList<Clinic> clinicList = new ArrayList<>();
     private Geocoder geocoder;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.locateclinic, container, false);
-
-        ListView listView = view.findViewById(R.id.listView);
-        CustomAdapter customAdapter = new CustomAdapter();
-        listView.setAdapter(customAdapter);
-
-        return view;
-    }
-
-    class CustomAdapter extends BaseAdapter{
-        @Override
-        public int getCount() {
-            return 0;
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-            view = getLayoutInflater().inflate(R.layout.locateclinic_customlayout,null);
-
-            TextView textView_clinicname = view.findViewById(R.id.clinicName);
-            TextView textView_clinicaddress = view.findViewById(R.id.clinicAddress);
-            TextView textView_cliniccontactno = view.findViewById(R.id.clinicContactNo);
-            TextView textView_clinicoperatinghours = view.findViewById(R.id.clinicoperatinghours);
-
-            textView_clinicname.setText(clinicList.get(i).getName());
-            textView_clinicaddress.setText(clinicList.get(i).getName());
-            textView_cliniccontactno.setText(clinicList.get(i).getName());
-            textView_clinicoperatinghours.setText(clinicList.get(i).getOperating_hour());
-
-            return null;
-        }
-    }
-
-    public LocateClinicManager()
-    {
-    }
 
     /**
      * This method will instantiate Context and Geocoder objects
@@ -123,6 +74,7 @@ import static android.content.Context.LOCATION_SERVICE;
         final LocationListener locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
+                Log.d("test1","test1");
                 user_LatLng = new LatLng(location.getLatitude(), location.getLongitude());
                 calculatingDirection();
                 locatingName();
