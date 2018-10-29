@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 /**
  * The type First fragment.
  */
-public class FirstFragment extends Fragment {
+public class MedicineSchedulerFragment extends Fragment {
 
     @Nullable
     @Override

@@ -39,18 +39,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps">
-        </activity>
-        <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".ScanVitalSigns">
+            android:name=".ScanVitalSignsActivity">
         </activity>
         <activity
-            android:name=".MeasureVitalSignsManager">
+            android:name=".MeasureVitalSignsActivity">
         </activity>
     </application>
 </manifest>

@@ -10,10 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-/**
- * The type Main activity.
- */
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MeasureVitalSignsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
 
     @Override
@@ -35,8 +32,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         if(savedInstanceState == null) {
+            // opens the VitalSignsFragment instead of HomeFragment to get to the InputVitalSigns UI
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new HomeFragment()).commit();
+                    new VitalSignsFragment()).commit();
 
             navigationView.setCheckedItem(R.id.home_page);
         }
@@ -52,9 +50,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.medication_scheduler:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new MedicineSchedulerFragment()).commit();
-                    break;
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new MedicineSchedulerFragment()).commit();
+                break;
 
             case R.id.show_records:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

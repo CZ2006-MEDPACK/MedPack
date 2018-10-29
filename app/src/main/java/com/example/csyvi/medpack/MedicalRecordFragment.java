@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 /**
  * The type Second fragment.
  */
-public class SecondFragment extends Fragment {
+public class MedicalRecordFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

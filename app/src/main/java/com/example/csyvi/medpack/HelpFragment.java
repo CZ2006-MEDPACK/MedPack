@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 /**
  * The type Fifth fragment.
  */
-public class FifthFragment extends Fragment {
+public class HelpFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

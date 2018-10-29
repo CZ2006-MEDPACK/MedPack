@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 /**
  * The type Fourth fragment.
  */
-public class FourthFragment extends Fragment {
+public class SettingFragment extends Fragment {
 
     SwitchCompat switch_1, switch_2;
     boolean stateSwitch1, stateSwitch2;

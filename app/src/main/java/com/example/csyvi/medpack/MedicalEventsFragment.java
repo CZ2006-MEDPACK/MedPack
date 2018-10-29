@@ -12,7 +12,7 @@ import android.webkit.WebViewClient;
 /**
  * The type Third fragment.
  */
-public class ThirdFragment extends Fragment {
+public class MedicalEventsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

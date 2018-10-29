@@ -1,5 +1,7 @@
 package com.example.csyvi.medpack;
 
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +22,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 /**
  * The type Maps activity.
  */
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     /**
@@ -46,12 +48,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            view = getLayoutInflater().inflate(R.layout.locateclinic_customlayout,null);
+            //view = getLayoutInflater().inflate(R.layout.locateclinic_customlayout,null);
 
-            TextView textView_clinicname = view.findViewById(R.id.clinicName);
-            TextView textView_clinicaddress = view.findViewById(R.id.clinicAddress);
-            TextView textView_cliniccontactno = view.findViewById(R.id.clinicContactNo);
-            TextView textView_clinicoperatinghours = view.findViewById(R.id.clinicoperatinghours);
+            //TextView textView_clinicname = view.findViewById(R.id.clinicName);
+            //TextView textView_clinicaddress = view.findViewById(R.id.clinicAddress);
+           // TextView textView_cliniccontactno = view.findViewById(R.id.clinicContactNo);
+            //TextView textView_clinicoperatinghours = view.findViewById(R.id.clinicoperatinghours);
 
            // textView_clinicname.setText(clinicList.get(i).getName());
             //textView_clinicaddress.setText(clinicList.get(i).getName());
@@ -62,20 +64,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-        apManager = new LocateClinicManager(this);
-        ListView listView = findViewById(R.id.listView);
-        CustomAdapter customAdapter = new CustomAdapter();
-        listView.setAdapter(customAdapter);
-    }
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.locateclinic, container, false);
 
+        return view;
+    }
 
     /**
      * Manipulates the map once available.

@@ -57,7 +57,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:text="Your Vital Signs"
-        android:textColor="@android:color/red"
+        android:textColor="@android:color/holo_red_dark"
         android:textSize="20sp"
         android:textStyle="bold|italic"
         android:typeface="sans" />
