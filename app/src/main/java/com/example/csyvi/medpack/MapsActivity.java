@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,16 +20,16 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 /**
  * The type Maps activity.
  */
 public class MapsActivity extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    /**
-     * The Ap manager.
-     */
-    LocateClinicManager apManager;
+    LocateClinicManager clinicManager;
+    ListView listView;
 
     class CustomAdapter extends BaseAdapter {
         @Override
@@ -47,27 +48,39 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
         }
 
         @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-            //view = getLayoutInflater().inflate(R.layout.locateclinic_customlayout,null);
+        public View getView(int position, View view, ViewGroup viewGroup) {
+            view = getLayoutInflater().inflate(R.layout.locateclinic_customlayout,null);
 
-            //TextView textView_clinicname = view.findViewById(R.id.clinicName);
-            //TextView textView_clinicaddress = view.findViewById(R.id.clinicAddress);
-           // TextView textView_cliniccontactno = view.findViewById(R.id.clinicContactNo);
-            //TextView textView_clinicoperatinghours = view.findViewById(R.id.clinicoperatinghours);
+            Clinic currentClinic = clinicManager.getClinicList().get(position);
 
-           // textView_clinicname.setText(clinicList.get(i).getName());
-            //textView_clinicaddress.setText(clinicList.get(i).getName());
-            //textView_cliniccontactno.setText(clinicList.get(i).getName());
-           // textView_clinicoperatinghours.setText(clinicList.get(i).getOperating_hour());
+            TextView textView_clinicname = view.findViewById(R.id.clinicName);
+            TextView textView_clinicaddress = view.findViewById(R.id.clinicAddress);
+            TextView textView_cliniccontactno = view.findViewById(R.id.clinicContactNo);
+            TextView textView_clinicoperatinghours = view.findViewById(R.id.clinicoperatinghours);
 
-            return null;
+            textView_clinicname.setText(currentClinic.getName());
+            textView_clinicaddress.setText(currentClinic.getAddress());
+            textView_cliniccontactno.setText(currentClinic.getPhone_number());
+            textView_clinicoperatinghours.setText(currentClinic.getOperating_hour());
+
+            return view;
         }
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.locateclinic, container, false);
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+        clinicManager = new LocateClinicManager(getActivity());
+        clinicManager.userLocation();
+
+        CustomAdapter adapter = new CustomAdapter();
+        //ArrayAdapter<Clinic> adapter = new ArrayAdapter<Clinic>(getActivity(),android.R.layout.simple_list_item_1,clinicManager.getClinicList());
+        listView = view.findViewById(R.id.listView);
+        listView.setAdapter(adapter);
 
         return view;
     }
@@ -82,15 +95,13 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        apManager.userLocation();
+    public void onMapReady(GoogleMap googleMap)
+    {
         mMap = googleMap;
-
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        Log.d("TERM", "Check");
+
     }
 }

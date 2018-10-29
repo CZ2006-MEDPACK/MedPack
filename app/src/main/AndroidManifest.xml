@@ -46,7 +46,7 @@
             android:name=".ScanVitalSignsActivity">
         </activity>
         <activity
-            android:name=".MeasureVitalSignsActivity">
+        android:name=".MeasureVitalSignsActivity">
         </activity>
     </application>
 </manifest>

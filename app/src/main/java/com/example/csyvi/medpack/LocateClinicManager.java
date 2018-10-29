@@ -24,14 +24,27 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.parser.Parser;
 import org.jsoup.select.Elements;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,21 +53,26 @@ import static android.content.Context.LOCATION_SERVICE;
 /**
  * The type Locate clinic manager.
  */
-    public class LocateClinicManager  {
+    public class LocateClinicManager {
     private Context mContext;
     private LatLng user_LatLng;
     private LocationManager locationManager;
     private ArrayList<String> direction = new ArrayList<>();
     private ArrayList<String> locationAL = new ArrayList<>();
     private ArrayList<String> storage = new ArrayList<>();
-    private ArrayList<Clinic> clinicList = new ArrayList<>();
     private Geocoder geocoder;
+    private String fileTodownload = "https://data.gov.sg/dataset/31e92629-980d-4672-af33-cec147c18102/download";
+    private ArrayList<Clinic> chasClinic = new ArrayList<>();
 
-    /**
-     * This method will instantiate Context and Geocoder objects
-     * @param mContext
-     */
-    @SuppressLint("ValidFragment")
+
+    //use either surroundingChas or clinicList to populate the surrounding general practitioner
+    private ArrayList<Clinic> surroundingChas = new ArrayList<>();
+    private ArrayList<Clinic> clinicList = new ArrayList<>();
+
+    public ArrayList<Clinic> getClinicList() {
+        return clinicList;
+    }
+
     public LocateClinicManager(Context mContext) {
         this.mContext = mContext;
         geocoder = new Geocoder(mContext);
@@ -67,19 +85,41 @@ import static android.content.Context.LOCATION_SERVICE;
         }
     }
 
-    /**
-     * Call the other methods to retrieve locations' details
-     */
+    public void compare(){
+        for (Clinic c : clinicList){
+            String name = c.getName().toUpperCase();
+            String postal = c.getPostalCode();
+            postal = postal.replace("Singapore ", "");
+            postal = postal.trim();
+            for (Clinic chas: chasClinic){
+                String chasPostal = chas.getPostalCode();
+                if (((chas.getName()).contains(name)) && chasPostal.equals(postal)) {
+//                    Log.d("chasClinic", chas.getName() + " compare with " + name + "| " + (chas.getName().contains(name)) + " | " + chas.getPostalCode());
+                    surroundingChas.add(c);
+                }
+            }
+        }
+
+        for (Clinic a: surroundingChas)
+        {
+            Log.d("chasClinic", "surroundingChas: " + a.getName() + ", " + a.getDistance());
+        }
+    }
+
     public void userLocation() {
+
         final LocationListener locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                Log.d("test1","test1");
                 user_LatLng = new LatLng(location.getLatitude(), location.getLongitude());
+//                downloadCommand();
+                readKML();
                 calculatingDirection();
                 locatingName();
                 siteRetrieve();
                 latLngChecker();
+                distSearch();
+                compare();
             }
             @Override
             public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -101,42 +141,41 @@ import static android.content.Context.LOCATION_SERVICE;
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-//        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, locationListener);
         locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, locationListener, null);
     }
 
-    /**
-     *
-     */
-    private void calculatingDirection(){
+    public void calculatingDirection(){
         int counter = 0;
         if (user_LatLng.longitude < 103.819839){
             direction.add("West");
+            Log.d("direction", "west");
         }
         else if (user_LatLng.longitude > 103.819839){
             direction.add("East");
+            Log.d("direction", "east");
         }
         if (user_LatLng.latitude > (1.3521+0.05))
         {
             direction.add("North");
+            Log.d("direction", "north");
         }
         else
         {
             direction.add("Central");
+            Log.d("direction", "central");
         }
         for(String s: direction)
         {
             if (s.equals("North") || s.equals("East"))
                 counter++;
         }
-        if (counter == 2)
+        if (counter == 2) {
             direction.add("Northeast");
+            Log.d("direction", "north east");
+        }
     }
 
-    /**
-     * This method will read the file and locate the name
-     */
-    private void locatingName (){
+    public void locatingName (){
         for (String s: direction) {
             BufferedReader reader = null;
             try {
@@ -165,14 +204,9 @@ import static android.content.Context.LOCATION_SERVICE;
         }
     }
 
-    /**
-     * This method will retrieve clinic details (excluding longitude & latitude) from SingHealth and insert into arraylist
-     */
-    private void siteRetrieve() {
+    public void siteRetrieve() {
 
         ArrayList<String> clinicName = new ArrayList<>();
-
-        Log.d("USERss", "--------------------------------------------------------------");
         for (String s : locationAL) {
             String keyword = s;
             Document doc = null;
@@ -184,7 +218,7 @@ import static android.content.Context.LOCATION_SERVICE;
                 for (Element row : rows) {
                     if (!row.text().equals(" ") && !row.text().equals("")) {
                         if ((row.text()).equals(keyword))
-                        counter = 1;
+                            counter = 1;
                         if (counter == 1 && ((row.text()).contains("Tel No: ") || (row.text()).contains("Tel: "))) {
                             clinicName.add((row.select("strong")).text());
                             storage.add(row.text());
@@ -245,17 +279,9 @@ import static android.content.Context.LOCATION_SERVICE;
             }
             i++;
         }
-//        for(Clinic a: clinicList)
-//        {
-//            Log.d("Clinic_Record", "clinic name: " + a.getName() + ", address: " + a.getAddress() + ", postal code: " + a.getPostalCode()
-//                    + ", Tel No: " + a.getPhone_number() + ", " + a.getOperating_hour());
-//        }
     }
 
-    /**
-     * This method will extract the latitude and longitude
-     */
-    private void latLngChecker(){
+    public void latLngChecker(){
         List<Address> list;
         int z = 0;
         for (Clinic a : clinicList) {
@@ -268,10 +294,150 @@ import static android.content.Context.LOCATION_SERVICE;
             }
             z++;
         }
+    }
+
+    public void distSearch(){
+        StringBuilder urlBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
+        urlBuilder.append("https://maps.googleapis.com/maps/api/distancematrix/json?origins="
+                + user_LatLng.latitude + "," + user_LatLng.longitude +
+                "&destinations=");
         for(Clinic a: clinicList)
         {
-            Log.d("CRESULT", "clinic name: " + a.getName() + ", latitude: " + a.getLatitude() + ", longitude: " + a.getLongitude());
+            urlBuilder.append(a.getLatitude() + "," + a.getLongitude() + "|");
         }
+        urlBuilder.deleteCharAt((urlBuilder.length()-1));
+        urlBuilder.append("&key=AIzaSyCkU5Dt6se9ziYISEEGXse6nxRAQud5awk");
+        Log.d("ReturnResult", urlBuilder.toString());
+        HttpURLConnection urlConnection = null;
+        try {
+            URL url = new URL(urlBuilder.toString());
+            urlConnection = (HttpURLConnection) url.openConnection();
+            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                stringBuilder.append(line);
+            }
 
+//            Log.d("ReturnResult", "stringBuilder: " + stringBuilder.toString());
+
+            JSONObject jsonObject = new JSONObject();
+            try{
+                jsonObject = new JSONObject(stringBuilder.toString());
+                JSONArray rowList = jsonObject.getJSONArray("rows");
+//                Log.d("ReturnResult", rowList.toString());
+                JSONObject row = rowList.getJSONObject(0);
+//                Log.d("ReturnResult", "row: " +row.toString());
+                JSONArray elements = row.getJSONArray("elements");
+//                Log.d("ReturnResult", "elements: " + elements.toString());
+                int i = 0;
+                for (Clinic a : clinicList) {
+                    JSONObject element = elements.getJSONObject(i);
+//                    Log.d("ReturnResult", "element single record: " + element.toString());
+                    JSONObject distanceRecord = element.getJSONObject("distance");
+//                    Log.d("ReturnResult", "distance Record: " + distanceRecord.toString());
+                    Double distanceText = distanceRecord.getDouble("value");
+//                    Log.d("ReturnResult", "clinic distance: " + distanceText);
+                    clinicList.get(i).setDistance(distanceText);
+                    i++;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        for(Clinic a : clinicList)
+//        {
+//            Log.d("ReturnResult", "clinic name: " + a.getName() + ", clinic latitude and longitude: " + a.getLatitude()+"," + a.getLongitude()
+//                    + " | distance from user: " + a.getDistance());
+//
+//        }
+    }
+
+    protected String downloadCommand() {
+        InputStream input = null;
+        OutputStream output = null;
+        HttpURLConnection connection = null;
+        try {
+            URL url = new URL(fileTodownload);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.connect();
+
+            // expect HTTP 200 OK, so we don't mistakenly save error report
+            // instead of the file
+            if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                return "Server returned HTTP " + connection.getResponseCode()
+                        + " " + connection.getResponseMessage();
+            }
+
+            // this will be useful to display download percentage
+            // might be -1: server did not report the length
+            int fileLength = connection.getContentLength();
+
+            // download the file
+            input = connection.getInputStream();
+            output = new FileOutputStream(mContext.getFilesDir()+"/chas.kml");
+            Log.d("downloaded", String.valueOf(mContext.getFilesDir())+"/chas.kml");
+            byte data[] = new byte[4096];
+            long total = 0;
+            double percent = 0.0;
+            int count;
+            while ((count = input.read(data)) != -1) {
+                total += count;
+                percent = (double) (total * 100 / fileLength);
+                Log.d("downloaded", "Current percent is: " + percent + "%");
+                output.write(data, 0, count);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (output != null)
+                    output.close();
+                if (input != null)
+                    input.close();
+            } catch (IOException e) {
+                Log.e("Error: ", e.getMessage());
+            }
+
+            if (connection != null)
+                connection.disconnect();
+        }
+        return null;
+    }
+
+    public void readKML(){
+        String kmlData = null;
+        try{
+            File file = new File((mContext.getFilesDir()+"/chas.kml"));
+            InputStream InputStream = new FileInputStream(file);
+            int size = InputStream.available();
+            byte[] buffer = new byte[size];
+            InputStream.read(buffer);
+            InputStream.close();
+            kmlData = new String(buffer);
+            Document doc = Jsoup.parse(kmlData, "", Parser.xmlParser());
+            int i =0;
+            String name = "";
+            String postal = "";
+            Elements e =  doc.select("ExtendedData").select("SchemaData");
+            Elements chasName = e.select("SimpleData[name=\"HCI_NAME\"]");
+            Elements chasPostal = e.select("SimpleData[name=\"POSTAL_CD\"]");
+
+            for (Element a:chasName){
+                name = a.text();
+                postal = chasPostal.get(i).text();
+//                    Log.d("chasClinic", "chasName: " + name + " | chasPostal: " + postal);
+                chasClinic.add(new Clinic(name.toUpperCase(),postal));
+                i++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
