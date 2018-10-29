@@ -8,8 +8,8 @@
         android:id="@+id/radioButton4"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
-        android:layout_alignTop="@+id/textView6"
-        android:layout_toEndOf="@+id/textView11"
+        android:layout_alignTop="@+id/radioButton6"
+        android:layout_toEndOf="@+id/textViewTitle"
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:text="3"
@@ -41,166 +41,200 @@
         android:id="@+id/radioButton3"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
-        android:layout_alignEnd="@+id/textView11"
-        android:layout_alignTop="@+id/textView6"
+        android:layout_alignEnd="@+id/textViewTitle"
+        android:layout_alignTop="@+id/radioButton4"
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:text="2"
         android:textColor="@android:color/black" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/textViewTitle"
         android:layout_width="236dp"
         android:layout_height="40dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_marginTop="46dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
         android:text="Your Vital Signs"
-        android:textStyle="bold"
+        android:textColor="@android:color/red"
         android:textSize="20sp"
-        android:textColor="@android:color/black"/>
+        android:textStyle="bold|italic"
+        android:typeface="sans" />
 
     <EditText
-        android:id="@+id/editText10"
-        android:layout_width="wrap_content"
+        android:id="@+id/editTextRespiratoryRate"
+        android:layout_width="166dp"
         android:layout_height="21dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
+        android:layout_marginEnd="15dp"
         android:layout_marginTop="244dp"
         android:ems="10" />
 
     <EditText
-        android:id="@+id/editText8"
-        android:layout_width="wrap_content"
+        android:id="@+id/editTextBPSystolic"
+        android:layout_width="166dp"
         android:layout_height="21dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="260dp"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="15dp"
         android:ems="10" />
 
     <EditText
-        android:id="@+id/editText7"
-        android:layout_width="wrap_content"
+        android:id="@+id/editTextBPDiastolic"
+        android:layout_width="168dp"
         android:layout_height="21dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/textView7"
+        android:layout_alignTop="@+id/textViewBPDiastolic"
+        android:layout_marginEnd="15dp"
+        android:ems="10" />
+
+    <EditText
+        android:id="@+id/editTextEnterTemperature"
+        android:layout_width="164dp"
+        android:layout_height="21dp"
+        android:layout_alignEnd="@+id/editTextBox"
+        android:layout_alignTop="@+id/textViewPulseRate"
+        android:layout_marginEnd="3dp"
         android:ems="10" />
 
     <EditText
         android:id="@+id/editText5"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView4"
-        android:layout_toEndOf="@+id/textView3"
+        android:layout_width="163dp"
+        android:layout_height="20dp"
+        android:layout_alignEnd="@+id/editTextRespiratoryRate"
+        android:layout_alignTop="@+id/textViewOxygen"
+        android:layout_marginEnd="0dp"
         android:ems="10"
         android:text="100"
         android:textSize="12sp" />
 
     <EditText
         android:id="@+id/editText4"
-        android:layout_width="wrap_content"
-        android:layout_height="21dp"
+        android:layout_width="164dp"
+        android:layout_height="27dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="244dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="169dp"
         android:ems="10"
         android:text="Name" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/editTextBox"
         android:layout_width="357dp"
-        android:layout_height="98dp"
-        android:layout_below="@+id/textView10"
+        android:layout_height="67dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-200dp"
+        android:layout_marginBottom="81dp"
         android:ems="10"
         android:inputType="textLongMessage" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/textViewAnySymptoms"
         android:layout_width="157dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_marginBottom="200dp"
+        android:layout_alignStart="@+id/textViewTitle"
+        android:layout_marginBottom="156dp"
         android:text="Any Symptoms?"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="157dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_marginBottom="234dp"
+        android:layout_alignStart="@+id/textViewTitle"
+        android:layout_marginBottom="204dp"
         android:text="Enter Pain Scale:"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black" />
 
     <TextView
-        android:id="@+id/textView9"
-        android:layout_width="157dp"
+        android:id="@+id/textViewBPSystolic"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView3"
+        android:layout_alignStart="@+id/textViewTitle"
         android:layout_centerVertical="true"
-        android:text="Enter Blood Pressure: "
-        android:textColor="@android:color/black"/>
+        android:text="Enter BP(Systolic): "
+        android:textColor="@android:color/black" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/textViewBPDiastolic"
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textViewTitle"
+        android:layout_marginBottom="246dp"
+        android:text="Enter BP(Diastolic): "
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/textViewRespiratoryRate"
         android:layout_width="157dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_alignTop="@+id/editText4"
+        android:layout_alignStart="@+id/textViewTitle"
+        android:layout_alignTop="@+id/editTextRespiratoryRate"
         android:text="Enter Respiratory Rate: "
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black" />
 
     <TextView
-        android:id="@+id/textView7"
-        android:layout_width="157dp"
+        android:id="@+id/textViewEnterTemperature"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_marginTop="203dp"
+        android:layout_alignStart="@+id/textViewTitle"
+        android:layout_marginTop="210dp"
         android:text="Enter Temperature: "
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textViewOxygen"
         android:layout_width="157dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_marginTop="125dp"
+        android:layout_alignStart="@+id/textViewTitle"
+        android:layout_marginTop="127dp"
         android:text="Your Oxygen Saturation: "
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="157dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="164dp"
-        android:text="Please Enter Below ..."
-        android:textColor="@android:color/black"/>
+        android:id="@+id/textViewPleaseEnterBelow"
+        android:layout_width="133dp"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/editText4"
+        android:layout_alignStart="@+id/textViewTitle"
+        android:text="Please Enter Below"
+        android:textColor="@android:color/black" />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="157dp"
+        android:id="@+id/textViewPulseRate"
+        android:layout_width="121dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView3"
+        android:layout_alignStart="@+id/textViewTitle"
         android:layout_marginTop="98dp"
         android:text="Your Pulse Rate:"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/textViewDegreesCelcius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/textViewEnterTemperature"
+        android:layout_marginEnd="68dp"
+        android:text="\u2103"
+        android:textColor="@android:color/black" />
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="209dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView4"
-        android:layout_toEndOf="@+id/textView3"
+        android:layout_width="54dp"
+        android:layout_height="25dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/textViewEnterTemperature"
+        android:layout_marginEnd="128dp"
         android:ems="10"
         android:singleLine="true"
         android:text="68"
@@ -210,20 +244,20 @@
         android:id="@+id/radioButton2"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
-        android:layout_alignStart="@+id/editText4"
-        android:layout_alignTop="@+id/textView6"
+        android:layout_alignTop="@+id/radioButton4"
+        android:layout_toEndOf="@+id/textViewAnySymptoms"
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:text="1"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="178dp"
-        android:layout_height="wrap_content"
+        android:layout_width="191dp"
+        android:layout_height="59dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="21dp"
+        android:layout_marginBottom="10dp"
         android:text="Submit" />
 
 </RelativeLayout>
