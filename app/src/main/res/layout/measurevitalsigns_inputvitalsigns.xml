@@ -91,7 +91,7 @@
         android:ems="10" />
 
     <EditText
-        android:id="@+id/editTextEnterTemperature"
+        android:id="@+id/editTextPulseRate"
         android:layout_width="164dp"
         android:layout_height="21dp"
         android:layout_alignEnd="@+id/editTextBox"
@@ -100,7 +100,7 @@
         android:ems="10" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/editTextOxygenSaturation"
         android:layout_width="163dp"
         android:layout_height="20dp"
         android:layout_alignEnd="@+id/editTextRespiratoryRate"
@@ -110,7 +110,7 @@
         android:text="100"
         android:textSize="12sp" />
 
-    <EditText
+    <!--<EditText
         android:id="@+id/editText4"
         android:layout_width="164dp"
         android:layout_height="27dp"
@@ -119,7 +119,7 @@
         android:layout_marginEnd="15dp"
         android:layout_marginTop="169dp"
         android:ems="10"
-        android:text="Name" />
+        android:text="Name" /> -->
 
     <EditText
         android:id="@+id/editTextBox"
@@ -203,8 +203,9 @@
         android:id="@+id/textViewPleaseEnterBelow"
         android:layout_width="133dp"
         android:layout_height="30dp"
-        android:layout_alignBottom="@+id/editText4"
+        android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/textViewTitle"
+        android:layout_marginTop="166dp"
         android:text="Please Enter Below"
         android:textColor="@android:color/black" />
 
@@ -229,7 +230,7 @@
         android:textColor="@android:color/black" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editTextEnterTemperature"
         android:layout_width="54dp"
         android:layout_height="25dp"
         android:layout_alignParentEnd="true"

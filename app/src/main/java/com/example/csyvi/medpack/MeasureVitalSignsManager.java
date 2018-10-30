@@ -11,51 +11,50 @@ public class MeasureVitalSignsManager {
     VitalSigns vs;
 
     /**
-     * This method will check and validate for all the inputted vital signs
-     */
-    private void checkVitalSigns()
-    {
-    }
-
-    /**
      * This method will measure the pulse rate of the patient
      */
-    private void measurePulseRate()
+    private void checkPulseRate()
     {
+        int PulseRate = 0;
+        if(PulseRate <50){
+
+        }
+
     }
 
     /**
      * This method will measure the oxygen saturation of the patient
      */
-    private void measureOxygenSaturation()
+    private void checkOxygenSaturation()
     {
     }
 
     /**
      * This method will measure the temperature of the patient
      */
-    private void measureTemperature()
+    private void checkTemperature()
     {
     }
 
     /**
      * This method will measure the blood pressure of the patient
      */
-    private void measureBloodPressure()
+    private void checkBloodPressure()
     {
+
     }
 
     /**
      * This method will measure the respiratory rate of the patient
      */
-    private void measureRespiratoryRate()
+    private void checkRespiratoryRate()
     {
     }
 
     /**
      * This method will measure the pain scale of the patient
      */
-    private void measurePainScale()
+    private void checkPainScale()
     {
     }
 }
