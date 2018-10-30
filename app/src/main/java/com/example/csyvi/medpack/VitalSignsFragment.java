@@ -8,15 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import static android.widget.Toast.LENGTH_LONG;
 
 /**
  * The type First fragment.
  */
+
 public class VitalSignsFragment extends Fragment{
 
     EditText PulseRate, OxygenSaturation, Temperature;
     EditText BloodPressureSystolic, BloodPressureDiastolic, RespiratoryRate;
-    MeasureVitalSignsManager vs = new MeasureVitalSignsManager();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -29,10 +33,18 @@ public class VitalSignsFragment extends Fragment{
         Temperature = (EditText)view.findViewById(R.id.editTextEnterTemperature);
         RespiratoryRate = (EditText)view.findViewById(R.id.editTextRespiratoryRate);
 
+        MeasureVitalSignsManager vs = new MeasureVitalSignsManager();
+
         PulseRate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
-
+                if(MeasureVitalSignsManager.checkPulseRate(PulseRate.getText().toString()))
+                {
+                    Toast.makeText(getContext(), "Abnormal values detected! Please re-enter values or see a doctor immediately!", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(getContext(), "Values Recorded!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -83,4 +95,4 @@ public class VitalSignsFragment extends Fragment{
         return view;
     }
 
-    }
+}
