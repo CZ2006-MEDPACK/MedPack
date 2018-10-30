@@ -77,8 +77,17 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
         clinicManager = new LocateClinicManager(getActivity());
         clinicManager.userLocation();
 
-        CustomAdapter adapter = new CustomAdapter();
-        //ArrayAdapter<Clinic> adapter = new ArrayAdapter<Clinic>(getActivity(),android.R.layout.simple_list_item_1,clinicManager.getClinicList());
+        /*ArrayList<String> testArray = new ArrayList<String>();
+        testArray.add("clinic1");
+        testArray.add("clinic2");
+        testArray.add("clinic3");
+        testArray.add("clinic4");
+        testArray.add("clinic5");
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,testArray);*/
+
+
+        //CustomAdapter adapter = new CustomAdapter();
+        ArrayAdapter<Clinic> adapter = new ArrayAdapter<Clinic>(getActivity(),android.R.layout.simple_list_item_1,clinicManager.getClinicList());
         listView = view.findViewById(R.id.listView);
         listView.setAdapter(adapter);
 
