@@ -42,6 +42,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -53,7 +54,7 @@ import static android.content.Context.LOCATION_SERVICE;
 /**
  * The type Locate clinic manager.
  */
-    public class LocateClinicManager {
+public class LocateClinicManager implements Serializable {
     private Context mContext;
     private LatLng user_LatLng;
     private LocationManager locationManager;
@@ -79,19 +80,18 @@ import static android.content.Context.LOCATION_SERVICE;
 
         try {
             locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void compare(){
-        for (Clinic c : clinicList){
+    public void compare() {
+        for (Clinic c : clinicList) {
             String name = c.getName().toUpperCase();
             String postal = c.getPostalCode();
             postal = postal.replace("Singapore ", "");
             postal = postal.trim();
-            for (Clinic chas: chasClinic){
+            for (Clinic chas : chasClinic) {
                 String chasPostal = chas.getPostalCode();
                 if (((chas.getName()).contains(name)) && chasPostal.equals(postal)) {
 //                    Log.d("chasClinic", chas.getName() + " compare with " + name + "| " + (chas.getName().contains(name)) + " | " + chas.getPostalCode());
@@ -100,8 +100,7 @@ import static android.content.Context.LOCATION_SERVICE;
             }
         }
 
-        for (Clinic a: surroundingChas)
-        {
+        for (Clinic a : surroundingChas) {
             Log.d("chasClinic", "surroundingChas: " + a.getName() + ", " + a.getDistance());
         }
     }
@@ -111,22 +110,20 @@ import static android.content.Context.LOCATION_SERVICE;
         final LocationListener locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
+                Log.d("chasClinic", " test");
                 user_LatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                Log.d("chasClinic", " test");
 //                downloadCommand();
-                readKML();
-                calculatingDirection();
-                locatingName();
-                siteRetrieve();
-                latLngChecker();
-                distSearch();
-                compare();
             }
+
             @Override
             public void onStatusChanged(String provider, int status, Bundle extras) {
             }
+
             @Override
             public void onProviderEnabled(String provider) {
             }
+
             @Override
             public void onProviderDisabled(String provider) {
             }
@@ -144,28 +141,23 @@ import static android.content.Context.LOCATION_SERVICE;
         locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, locationListener, null);
     }
 
-    public void calculatingDirection(){
+    public void calculatingDirection() {
         int counter = 0;
-        if (user_LatLng.longitude < 103.819839){
+        if (user_LatLng.longitude < 103.819839) {
             direction.add("West");
             Log.d("direction", "west");
-        }
-        else if (user_LatLng.longitude > 103.819839){
+        } else if (user_LatLng.longitude > 103.819839) {
             direction.add("East");
             Log.d("direction", "east");
         }
-        if (user_LatLng.latitude > (1.3521+0.05))
-        {
+        if (user_LatLng.latitude > (1.3521 + 0.05)) {
             direction.add("North");
             Log.d("direction", "north");
-        }
-        else
-        {
+        } else {
             direction.add("Central");
             Log.d("direction", "central");
         }
-        for(String s: direction)
-        {
+        for (String s : direction) {
             if (s.equals("North") || s.equals("East"))
                 counter++;
         }
@@ -175,8 +167,8 @@ import static android.content.Context.LOCATION_SERVICE;
         }
     }
 
-    public void locatingName (){
-        for (String s: direction) {
+    public void locatingName() {
+        for (String s : direction) {
             BufferedReader reader = null;
             try {
                 reader = new BufferedReader(
@@ -231,7 +223,7 @@ import static android.content.Context.LOCATION_SERVICE;
         }
         int i = 0;
         String name, postalCode, address, phoneNumber, operating_hour;
-        for (String a: storage) {
+        for (String a : storage) {
             if (!a.equals(clinicName.get(i))) {
                 a = a.replace(clinicName.get(i), "");
                 a = a.trim();
@@ -252,18 +244,15 @@ import static android.content.Context.LOCATION_SERVICE;
                 a = a.trim();
                 operating_hour = a;
                 clinicList.add(new Clinic(clinicName.get(i), address, postalCode, phoneNumber, operating_hour));
-            }
-            else
-            {
+            } else {
                 operating_hour = a.substring(a.indexOf("Operating Hours: "), a.length());
                 a = a.replace(operating_hour, "");
                 a = a.trim();
-                if (a.contains("Tel: ")){
-                    phoneNumber = a.substring((a.indexOf("Tel: ")+ 5), a.length());
+                if (a.contains("Tel: ")) {
+                    phoneNumber = a.substring((a.indexOf("Tel: ") + 5), a.length());
                     a = a.replace("Tel: ", "");
-                }
-                else {
-                    phoneNumber = a.substring((a.indexOf("Tel No: ")+8), a.length());
+                } else {
+                    phoneNumber = a.substring((a.indexOf("Tel No: ") + 8), a.length());
                     a = a.replace("Tel No: ", "");
                 }
                 a = a.replace(phoneNumber, "");
@@ -281,7 +270,7 @@ import static android.content.Context.LOCATION_SERVICE;
         }
     }
 
-    public void latLngChecker(){
+    public void latLngChecker() {
         List<Address> list;
         int z = 0;
         for (Clinic a : clinicList) {
@@ -296,67 +285,79 @@ import static android.content.Context.LOCATION_SERVICE;
         }
     }
 
-    public void distSearch(){
+    public void distSearch() {
         StringBuilder urlBuilder = new StringBuilder();
         StringBuilder stringBuilder = new StringBuilder();
-        urlBuilder.append("https://maps.googleapis.com/maps/api/distancematrix/json?origins="
-                + user_LatLng.latitude + "," + user_LatLng.longitude +
-                "&destinations=");
-        for(Clinic a: clinicList)
-        {
-            urlBuilder.append(a.getLatitude() + "," + a.getLongitude() + "|");
-        }
-        urlBuilder.deleteCharAt((urlBuilder.length()-1));
-        urlBuilder.append("&key=AIzaSyCkU5Dt6se9ziYISEEGXse6nxRAQud5awk");
-        Log.d("ReturnResult", urlBuilder.toString());
-        HttpURLConnection urlConnection = null;
-        try {
-            URL url = new URL(urlBuilder.toString());
-            urlConnection = (HttpURLConnection) url.openConnection();
-            InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                stringBuilder.append(line);
-            }
-
-//            Log.d("ReturnResult", "stringBuilder: " + stringBuilder.toString());
-
-            JSONObject jsonObject = new JSONObject();
-            try{
-                jsonObject = new JSONObject(stringBuilder.toString());
-                JSONArray rowList = jsonObject.getJSONArray("rows");
-//                Log.d("ReturnResult", rowList.toString());
-                JSONObject row = rowList.getJSONObject(0);
-//                Log.d("ReturnResult", "row: " +row.toString());
-                JSONArray elements = row.getJSONArray("elements");
-//                Log.d("ReturnResult", "elements: " + elements.toString());
-                int i = 0;
-                for (Clinic a : clinicList) {
-                    JSONObject element = elements.getJSONObject(i);
-//                    Log.d("ReturnResult", "element single record: " + element.toString());
-                    JSONObject distanceRecord = element.getJSONObject("distance");
-//                    Log.d("ReturnResult", "distance Record: " + distanceRecord.toString());
-                    Double distanceText = distanceRecord.getDouble("value");
-//                    Log.d("ReturnResult", "clinic distance: " + distanceText);
-                    clinicList.get(i).setDistance(distanceText);
-                    i++;
+        boolean operating = true;
+        int index = 0;
+        int index2 = 0;
+        while (operating) {
+            urlBuilder.delete(0, urlBuilder.length());
+            urlBuilder.append("https://maps.googleapis.com/maps/api/distancematrix/json?origins="
+                    + user_LatLng.latitude + "," + user_LatLng.longitude +
+                    "&destinations=");
+            for (int a = 0; a < 25; a++) {
+                if (index < clinicList.size()) {
+                    urlBuilder.append(clinicList.get(index).getLatitude() + "," + clinicList.get(index).getLongitude() + "|");
                 }
-            } catch (JSONException e) {
+                else{
+                    break;
+                }
+                index++;
+            }
+            urlBuilder.deleteCharAt((urlBuilder.length() - 1));
+            urlBuilder.append("&key=AIzaSyCkU5Dt6se9ziYISEEGXse6nxRAQud5awk");
+//            Log.d("ReturnResult", urlBuilder.toString());
+            HttpURLConnection urlConnection = null;
+            try {
+                URL url = new URL(urlBuilder.toString());
+                urlConnection = (HttpURLConnection) url.openConnection();
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject = new JSONObject(stringBuilder.toString());
+                    JSONArray rowList = jsonObject.getJSONArray("rows");
+//                Log.d("ReturnResult", rowList.toString());
+                    JSONObject row = rowList.getJSONObject(0);
+//                Log.d("ReturnResult", "row: " +row.toString());
+                    JSONArray elements = row.getJSONArray("elements");
+//                Log.d("ReturnResult", "elements: " + elements.toString());
+                    for (int i = 0; i < 25; i++) {
+                        if (index2 < clinicList.size()) {
+                            JSONObject element = elements.getJSONObject(i);
+//                    Log.d("ReturnResult", "element single record: " + element.toString());
+                            JSONObject distanceRecord = element.getJSONObject("distance");
+//                    Log.d("ReturnResult", "distance Record: " + distanceRecord.toString());
+                            Double distanceText = distanceRecord.getDouble("value");
+//                    Log.d("ReturnResult", "clinic index " + index2 + " distance: " + distanceText);
+                            clinicList.get(index2).setDistance(distanceText);
+                        }
+                        index2++;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if (reader != null)
+                {
+                    reader.close();
+                }
+                if (in != null)
+                {
+                    in.close();
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            if (index >= clinicList.size())
+                operating = false;
         }
-//        for(Clinic a : clinicList)
-//        {
-//            Log.d("ReturnResult", "clinic name: " + a.getName() + ", clinic latitude and longitude: " + a.getLatitude()+"," + a.getLongitude()
-//                    + " | distance from user: " + a.getDistance());
-//
-//        }
     }
 
     protected String downloadCommand() {
@@ -381,8 +382,8 @@ import static android.content.Context.LOCATION_SERVICE;
 
             // download the file
             input = connection.getInputStream();
-            output = new FileOutputStream(mContext.getFilesDir()+"/chas.kml");
-            Log.d("downloaded", String.valueOf(mContext.getFilesDir())+"/chas.kml");
+            output = new FileOutputStream(mContext.getFilesDir() + "/chas.kml");
+            Log.d("downloaded", String.valueOf(mContext.getFilesDir()) + "/chas.kml");
             byte data[] = new byte[4096];
             long total = 0;
             double percent = 0.0;
@@ -411,10 +412,10 @@ import static android.content.Context.LOCATION_SERVICE;
         return null;
     }
 
-    public void readKML(){
+    public void readKML() {
         String kmlData = null;
-        try{
-            File file = new File((mContext.getFilesDir()+"/chas.kml"));
+        try {
+            File file = new File((mContext.getFilesDir() + "/chas.kml"));
             InputStream InputStream = new FileInputStream(file);
             int size = InputStream.available();
             byte[] buffer = new byte[size];
@@ -422,18 +423,18 @@ import static android.content.Context.LOCATION_SERVICE;
             InputStream.close();
             kmlData = new String(buffer);
             Document doc = Jsoup.parse(kmlData, "", Parser.xmlParser());
-            int i =0;
+            int i = 0;
             String name = "";
             String postal = "";
-            Elements e =  doc.select("ExtendedData").select("SchemaData");
+            Elements e = doc.select("ExtendedData").select("SchemaData");
             Elements chasName = e.select("SimpleData[name=\"HCI_NAME\"]");
             Elements chasPostal = e.select("SimpleData[name=\"POSTAL_CD\"]");
 
-            for (Element a:chasName){
+            for (Element a : chasName) {
                 name = a.text();
                 postal = chasPostal.get(i).text();
 //                    Log.d("chasClinic", "chasName: " + name + " | chasPostal: " + postal);
-                chasClinic.add(new Clinic(name.toUpperCase(),postal));
+                chasClinic.add(new Clinic(name.toUpperCase(), postal));
                 i++;
             }
         } catch (IOException e) {

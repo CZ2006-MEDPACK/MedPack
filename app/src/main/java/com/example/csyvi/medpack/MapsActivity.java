@@ -1,8 +1,8 @@
 package com.example.csyvi.medpack;
 
-import android.support.annotation.Nullable;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,57 +25,55 @@ import java.util.ArrayList;
 /**
  * The type Maps activity.
  */
-public class MapsActivity extends Fragment implements OnMapReadyCallback {
+public class MapsActivity extends Fragment {
 
-    private GoogleMap mMap;
     LocateClinicManager clinicManager;
     ListView listView;
+    ArrayAdapter<String> adapter;
+    Clinic[] clinic_array;
 
-    class CustomAdapter extends BaseAdapter {
-        @Override
-        public int getCount() {
-            return 0;
-        }
+//    class CustomAdapter extends BaseAdapter {
+//        @Override
+//        public int getCount() {
+//            return 0;
+//        }
+//
+//        @Override
+//        public Object getItem(int i) {
+//            return null;
+//        }
+//
+//        @Override
+//        public long getItemId(int i) {
+//            return 0;
+//        }
 
-        @Override
-        public Object getItem(int i) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View view, ViewGroup viewGroup) {
-            view = getLayoutInflater().inflate(R.layout.locateclinic_customlayout,null);
-
-            Clinic currentClinic = clinicManager.getClinicList().get(position);
-
-            TextView textView_clinicname = view.findViewById(R.id.clinicName);
-            TextView textView_clinicaddress = view.findViewById(R.id.clinicAddress);
-            TextView textView_cliniccontactno = view.findViewById(R.id.clinicContactNo);
-            TextView textView_clinicoperatinghours = view.findViewById(R.id.clinicoperatinghours);
-
-            textView_clinicname.setText(currentClinic.getName());
-            textView_clinicaddress.setText(currentClinic.getAddress());
-            textView_cliniccontactno.setText(currentClinic.getPhone_number());
-            textView_clinicoperatinghours.setText(currentClinic.getOperating_hour());
-
-            return view;
-        }
-    }
+//        @Override
+//        public View getView(int position, View view, ViewGroup viewGroup) {
+//            Log.d("chasClinic", "testACtivity4");
+//            view = getLayoutInflater().inflate(R.layout.locateclinic_customlayout,null);
+//
+//            Clinic currentClinic = clinicManager.getClinicList().get(position);
+//
+//            TextView textView_clinicname = view.findViewById(R.id.clinicName);
+//            TextView textView_clinicaddress = view.findViewById(R.id.clinicAddress);
+//            TextView textView_cliniccontactno = view.findViewById(R.id.clinicContactNo);
+//            TextView textView_clinicoperatinghours = view.findViewById(R.id.clinicoperatinghours);
+//
+//            textView_clinicname.setText(currentClinic.getName());
+//            textView_clinicaddress.setText(currentClinic.getAddress());
+//            textView_cliniccontactno.setText(currentClinic.getPhone_number());
+//            textView_clinicoperatinghours.setText(currentClinic.getOperating_hour());
+//
+//            return view;
+//        }
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Bundle args = getArguments();
+        clinicManager = (LocateClinicManager) args.getSerializable("ListClinic");
         View view = inflater.inflate(R.layout.locateclinic, container, false);
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-        clinicManager = new LocateClinicManager(getActivity());
-        clinicManager.userLocation();
 
         /*ArrayList<String> testArray = new ArrayList<String>();
         testArray.add("clinic1");
@@ -87,30 +85,19 @@ public class MapsActivity extends Fragment implements OnMapReadyCallback {
 
 
         //CustomAdapter adapter = new CustomAdapter();
-        ArrayAdapter<Clinic> adapter = new ArrayAdapter<Clinic>(getActivity(),android.R.layout.simple_list_item_1,clinicManager.getClinicList());
+
+        clinic_array = new Clinic[clinicManager.getClinicList().size()];
+        clinicManager.getClinicList().toArray(clinic_array);
+        String[] name = new String[clinic_array.length];
+        int i = 0;
+        for (Clinic a : clinic_array){
+            name[i] = a.getName();
+            i++;
+        }
+        Log.d("chasClinic", "testACtivity5");
+        adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,name);
         listView = view.findViewById(R.id.listView);
         listView.setAdapter(adapter);
-
         return view;
-    }
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-    @Override
-    public void onMapReady(GoogleMap googleMap)
-    {
-        mMap = googleMap;
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
     }
 }
