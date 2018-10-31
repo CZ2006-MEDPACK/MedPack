@@ -106,7 +106,14 @@ public class MapsActivity extends Fragment {
         adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,name);*/
 
         BookAppointmentManager bookam = new BookAppointmentManager(this.getActivity());
-        
+        bookam.insertAppointment(new Patient("testNRIC", "testLAST", "testFIRST"
+        , "testADDRESS", 12345678, "testBIRTH", "testCITIZEN"
+        , "testGENDER", "testRACE", "testLANGUAGES", "testMARITAL"
+        , "testALLERGY"), true, clinicList.get(0));
+
+
+        bookam.loadAppointment();
+
 
         CustomAdapter adapter = new CustomAdapter();
         listView = view.findViewById(R.id.listView);
