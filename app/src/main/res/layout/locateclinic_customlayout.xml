@@ -6,39 +6,27 @@
         android:id="@+id/clinicDistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_alignEnd="@+id/clinicoperatinghours"
         android:layout_alignTop="@+id/clinicName"
-        android:layout_marginEnd="12dp"
         android:text="Distance"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/clinicName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_width="281dp"
+        android:layout_height="37dp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="15dp"
+        android:layout_alignStart="@+id/clinicoperatinghours"
+        android:layout_marginTop="19dp"
         android:text="Clinic Name"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/clinicAddress"
-        android:layout_width="203dp"
+        android:layout_width="275dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="46dp"
-        android:text="Clinic Address" />
-
-    <TextView
-        android:id="@+id/clinicAddress2"
-        android:layout_width="203dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="46dp"
+        android:layout_alignEnd="@+id/clinicDistance"
+        android:layout_alignTop="@+id/clinicAddressText2"
         android:text="Clinic Address" />
 
     <TextView
@@ -46,26 +34,26 @@
         android:layout_width="122dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="116dp"
-        android:layout_marginTop="77dp"
+        android:layout_alignTop="@+id/clinicAddressText"
+        android:layout_marginEnd="95dp"
         android:text="Clinic Contact No" />
 
     <TextView
         android:id="@+id/clinicoperatinghours"
-        android:layout_width="121dp"
-        android:layout_height="66dp"
+        android:layout_width="348dp"
+        android:layout_height="69dp"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/clinicName"
-        android:layout_marginTop="108dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="111dp"
         android:text="Operating Hours" />
 
     <TextView
         android:id="@+id/clinicAddressText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/clinicName"
-        android:layout_alignTop="@+id/clinicContactNo"
+        android:layout_marginTop="85dp"
         android:text="Contact Number:"
         android:textStyle="bold" />
 
@@ -73,8 +61,9 @@
         android:id="@+id/clinicAddressText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/clinicName"
-        android:layout_alignTop="@+id/clinicAddress"
+        android:layout_marginTop="58dp"
         android:text="Address: "
         android:textStyle="bold" />
 </RelativeLayout>
