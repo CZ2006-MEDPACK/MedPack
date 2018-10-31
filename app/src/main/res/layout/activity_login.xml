@@ -8,7 +8,7 @@
         android:layout_width="72dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/editText"
+        android:layout_alignTop="@+id/etPassword"
         android:layout_marginStart="69dp"
         android:text="Password:"
         android:textStyle="bold" />
@@ -18,12 +18,12 @@
         android:layout_width="72dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView4"
-        android:layout_alignTop="@+id/editText2"
-        android:text="Login ID:"
+        android:layout_alignTop="@+id/etEmail"
+        android:text="Email:"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/etPassword"
         android:layout_width="147dp"
         android:layout_height="23dp"
         android:layout_alignParentTop="true"
@@ -33,7 +33,7 @@
         android:inputType="textPassword" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/etEmail"
         android:layout_width="146dp"
         android:layout_height="25dp"
         android:layout_alignParentTop="true"
@@ -51,15 +51,25 @@
         android:layout_marginTop="134dp"
         android:text="LOGIN PAGE"
         android:textSize="15sp"
-        android:textStyle="bold|italic" />
+        android:textStyle="bold" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/loginButton"
         android:layout_width="121dp"
         android:layout_height="37dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="225dp"
-        android:layout_marginStart="116dp"
+        android:layout_marginBottom="238dp"
+        android:layout_marginStart="117dp"
         android:text="Login" />
+
+    <TextView
+        android:id="@+id/registerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/loginButton"
+        android:layout_marginBottom="188dp"
+        android:text="New user? Sign up!"
+        android:textStyle="italic" />
 </RelativeLayout>

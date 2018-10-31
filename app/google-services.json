@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "458722935183",
+    "firebase_url": "https://medpacklogin.firebaseio.com",
+    "project_id": "medpacklogin",
+    "storage_bucket": "medpacklogin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458722935183:android:922b8e52be66a12d",
+        "android_client_info": {
+          "package_name": "com.example.csyvi.medpack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458722935183-sdi9t6dp24p7vjkb7k8tq5ni4v4fon2f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxFBSu4nFxJdvLDI7cm1FYFYnjGGb9jYo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
