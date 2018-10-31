@@ -263,4 +263,22 @@ public class Patient {
     public void setAllergyInfo(String allergyInfo) {
         this.allergyInfo = allergyInfo;
     }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "nric='" + nric + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", address='" + address + '\'' +
+                ", contactNo=" + contactNo +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", citizenship='" + citizenship + '\'' +
+                ", gender='" + gender + '\'' +
+                ", race='" + race + '\'' +
+                ", spokenLanguages='" + spokenLanguages + '\'' +
+                ", maritalStatus='" + maritalStatus + '\'' +
+                ", allergyInfo='" + allergyInfo + '\'' +
+                '}';
+    }
 }
