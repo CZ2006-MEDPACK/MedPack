@@ -74,4 +74,18 @@ public class Clinic {
     public double getLatitude() {
         return latitude;
     }
+
+    @Override
+    public String toString() {
+        return "Clinic{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", phone_number='" + phone_number + '\'' +
+                ", operating_hour='" + operating_hour + '\'' +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", distance=" + distance +
+                '}';
+    }
 }

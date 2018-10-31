@@ -1,5 +1,6 @@
 package com.example.csyvi.medpack;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
@@ -30,44 +31,46 @@ public class MapsActivity extends Fragment {
     ArrayList<Clinic> clinicList = new ArrayList<>();
     ListView listView;
     ArrayAdapter<String> adapter;
-    Clinic[] clinic_array;
+    //Clinic[] clinic_array;
+    Context mContext;
 
-//    class CustomAdapter extends BaseAdapter {
-//        @Override
-//        public int getCount() {
-//            return 0;
-//        }
-//
-//        @Override
-//        public Object getItem(int i) {
-//            return null;
-//        }
-//
-//        @Override
-//        public long getItemId(int i) {
-//            return 0;
-//        }
+    class CustomAdapter extends BaseAdapter {
 
-//        @Override
-//        public View getView(int position, View view, ViewGroup viewGroup) {
-//            Log.d("chasClinic", "testACtivity4");
-//            view = getLayoutInflater().inflate(R.layout.locateclinic_customlayout,null);
-//
-//            Clinic currentClinic = clinicManager.getClinicList().get(position);
-//
-//            TextView textView_clinicname = view.findViewById(R.id.clinicName);
-//            TextView textView_clinicaddress = view.findViewById(R.id.clinicAddress);
-//            TextView textView_cliniccontactno = view.findViewById(R.id.clinicContactNo);
-//            TextView textView_clinicoperatinghours = view.findViewById(R.id.clinicoperatinghours);
-//
-//            textView_clinicname.setText(currentClinic.getName());
-//            textView_clinicaddress.setText(currentClinic.getAddress());
-//            textView_cliniccontactno.setText(currentClinic.getPhone_number());
-//            textView_clinicoperatinghours.setText(currentClinic.getOperating_hour());
-//
-//            return view;
-//        }
-//    }
+        @Override
+        public int getCount() {
+            return clinicList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return clinicList.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup viewGroup) {
+            Log.d("chasClinic", "testACtivity4");
+            View view = View.inflate(getActivity(),R.layout.locateclinic_customlayout,null);
+
+            TextView textView_clinicname = view.findViewById(R.id.clinicName);
+            TextView textView_clinicaddress = view.findViewById(R.id.clinicAddress);
+            TextView textView_cliniccontactno = view.findViewById(R.id.clinicContactNo);
+            TextView textView_clinicoperatinghours = view.findViewById(R.id.clinicoperatinghours);
+            TextView textView_clinicdistance = view.findViewById(R.id.clinicDistance);
+
+            textView_clinicname.setText(clinicList.get(position).getName());
+            textView_clinicaddress.setText(clinicList.get(position).getAddress());
+            textView_cliniccontactno.setText(clinicList.get(position).getPhone_number());
+            textView_clinicoperatinghours.setText(clinicList.get(position).getOperating_hour());
+            //textView_clinicdistance.setText(clinicList.get(position).getDistance());
+
+            return view;
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -86,10 +89,7 @@ public class MapsActivity extends Fragment {
         testArray.add("clinic5");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,testArray);*/
 
-
-        //CustomAdapter adapter = new CustomAdapter();
-
-        clinic_array = new Clinic[clinicList.size()];
+        /*clinic_array = new Clinic[clinicList.size()];
         Log.d("chasClinic", "testMaps");
         clinic_array = clinicList.toArray(clinic_array);
         Log.d("chasClinic", "testMaps");
@@ -100,7 +100,9 @@ public class MapsActivity extends Fragment {
             i++;
         }
         Log.d("chasClinic", "testMaps");
-        adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,name);
+        adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,name);*/
+
+        CustomAdapter adapter = new CustomAdapter();
         listView = view.findViewById(R.id.listView);
         Log.d("chasClinic", "testMaps");
         listView.setAdapter(adapter);
