@@ -66,7 +66,10 @@ public class MapsActivity extends Fragment {
             textView_clinicaddress.setText(clinicList.get(position).getAddress());
             textView_cliniccontactno.setText(clinicList.get(position).getPhone_number());
             textView_clinicoperatinghours.setText(clinicList.get(position).getOperating_hour());
-            //textView_clinicdistance.setText(clinicList.get(position).getDistance());
+            Double distance = clinicList.get(position).getDistance();
+            distance = distance / 1000;
+            String getDistance = Double.toString(distance);
+            textView_clinicdistance.setText(getDistance + "KM");
 
             return view;
         }
