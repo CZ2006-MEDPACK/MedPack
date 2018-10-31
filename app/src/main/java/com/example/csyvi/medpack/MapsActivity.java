@@ -27,7 +27,7 @@ import java.util.ArrayList;
  */
 public class MapsActivity extends Fragment {
 
-    LocateClinicManager clinicManager;
+    ArrayList<Clinic> clinicList = new ArrayList<>();
     ListView listView;
     ArrayAdapter<String> adapter;
     Clinic[] clinic_array;
@@ -71,9 +71,12 @@ public class MapsActivity extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        Log.d("chasClinic", "testMaps");
         Bundle args = getArguments();
-        clinicManager = (LocateClinicManager) args.getSerializable("ListClinic");
+        clinicList = (ArrayList<Clinic>) args.getSerializable("ListClinic");
         View view = inflater.inflate(R.layout.locateclinic, container, false);
+        Log.d("chasClinic", "testMaps");
 
         /*ArrayList<String> testArray = new ArrayList<String>();
         testArray.add("clinic1");
@@ -86,17 +89,20 @@ public class MapsActivity extends Fragment {
 
         //CustomAdapter adapter = new CustomAdapter();
 
-        clinic_array = new Clinic[clinicManager.getClinicList().size()];
-        clinicManager.getClinicList().toArray(clinic_array);
+        clinic_array = new Clinic[clinicList.size()];
+        Log.d("chasClinic", "testMaps");
+        clinic_array = clinicList.toArray(clinic_array);
+        Log.d("chasClinic", "testMaps");
         String[] name = new String[clinic_array.length];
         int i = 0;
         for (Clinic a : clinic_array){
             name[i] = a.getName();
             i++;
         }
-        Log.d("chasClinic", "testACtivity5");
+        Log.d("chasClinic", "testMaps");
         adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,name);
         listView = view.findViewById(R.id.listView);
+        Log.d("chasClinic", "testMaps");
         listView.setAdapter(adapter);
         return view;
     }

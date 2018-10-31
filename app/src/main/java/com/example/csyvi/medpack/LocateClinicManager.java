@@ -2,6 +2,8 @@ package com.example.csyvi.medpack;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -9,10 +11,12 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,14 +61,16 @@ import static android.content.Context.LOCATION_SERVICE;
 public class LocateClinicManager implements Serializable {
     private Context mContext;
     private LatLng user_LatLng;
-    private LocationManager locationManager;
     private ArrayList<String> direction = new ArrayList<>();
     private ArrayList<String> locationAL = new ArrayList<>();
     private ArrayList<String> storage = new ArrayList<>();
     private Geocoder geocoder;
     private String fileTodownload = "https://data.gov.sg/dataset/31e92629-980d-4672-af33-cec147c18102/download";
     private ArrayList<Clinic> chasClinic = new ArrayList<>();
-
+    LocationManager locationManager;
+    LocationListener locationListener;
+    android.support.v4.app.FragmentManager fragmentManager;
+    MapsActivity myFragment;
 
     //use either surroundingChas or clinicList to populate the surrounding general practitioner
     private ArrayList<Clinic> surroundingChas = new ArrayList<>();
@@ -74,15 +80,11 @@ public class LocateClinicManager implements Serializable {
         return clinicList;
     }
 
-    public LocateClinicManager(Context mContext) {
+    public LocateClinicManager(Context mContext, android.support.v4.app.FragmentManager fragmentManager, MapsActivity myFragment) {
         this.mContext = mContext;
         geocoder = new Geocoder(mContext);
-
-        try {
-            locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        this.fragmentManager = fragmentManager;
+        this.myFragment = myFragment;
     }
 
     public void compare() {
@@ -94,7 +96,6 @@ public class LocateClinicManager implements Serializable {
             for (Clinic chas : chasClinic) {
                 String chasPostal = chas.getPostalCode();
                 if (((chas.getName()).contains(name)) && chasPostal.equals(postal)) {
-//                    Log.d("chasClinic", chas.getName() + " compare with " + name + "| " + (chas.getName().contains(name)) + " | " + chas.getPostalCode());
                     surroundingChas.add(c);
                 }
             }
@@ -107,28 +108,31 @@ public class LocateClinicManager implements Serializable {
 
     public void userLocation() {
 
-        final LocationListener locationListener = new LocationListener() {
-            @Override
+        locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
+
+        // Define a listener that responds to location updates
+        locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
-                Log.d("chasClinic", " test");
                 user_LatLng = new LatLng(location.getLatitude(), location.getLongitude());
-                Log.d("chasClinic", " test");
-//                downloadCommand();
+                Log.d("chasClinic", user_LatLng.latitude + " | " + user_LatLng.longitude);
+                locationManager.removeUpdates(locationListener);
+                Log.d("chasClinic", "gone to asyncTask");
+                new dataOperation().execute("");
             }
 
-            @Override
             public void onStatusChanged(String provider, int status, Bundle extras) {
             }
 
-            @Override
             public void onProviderEnabled(String provider) {
             }
 
-            @Override
             public void onProviderDisabled(String provider) {
             }
         };
+
+        // Register the listener with the Location Manager to receive location updates
         if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions((Activity) mContext, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 120);
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -138,7 +142,7 @@ public class LocateClinicManager implements Serializable {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, locationListener, null);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
     }
 
     public void calculatingDirection() {
@@ -299,15 +303,14 @@ public class LocateClinicManager implements Serializable {
             for (int a = 0; a < 25; a++) {
                 if (index < clinicList.size()) {
                     urlBuilder.append(clinicList.get(index).getLatitude() + "," + clinicList.get(index).getLongitude() + "|");
-                }
-                else{
+                } else {
                     break;
                 }
                 index++;
             }
             urlBuilder.deleteCharAt((urlBuilder.length() - 1));
             urlBuilder.append("&key=AIzaSyCkU5Dt6se9ziYISEEGXse6nxRAQud5awk");
-//            Log.d("ReturnResult", urlBuilder.toString());
+            Log.d("ReturnResult", urlBuilder.toString());
             HttpURLConnection urlConnection = null;
             try {
                 URL url = new URL(urlBuilder.toString());
@@ -342,12 +345,10 @@ public class LocateClinicManager implements Serializable {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                if (reader != null)
-                {
+                if (reader != null) {
                     reader.close();
                 }
-                if (in != null)
-                {
+                if (in != null) {
                     in.close();
                 }
             } catch (MalformedURLException e) {
@@ -382,8 +383,8 @@ public class LocateClinicManager implements Serializable {
 
             // download the file
             input = connection.getInputStream();
-            output = new FileOutputStream(mContext.getFilesDir() + "/chas.kml");
-            Log.d("downloaded", String.valueOf(mContext.getFilesDir()) + "/chas.kml");
+            output = new FileOutputStream(mContext.getApplicationContext().getFilesDir() + "/chas.kml");
+            Log.d("downloaded", String.valueOf(mContext.getApplicationContext().getFilesDir()) + "/chas.kml");
             byte data[] = new byte[4096];
             long total = 0;
             double percent = 0.0;
@@ -415,7 +416,7 @@ public class LocateClinicManager implements Serializable {
     public void readKML() {
         String kmlData = null;
         try {
-            File file = new File((mContext.getFilesDir() + "/chas.kml"));
+            File file = new File((mContext.getApplicationContext().getFilesDir() + "/chas.kml"));
             InputStream InputStream = new FileInputStream(file);
             int size = InputStream.available();
             byte[] buffer = new byte[size];
@@ -439,6 +440,39 @@ public class LocateClinicManager implements Serializable {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private class dataOperation extends AsyncTask<String, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            Log.d("chasClinic", "testingDoInBackground");
+            downloadCommand();
+            readKML();
+            calculatingDirection();
+            locatingName();
+            siteRetrieve();
+            latLngChecker();
+            distSearch();
+            compare();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            Log.d("chasClinic", "testingOnPostExecute");
+            MapsActivity myFragment = new MapsActivity();
+            Bundle arguments = new Bundle();
+            arguments.putSerializable("ListClinic", clinicList);
+            myFragment.setArguments(arguments);
+            Log.d("chasClinic", "test");
+            fragmentManager.beginTransaction().replace(R.id.fragment_container, myFragment).commit();
+            Log.d("chasClinic", "test");
+
         }
     }
 }

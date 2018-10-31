@@ -27,7 +27,7 @@ public class VitalSignsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        clinicManager = new LocateClinicManager(this.getActivity());
+        clinicManager = new LocateClinicManager(this.getActivity(), this.getFragmentManager(), new MapsActivity());
 
         View view = inflater.inflate(R.layout.measurevitalsigns_inputvitalsigns, container, false);
         PulseRate = (EditText) view.findViewById(R.id.editTextPulseRate);
@@ -83,43 +83,13 @@ public class VitalSignsFragment extends Fragment {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new LongOperation().execute("");
+
+                Log.d("chasClinic", "entering user location");
+                clinicManager.userLocation();
             }
         });
 
         return view;
     }
 
-    private class LongOperation extends AsyncTask<String, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            Log.d("chasClinic", "testACtivity1");
-            clinicManager.userLocation();
-            Log.d("chasClinic", "testACtivity2");
-
-        }
-
-        @Override
-        protected Void doInBackground(String... strings) {
-            clinicManager.readKML();
-            clinicManager.calculatingDirection();
-            clinicManager.locatingName();
-            clinicManager.siteRetrieve();
-            clinicManager.latLngChecker();
-            clinicManager.distSearch();
-            clinicManager.compare();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            Log.d("chasClinic", "testACtivity3");
-            MapsActivity myFragment = new MapsActivity();
-            Bundle arguments = new Bundle();
-            arguments.putSerializable("ListClinic", clinicManager);
-            myFragment.setArguments(arguments);
-            getFragmentManager().beginTransaction().replace(R.id.fragment_container, myFragment).commit();
-        }
-    }
 }
