@@ -85,16 +85,12 @@ public class VitalSignsFragment extends Fragment {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-<<<<<<< HEAD
-
                 Log.d("storeDATA", "entering user location");
                 Log.d("timeCheck", "timeStart");
-=======
                 submitButton.setVisibility(View.INVISIBLE);
                 progressDialog.setMessage("Searching for nearby clinics. Please wait.");
                 progressDialog.show();
                 Log.d("chasClinic", "entering user location");
->>>>>>> 7b6d3a44cf66f2542999e2a2101188e437fa083a
                 clinicManager.userLocation();
                 progressDialog.dismiss();
             }
