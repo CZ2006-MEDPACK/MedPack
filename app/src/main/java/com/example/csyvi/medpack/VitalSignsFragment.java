@@ -1,6 +1,7 @@
 package com.example.csyvi.medpack;
 
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,7 +24,7 @@ public class VitalSignsFragment extends Fragment {
     EditText BloodPressureSystolic, BloodPressureDiastolic, RespiratoryRate;
     MeasureVitalSignsManager vs = new MeasureVitalSignsManager();
     LocateClinicManager clinicManager;
-
+    ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class VitalSignsFragment extends Fragment {
         BloodPressureDiastolic = (EditText) view.findViewById(R.id.editTextBPDiastolic);
         Temperature = (EditText) view.findViewById(R.id.editTextEnterTemperature);
         RespiratoryRate = (EditText) view.findViewById(R.id.editTextRespiratoryRate);
+        progressDialog = new ProgressDialog(getActivity());
 
         PulseRate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -79,14 +81,22 @@ public class VitalSignsFragment extends Fragment {
             }
         });
 
-        Button submitButton = view.findViewById(R.id.button);
+        final Button submitButton = view.findViewById(R.id.button);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+<<<<<<< HEAD
 
                 Log.d("storeDATA", "entering user location");
                 Log.d("timeCheck", "timeStart");
+=======
+                submitButton.setVisibility(View.INVISIBLE);
+                progressDialog.setMessage("Searching for nearby clinics. Please wait.");
+                progressDialog.show();
+                Log.d("chasClinic", "entering user location");
+>>>>>>> 7b6d3a44cf66f2542999e2a2101188e437fa083a
                 clinicManager.userLocation();
+                progressDialog.dismiss();
             }
         });
 

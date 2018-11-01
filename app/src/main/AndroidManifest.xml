@@ -50,5 +50,8 @@
         <activity
         android:name=".MeasureVitalSignsActivity">
         </activity>
+        <activity
+            android:name=".LoginActivity">
+        </activity>
     </application>
 </manifest>
