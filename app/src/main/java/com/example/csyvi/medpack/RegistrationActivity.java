@@ -1,5 +1,6 @@
 package com.example.csyvi.medpack;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,6 +26,7 @@ public class RegistrationActivity extends AppCompatActivity {
     String name, password, email;
     Boolean registerValid;
     FirebaseAuth firebaseAuth;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +43,8 @@ public class RegistrationActivity extends AppCompatActivity {
         password = userPassword.getText().toString();
         email = userEmail.getText().toString();
 
+        progressDialog = new ProgressDialog(this);
+
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,11 +55,16 @@ public class RegistrationActivity extends AppCompatActivity {
                     // upload the patient info to the database
                     String registerEmail = email.trim();
                     String registerPassword = password.trim();
+
+                    progressDialog.setMessage("Trying to register now");
+                    progressDialog.show();
+
                     firebaseAuth.createUserWithEmailAndPassword(registerEmail,registerPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful())
                             {
+                                progressDialog.dismiss();
                                 Toast.makeText(RegistrationActivity.this,"Registration Successful!",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
                                 startActivity(intent);
@@ -64,6 +73,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             else
                             {
                                 Toast.makeText(RegistrationActivity.this,"Registration Failed!",Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
                             }
 
                         }

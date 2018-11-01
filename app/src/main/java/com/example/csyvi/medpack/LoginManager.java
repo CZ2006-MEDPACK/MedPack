@@ -22,4 +22,19 @@ public class LoginManager {
         }
     }
 
+    public Boolean validateLogin(String email, String password)
+    {
+        Boolean result = false;
+
+        if(password.isEmpty() || email.isEmpty())
+        {
+            return result;
+        }
+
+        else
+        {
+            return true;
+        }
+    }
+
 }
