@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText loginPassword;
     Button loginButton;
     String email, password;
-    Boolean loginValid;
+    Boolean loginValid, emailValid;
     FirebaseAuth fireBaseAuth;
     ProgressDialog progressDialog;
     LoginManager loginManager = new LoginManager();
@@ -79,16 +79,15 @@ public class LoginActivity extends AppCompatActivity {
                     email = email.trim();
                     password = password.trim();
 
-                    String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-                    Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-                    Matcher matcher = pattern.matcher(email);
+                    // call validateEmailFormat method to make sure it is in email format
+                    emailValid = loginManager.validateEmailFormat(email);
 
                     if (password.length() < 6)
                     {
                         Toast.makeText(LoginActivity.this, "Please enter password of length that is more than 5.", Toast.LENGTH_SHORT).show();
                     }
 
-                    else if (!matcher.matches())
+                    else if (!emailValid)
                     {
                         Toast.makeText(LoginActivity.this, "Please enter your email with the correct format. e.g. username@gmail.com/username@hotmail.com.", Toast.LENGTH_SHORT).show();
                     }
@@ -104,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     progressDialog.dismiss();
                                     Toast.makeText(LoginActivity.this, "Login Successful! Redirecting ..", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                                     startActivity(intent);
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Login Failed! Account is not valid!", Toast.LENGTH_SHORT).show();
