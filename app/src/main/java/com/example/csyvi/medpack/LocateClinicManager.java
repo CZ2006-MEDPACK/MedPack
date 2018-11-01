@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -55,6 +56,8 @@ import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -78,17 +81,20 @@ public class LocateClinicManager implements Serializable {
     LocationListener locationListener;
     android.support.v4.app.FragmentManager fragmentManager;
     MapsActivity myFragment;
+    ProgressDialog myProgress;
 
     //use either surroundingChas or clinicList to populate the surrounding general practitioner
     private ArrayList<Clinic> surroundingChas = new ArrayList<>();
     private ArrayList<Clinic> clinicList = new ArrayList<>();
 
-    public LocateClinicManager(Context mContext, android.support.v4.app.FragmentManager fragmentManager, MapsActivity myFragment) {
+    public LocateClinicManager(Context mContext, android.support.v4.app.FragmentManager fragmentManager, MapsActivity myFragment, ProgressDialog myProgress) {
         this.mContext = mContext;
         geocoder = new Geocoder(mContext);
         this.fragmentManager = fragmentManager;
         this.myFragment = myFragment;
+        this.myProgress = myProgress;
     }
+
 
     public void compare() {
         for (Clinic c : clinicList) {
@@ -176,7 +182,6 @@ public class LocateClinicManager implements Serializable {
 
     public void locatingName(String direction) {
         locationAL.clear();
-        clinicList.clear();
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(
@@ -205,6 +210,7 @@ public class LocateClinicManager implements Serializable {
 
     public void siteRetrieve() {
         for (String s : locationAL) {
+            Log.d("storeDATA", s);
             String keyword = s;
             Document doc = null;
             try {
@@ -337,7 +343,6 @@ public class LocateClinicManager implements Serializable {
                 fis = mContext.openFileInput(direction + ".txt");
                 InputStreamReader isr = new InputStreamReader(fis);
                 BufferedReader br = new BufferedReader(isr);
-                StringBuilder sb = new StringBuilder();
                 String text;
                 String date = br.readLine();
                 if (!isPackageExpired(date)) {
@@ -352,8 +357,6 @@ public class LocateClinicManager implements Serializable {
                         clinicList.add(new Clinic(separated[0], separated[1], separated[2], separated[3]
                                 , separated[4], Double.valueOf(separated[5]), Double.valueOf(separated[6]), Double.valueOf(separated[7])));
                     }
-                    Log.d("storeDATA", "sb: " + sb.toString());
-//            Toast.makeText(mContext, sb.toString(), Toast.LENGTH_LONG).show();
                 } else {
                     Log.d("storeDATA", "file date expired");
                     downloadCommand();
@@ -567,6 +570,7 @@ public class LocateClinicManager implements Serializable {
         }
     }
 
+
     private class dataOperation extends AsyncTask<String, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -579,27 +583,21 @@ public class LocateClinicManager implements Serializable {
             calculatingDirection();
             for (String a : direction) {
                 if (fileExist(a)) {
-                    Log.d("chasClinic", "file existed");
-                    Log.d("chasClinic", "enter readFile");
                     readFile(a);
-                    Log.d("chasClinic", "done readFile");
                 } else {
-                    Log.d("chasClinic", "file does not exist");
-                    Log.d("chasClinic", "enter locatingName");
                     locatingName(a);
-                    Log.d("chasClinic", "done locationName");
-                    Log.d("chasClinic", "enter siteRetrieve");
                     siteRetrieve();
-                    Log.d("chasClinic", "done siteRetrieve");
-                    Log.d("chasClinic", "enter processData");
                     processData();
-                    Log.d("chasClinic", "done processData");
-                    Log.d("chasClinic", "enter latlngcheck");
                     latLngChecker();
-                    Log.d("chasClinic", "done latlngcheck");
-                    Log.d("chasClinic", "enter writeFile");
+
+                    Collections.sort(clinicList, new Comparator<Clinic>() {
+                        @Override
+                        public int compare(Clinic o1, Clinic o2) {
+                            return (Double.toString(o1.getDistance())).compareTo(Double.toString(o2.getDistance()));
+                        }
+                    });
+
                     writeFile(a);
-                    Log.d("chasClinic", "done writeFile");
                 }
             }
             distSearch();
@@ -610,14 +608,22 @@ public class LocateClinicManager implements Serializable {
         protected void onPostExecute(Void aVoid) {
             compare();
             Log.d("chasClinic", "testingOnPostExecute");
+
+            //if user have chas then take 10 record from surroundingChas
+            //else take 10 from clinicList
+
             MapsActivity myFragment = new MapsActivity();
             Bundle arguments = new Bundle();
+            Log.d("chasClinic" , ""+surroundingChas.size());
+            Log.d("chasClnic", ""+clinicList.size());
             arguments.putSerializable("ListClinic", clinicList);
             myFragment.setArguments(arguments);
-            Log.d("chasClinic", "test");
+//            Log.d("chasClinic", "test");
             fragmentManager.beginTransaction().replace(R.id.fragment_container, myFragment).commit();
-            Log.d("chasClinic", "test");
+//            Log.d("chasClinic", "test");
 
         }
     }
+
+
 }

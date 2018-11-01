@@ -28,7 +28,7 @@ public class VitalSignsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        clinicManager = new LocateClinicManager(this.getActivity(), this.getFragmentManager(), new MapsActivity());
+        clinicManager = new LocateClinicManager(this.getActivity(), this.getFragmentManager(), new MapsActivity(), progressDialog);
 
         View view = inflater.inflate(R.layout.measurevitalsigns_inputvitalsigns, container, false);
         PulseRate = (EditText) view.findViewById(R.id.editTextPulseRate);

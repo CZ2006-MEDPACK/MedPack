@@ -4,6 +4,8 @@ import android.location.Location;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.Comparator;
+
 /**
  * The type Clinic.
  */
@@ -87,6 +89,26 @@ public class Clinic {
         return latitude;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
+    }
+
+    public void setOperating_hour(String operating_hour) {
+        this.operating_hour = operating_hour;
+    }
+
     @Override
     public String toString() {
         return "Clinic{" + name +
@@ -99,4 +121,5 @@ public class Clinic {
                 "~" + distance +
                 '}';
     }
+
 }
