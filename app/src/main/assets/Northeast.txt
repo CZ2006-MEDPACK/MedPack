@@ -1,4 +1,4 @@
-Ang Mo Kio
+AngMoKio
 Buangkok
 Hougang
 Kovan
@@ -6,5 +6,5 @@ Punggol
 Seletar
 Sengkang
 Serangoon
-Upper Thomson
-Yio Chu Kang
+UpperThomson
+YioChuKang

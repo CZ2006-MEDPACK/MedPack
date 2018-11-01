@@ -1,9 +1,9 @@
-Boon Lay
-Bukit Batok
-Bukit Panjang
-Choa Chu Kang
+BoonLay
+BukitBatok
+BukitPanjang
+ChoaChuKang
 Clementi
-Jurong East
-Jurong West
+JurongEast
+JurongWest
 Pioneer
-Taman Jurong
+TamanJurong
