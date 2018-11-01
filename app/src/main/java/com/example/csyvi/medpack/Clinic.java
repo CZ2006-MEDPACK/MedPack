@@ -17,6 +17,18 @@ public class Clinic {
     private double latitude;
     private double distance;
 
+
+    public Clinic(String name, String address, String postalCode, String phone_number, String operating_hour, double longitude, double latitude, double distance) {
+        this.name = name;
+        this.address = address;
+        this.postalCode = postalCode;
+        this.phone_number = phone_number;
+        this.operating_hour = operating_hour;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.distance = distance;
+    }
+
     public Clinic(String name, String address, String postalCode, String phone_number, String operating_hour) {
         this.name = name;
         this.address = address;
@@ -77,15 +89,14 @@ public class Clinic {
 
     @Override
     public String toString() {
-        return "Clinic{" +
-                "name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", postalCode='" + postalCode + '\'' +
-                ", phone_number='" + phone_number + '\'' +
-                ", operating_hour='" + operating_hour + '\'' +
-                ", longitude=" + longitude +
-                ", latitude=" + latitude +
-                ", distance=" + distance +
+        return "Clinic{" + name +
+                "~" + address  +
+                "~" + postalCode +
+                "~" + phone_number +
+                "~" + operating_hour +
+                "~" + longitude +
+                "~" + latitude +
+                "~" + distance +
                 '}';
     }
 }

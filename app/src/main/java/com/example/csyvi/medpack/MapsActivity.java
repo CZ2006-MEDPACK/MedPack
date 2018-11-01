@@ -76,13 +76,18 @@ public class MapsActivity extends Fragment {
     }
 
     @Override
+<<<<<<< HEAD
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+=======
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mContext = this.getActivity();
+>>>>>>> dc584c4698f005e13a0525207a413355071c5f1c
         Log.d("chasClinic", "testMaps");
         Bundle args = getArguments();
         clinicList = (ArrayList<Clinic>) args.getSerializable("ListClinic");
         View view = inflater.inflate(R.layout.locateclinic, container, false);
-        Log.d("chasClinic", "testMaps");
+        Log.d("storeDATA", "testMaps");
 
         /*ArrayList<String> testArray = new ArrayList<String>();
         testArray.add("clinic1");
@@ -105,20 +110,24 @@ public class MapsActivity extends Fragment {
         Log.d("chasClinic", "testMaps");
         adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,name);*/
 
-        BookAppointmentManager bookam = new BookAppointmentManager(this.getActivity());
-        bookam.insertAppointment(new Patient("testNRIC", "testLAST", "testFIRST"
-        , "testADDRESS", 12345678, "testBIRTH", "testCITIZEN"
-        , "testGENDER", "testRACE", "testLANGUAGES", "testMARITAL"
-        , "testALLERGY"), true, clinicList.get(0));
 
+        //testing code
+//        BookAppointmentManager bookam = new BookAppointmentManager(this.getActivity());
+//        bookam.insertAppointment(new Patient("testNRIC", "testLAST", "testFIRST"
+//        , "testADDRESS", 12345678, "testBIRTH", "testCITIZEN"
+//        , "testGENDER", "testRACE", "testLANGUAGES", "testMARITAL"
+//        , "testALLERGY"), true, clinicList.get(0));
+//
+//
+//        bookam.loadAppointment();
 
-        bookam.loadAppointment();
 
 
         CustomAdapter adapter = new CustomAdapter();
         listView = view.findViewById(R.id.listView);
-        Log.d("chasClinic", "testMaps");
+        Log.d("storeDATA", "testMaps");
         listView.setAdapter(adapter);
+        Log.d("timeCheck", "timeStart");
         return view;
     }
 }
