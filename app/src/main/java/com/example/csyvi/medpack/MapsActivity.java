@@ -76,8 +76,8 @@ public class MapsActivity extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         Log.d("chasClinic", "testMaps");
         Bundle args = getArguments();
         clinicList = (ArrayList<Clinic>) args.getSerializable("ListClinic");

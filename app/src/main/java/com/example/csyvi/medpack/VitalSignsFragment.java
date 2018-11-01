@@ -82,6 +82,8 @@ public class VitalSignsFragment extends Fragment {
         });
 
         final Button submitButton = view.findViewById(R.id.button);
+        progressDialog = new ProgressDialog(getActivity());
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,7 +92,6 @@ public class VitalSignsFragment extends Fragment {
                 progressDialog.show();
                 Log.d("chasClinic", "entering user location");
                 clinicManager.userLocation();
-                progressDialog.dismiss();
             }
         });
 

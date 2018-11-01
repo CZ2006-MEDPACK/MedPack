@@ -9,17 +9,19 @@ public class LoginManager {
 
     public Boolean validateRegistration(String name, String email, String password)
     {
-        Boolean result = false;
+        Boolean result;
 
         if(name.isEmpty() || password.isEmpty() || email.isEmpty())
         {
-            return result;
+            result = false;
         }
 
         else
         {
-            return true;
+            result = true;
         }
+
+        return result;
     }
 
     public Boolean validateLogin(String email, String password)
