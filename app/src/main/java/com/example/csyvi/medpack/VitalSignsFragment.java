@@ -84,7 +84,8 @@ public class VitalSignsFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Log.d("chasClinic", "entering user location");
+                Log.d("storeDATA", "entering user location");
+                Log.d("timeCheck", "timeStart");
                 clinicManager.userLocation();
             }
         });
