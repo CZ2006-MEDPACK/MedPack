@@ -4,10 +4,29 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
+    <TextView
+        android:id="@+id/text_firstname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/text_lastname"
+        android:layout_toEndOf="@+id/text_dob"
+        android:text="First Name" />
+
+    <TextView
+        android:id="@+id/text_spokenlanguages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginBottom="141dp"
+        android:text="Spoken Languages" />
+
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:background="@drawable/cover"/>
+        android:layout_height="151dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/cover" />
 
     <Button
         android:layout_width="match_parent"
@@ -24,30 +43,89 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="186dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="168dp"
         android:text="Welcome, " />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/text_lastname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/textView"
-        android:layout_marginTop="212dp"
-        android:text="Ong Han Xiang" />
+        android:layout_marginTop="197dp"
+        android:text="Last Name" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="277dp"
+    <TextView
+        android:id="@+id/text_contactNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/textView"
-        android:layout_marginTop="242dp">
+        android:layout_marginTop="256dp"
+        android:text="Contact Number" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+    <TextView
+        android:id="@+id/text_dob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginBottom="261dp"
+        android:text="Date of Birth" />
+
+    <TextView
+        android:id="@+id/text_citizenship"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginBottom="231dp"
+        android:text="Citizenship" />
+
+    <TextView
+        android:id="@+id/text_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginTop="228dp"
+        android:text="Address" />
+
+    <TextView
+        android:id="@+id/text_allergy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginBottom="76dp"
+        android:text="Allergy Info" />
+
+    <TextView
+        android:id="@+id/text_gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginBottom="201dp"
+        android:text="Gender" />
+
+    <TextView
+        android:id="@+id/text_race"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginBottom="172dp"
+        android:text="Race" />
+
+    <TextView
+        android:id="@+id/text_maritalstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginBottom="110dp"
+        android:text="Marital Status" />
 
 </RelativeLayout>

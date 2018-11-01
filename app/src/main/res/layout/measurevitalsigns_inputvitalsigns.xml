@@ -52,10 +52,9 @@
         android:id="@+id/textViewTitle"
         android:layout_width="236dp"
         android:layout_height="40dp"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_alignStart="@+id/editTextBox"
+        android:layout_marginTop="30dp"
         android:text="Your Vital Signs"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="20sp"
@@ -65,11 +64,11 @@
     <EditText
         android:id="@+id/editTextRespiratoryRate"
         android:layout_width="166dp"
-        android:layout_height="21dp"
+        android:layout_height="32dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_marginEnd="15dp"
-        android:layout_marginTop="244dp"
+        android:layout_marginTop="233dp"
         android:ems="10" />
 
     <EditText
@@ -84,28 +83,29 @@
     <EditText
         android:id="@+id/editTextBPDiastolic"
         android:layout_width="168dp"
-        android:layout_height="21dp"
-        android:layout_alignParentEnd="true"
+        android:layout_height="34dp"
+        android:layout_alignEnd="@+id/editTextPulseRate"
         android:layout_alignTop="@+id/textViewBPDiastolic"
-        android:layout_marginEnd="15dp"
         android:ems="10" />
 
     <EditText
         android:id="@+id/editTextPulseRate"
         android:layout_width="164dp"
-        android:layout_height="21dp"
-        android:layout_alignEnd="@+id/editTextBox"
-        android:layout_alignTop="@+id/textViewPulseRate"
-        android:layout_marginEnd="3dp"
-        android:ems="10" />
+        android:layout_height="35dp"
+        android:layout_alignEnd="@+id/radioButton6"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="77dp"
+        android:ems="10"
+        android:text="68"
+        android:textSize="12sp" />
 
     <EditText
         android:id="@+id/editTextOxygenSaturation"
         android:layout_width="163dp"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/editTextRespiratoryRate"
-        android:layout_alignTop="@+id/textViewOxygen"
-        android:layout_marginEnd="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="119dp"
         android:ems="10"
         android:text="100"
         android:textSize="12sp" />
@@ -147,7 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/textViewTitle"
-        android:layout_marginBottom="204dp"
+        android:layout_marginBottom="199dp"
         android:text="Enter Pain Scale:"
         android:textColor="@android:color/black" />
 
@@ -174,8 +174,8 @@
         android:id="@+id/textViewRespiratoryRate"
         android:layout_width="157dp"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/editTextRespiratoryRate"
         android:layout_alignStart="@+id/textViewTitle"
-        android:layout_alignTop="@+id/editTextRespiratoryRate"
         android:text="Enter Respiratory Rate: "
         android:textColor="@android:color/black" />
 
@@ -185,7 +185,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/textViewTitle"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="206dp"
         android:text="Enter Temperature: "
         android:textColor="@android:color/black" />
 
@@ -213,9 +213,8 @@
         android:id="@+id/textViewPulseRate"
         android:layout_width="121dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignBaseline="@+id/editTextPulseRate"
         android:layout_alignStart="@+id/textViewTitle"
-        android:layout_marginTop="98dp"
         android:text="Your Pulse Rate:"
         android:textColor="@android:color/black" />
 
@@ -232,13 +231,13 @@
     <EditText
         android:id="@+id/editTextEnterTemperature"
         android:layout_width="54dp"
-        android:layout_height="25dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/textViewEnterTemperature"
         android:layout_marginEnd="128dp"
+        android:layout_marginTop="-12dp"
         android:ems="10"
         android:singleLine="true"
-        android:text="68"
         android:textSize="12sp" />
 
     <RadioButton
