@@ -250,7 +250,7 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/et_allergy2"
+        android:id="@+id/et_allergy"
         android:layout_width="234dp"
         android:layout_height="30dp"
         android:layout_alignTop="@+id/textView18"

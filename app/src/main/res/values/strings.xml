@@ -11,4 +11,27 @@
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
     <string name="appbar_scrolling_view_behavior">Scrolling Behaviour</string>
+
+    <string-array name="citizenship">
+        <item>Singapore Citizen</item>
+        <item>Permanent Resident</item>
+        <item>Foreigner</item>
+    </string-array>
+
+    <string-array name="maritalstatus">
+        <item>Single</item>
+        <item>Married</item>
+        <item>Divorced</item>
+        <item>Separated</item>
+        <item>Widowed</item>
+    </string-array>
+
+    <string-array name="race">
+        <item>Chinese</item>
+        <item>Malay</item>
+        <item>Indian</item>
+        <item>Eurasian</item>
+        <item>Others</item>
+    </string-array>
+
 </resources>
