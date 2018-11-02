@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -18,6 +19,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -95,25 +97,6 @@ public class LocateClinicManager implements Serializable {
         this.myProgress = myProgress;
     }
 
-
-    public void compare() {
-        for (Clinic c : clinicList) {
-            String name = c.getName().toUpperCase();
-            String postal = c.getPostalCode();
-            postal = postal.replace("Singapore ", "");
-            postal = postal.trim();
-            for (Clinic chas : chasClinic) {
-                String chasPostal = chas.getPostalCode();
-                if (((chas.getName()).contains(name)) && chasPostal.equals(postal)) {
-                    surroundingChas.add(c);
-                }
-            }
-        }
-
-        for (Clinic a : surroundingChas) {
-            Log.d("chasClinic", "surroundingChas: " + a.getName() + ", " + a.getDistance());
-        }
-    }
 
     public void userLocation() {
 
@@ -210,7 +193,7 @@ public class LocateClinicManager implements Serializable {
 
     public void siteRetrieve() {
         for (String s : locationAL) {
-            Log.d("storeDATA", s);
+//            Log.d("storeDATA", s);
             String keyword = s;
             Document doc = null;
             try {
@@ -302,6 +285,7 @@ public class LocateClinicManager implements Serializable {
     }
 
     public void writeFile(String direction) {
+        downloadCommand();
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, 10);
         Date EXPIRED = calendar.getTime();
@@ -316,7 +300,6 @@ public class LocateClinicManager implements Serializable {
         FileOutputStream fos = null;
 
         try {
-            Log.d("storeDATA", "writing");
             fos = mContext.openFileOutput(direction + ".txt", mContext.MODE_PRIVATE);
             fos.write(data.toString().getBytes());
         } catch (IOException e) {
@@ -347,19 +330,14 @@ public class LocateClinicManager implements Serializable {
                 String date = br.readLine();
                 if (!isPackageExpired(date)) {
                     while ((text = br.readLine()) != null) {
-                        Log.d("storeDATA", "text1: " + text);
                         text = text.replace("Clinic{", "");
-                        Log.d("storeDATA", "text2: " + text);
                         text = text.replace("}", "");
-                        Log.d("storeDATA", "text3: " + text);
                         String[] separated = text.split("~");
-                        Log.d("storeDATA", "separated size: " + separated.length);
                         clinicList.add(new Clinic(separated[0], separated[1], separated[2], separated[3]
                                 , separated[4], Double.valueOf(separated[5]), Double.valueOf(separated[6]), Double.valueOf(separated[7])));
                     }
                 } else {
                     Log.d("storeDATA", "file date expired");
-                    downloadCommand();
                     writeFile(direction);
                     readFile(direction);
                 }
@@ -377,7 +355,6 @@ public class LocateClinicManager implements Serializable {
 
         } else {
             Log.d("storeDATA", "file does not exist");
-            downloadCommand();
             writeFile(direction);
             readFile(direction);
         }
@@ -408,7 +385,6 @@ public class LocateClinicManager implements Serializable {
             // download the file
             input = connection.getInputStream();
             output = new FileOutputStream(mContext.getApplicationContext().getFilesDir() + "/chas.kml");
-            Log.d("downloaded", String.valueOf(mContext.getApplicationContext().getFilesDir()) + "/chas.kml");
             byte data[] = new byte[4096];
             long total = 0;
             double percent = 0.0;
@@ -416,7 +392,6 @@ public class LocateClinicManager implements Serializable {
             while ((count = input.read(data)) != -1) {
                 total += count;
                 percent = (double) (total * 100 / fileLength);
-                Log.d("downloaded", "Current percent is: " + percent + "%");
                 output.write(data, 0, count);
             }
         } catch (IOException e) {
@@ -450,9 +425,6 @@ public class LocateClinicManager implements Serializable {
         boolean isExpired = false;
         Date expiredDate = stringToDate(date, "yyyy-MM-dd");
         if (new Date().after(expiredDate)) isExpired = true;
-
-        Log.d("storeDATA", expiredDate.toString());
-        Log.d("storeDATA", new Date().toString());
 
         return isExpired;
     }
@@ -488,7 +460,7 @@ public class LocateClinicManager implements Serializable {
             }
             urlBuilder.deleteCharAt((urlBuilder.length() - 1));
             urlBuilder.append("&key=AIzaSyCkU5Dt6se9ziYISEEGXse6nxRAQud5awk");
-            Log.d("ReturnResult", urlBuilder.toString());
+//            Log.d("ReturnResult", urlBuilder.toString());
             HttpURLConnection urlConnection = null;
             try {
                 URL url = new URL(urlBuilder.toString());
@@ -561,7 +533,6 @@ public class LocateClinicManager implements Serializable {
             for (Element a : chasName) {
                 name = a.text();
                 postal = chasPostal.get(i).text();
-//                    Log.d("chasClinic", "chasName: " + name + " | chasPostal: " + postal);
                 chasClinic.add(new Clinic(name.toUpperCase(), postal));
                 i++;
             }
@@ -576,10 +547,26 @@ public class LocateClinicManager implements Serializable {
         protected void onPreExecute() {
         }
 
+        public void compare() {
+            int i = 1;
+            for (Clinic c : clinicList) {
+                String name = c.getName().toUpperCase();
+                String postal = c.getPostalCode();
+                postal = postal.replace("Singapore ", "");
+                postal = postal.trim();
+                for (Clinic chas : chasClinic) {
+                    String chasPostal = chas.getPostalCode();
+                    if (((chas.getName()).contains(name)) && chasPostal.equals(postal)) {
+                        surroundingChas.add(c);
+                    }
+                    i++;
+                }
+            }
+        }
+
         @Override
         protected Void doInBackground(String... strings) {
             Log.d("chasClinic", "testingDoInBackground");
-            readKML();
             calculatingDirection();
             for (String a : direction) {
                 if (fileExist(a)) {
@@ -589,39 +576,37 @@ public class LocateClinicManager implements Serializable {
                     siteRetrieve();
                     processData();
                     latLngChecker();
-
-                    Collections.sort(clinicList, new Comparator<Clinic>() {
-                        @Override
-                        public int compare(Clinic o1, Clinic o2) {
-                            return (Double.toString(o1.getDistance())).compareTo(Double.toString(o2.getDistance()));
-                        }
-                    });
-
                     writeFile(a);
                 }
             }
+            readKML();
             distSearch();
+            Collections.sort(clinicList, new Comparator<Clinic>() {
+                @Override
+                public int compare(Clinic o1, Clinic o2) {
+                    return Double.compare(o1.getDistance(), o2.getDistance());
+                    //return (Double.toString(o1.getDistance())).comp(Double.toString(o2.getDistance()));
+                }
+            });
+            compare();
+            //if user have chas then take 10 from surroundingChas
+            //else take 10 from clinicList
+
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            compare();
+
             Log.d("chasClinic", "testingOnPostExecute");
-
-            //if user have chas then take 10 record from surroundingChas
-            //else take 10 from clinicList
-
+            LocalBroadcastManager.getInstance(mContext).sendBroadcast(new Intent("com.blah.DISMISS_DIALOG"));
             MapsActivity myFragment = new MapsActivity();
             Bundle arguments = new Bundle();
             Log.d("chasClinic" , ""+surroundingChas.size());
-            Log.d("chasClnic", ""+clinicList.size());
-            arguments.putSerializable("ListClinic", clinicList);
+            Log.d("chasClinic", ""+clinicList.size());
+            arguments.putSerializable("ListClinic", surroundingChas);
             myFragment.setArguments(arguments);
-//            Log.d("chasClinic", "test");
             fragmentManager.beginTransaction().replace(R.id.fragment_container, myFragment).commit();
-//            Log.d("chasClinic", "test");
-
         }
     }
 
