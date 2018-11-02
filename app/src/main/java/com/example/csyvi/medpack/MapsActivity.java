@@ -74,7 +74,8 @@ public class MapsActivity extends Fragment {
             return view;
         }
     }
-
+    
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContext = this.getActivity();
         Log.d("chasClinic", "testMaps");

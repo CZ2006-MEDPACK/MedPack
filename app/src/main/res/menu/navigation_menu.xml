@@ -8,9 +8,15 @@
             android:icon="@drawable/ic_home_black_24dp"
             android:title="@string/home_page" />
         <item
+            android:id="@+id/update_profile"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Update Profile" />
+
+        <!--<item
             android:id="@+id/medication_scheduler"
             android:icon="@drawable/ic_local_pharmacy_black_24dp"
-            android:title="@string/medication" />
+            android:title="@string/medication" />-->
+
         <item
             android:id="@+id/show_records"
             android:icon="@drawable/ic_mail_black_24dp"
@@ -27,5 +33,9 @@
             android:id="@+id/help"
             android:icon="@drawable/ic_help_black_24dp"
             android:title="@string/help" />
+        <item
+            android:id="@+id/logoutAccount"
+            android:icon="@drawable/ic_exit_to_app_black_24dp"
+            android:title="Logout" />
     </group>
 </menu>

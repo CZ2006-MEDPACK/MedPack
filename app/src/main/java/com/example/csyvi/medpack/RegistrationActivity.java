@@ -23,12 +23,12 @@ import java.util.regex.Pattern;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    EditText userName, userEmail, userPassword;
+    EditText userEmail, userPassword;
     Button registerButton;
     TextView userLogin;
     LoginManager loginManager = new LoginManager();
-    String name, password, email;
-    Boolean registerValid;
+    String email, password;
+    Boolean registerValid, emailValid;
     FirebaseAuth firebaseAuth;
     ProgressDialog progressDialog;
 
@@ -37,7 +37,6 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        userName = findViewById(R.id.etRegisterName);
         userPassword = findViewById(R.id.etRegisterPass);
         userEmail = findViewById(R.id.etRegisterEmail);
         registerButton = findViewById(R.id.registerButton);
@@ -51,31 +50,28 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // get the input from users
-                name = userName.getText().toString();
                 password = userPassword.getText().toString();
                 email = userEmail.getText().toString();
 
                 // call validateRegistration method to check for null values
-                registerValid = loginManager.validateRegistration(name,email,password);
+                registerValid = loginManager.validateRegistration(email,password);
 
                 // if no null values
                 if(registerValid)
                 {
                     // trim the input to insert into the Firebase database
-                    name = name.trim();
                     password = password.trim();
                     email = email.trim();
 
-                    String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-                    Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-                    Matcher matcher = pattern.matcher(email);
+                    // call validateEmailFormat method to make sure it is in email format
+                    emailValid = loginManager.validateEmailFormat(email);
 
                     if(password.length() < 6)
                     {
                         Toast.makeText(RegistrationActivity.this,"Please enter password of length that is more than 5.",Toast.LENGTH_SHORT).show();
                     }
 
-                    else if(!matcher.matches())
+                    else if(!emailValid)
                     {
                         Toast.makeText(RegistrationActivity.this,"Please enter your email with the correct format. e.g. username@gmail.com/username@hotmail.com.",Toast.LENGTH_SHORT).show();
                     }

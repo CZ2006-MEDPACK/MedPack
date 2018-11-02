@@ -1,5 +1,6 @@
 package com.example.csyvi.medpack;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -9,12 +10,16 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * The type Main activity.
  */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawer;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -51,9 +56,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new HomeFragment()).commit();
                 break;
 
-            case R.id.medication_scheduler:
+            case R.id.update_profile:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new MedicineSchedulerFragment()).commit();
+                            new UpdateProfileFragment()).commit();
                     break;
 
             case R.id.show_records:
@@ -75,6 +80,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new HelpFragment()).commit();
                 break;
+
+            case R.id.logoutAccount:
+                firebaseAuth = FirebaseAuth.getInstance();
+                firebaseAuth.signOut();
+                finish();
+                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
+                Toast.makeText(MainActivity.this, "Logging out..", Toast.LENGTH_SHORT).show();
+                break;
+
         }
 
         drawer.closeDrawer(GravityCompat.START);
