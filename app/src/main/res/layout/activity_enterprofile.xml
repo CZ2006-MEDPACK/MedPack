@@ -16,53 +16,57 @@
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/textView14"
-        android:layout_marginTop="219dp"
-        android:text="Date of Birth:" />
+        android:layout_below="@+id/textView11"
+        android:layout_marginTop="13dp"
+        android:text="Date of Birth:"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView15"
-        android:layout_alignTop="@+id/spinner_citizenship"
-        android:text="Citizenship:" />
+        android:layout_below="@+id/et_dob"
+        android:text="Citizenship:"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="33dp"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/textView11"
-        android:layout_marginBottom="252dp"
-        android:text="Gender:" />
+        android:layout_marginBottom="194dp"
+        android:text="Gender:"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/textView13"
-        android:layout_marginBottom="149dp"
-        android:text="Spoken Language:" />
+        android:layout_alignTop="@+id/spinner_languages"
+        android:text="Spoken Language:"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/spinner_chas"
         android:layout_alignStart="@+id/textView13"
-        android:layout_alignTop="@+id/spinner_chas"
-        android:text="Do you have CHAS?" />
+        android:text="Do you have CHAS?"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/textView13"
-        android:layout_marginBottom="116dp"
-        android:text="Marital Status:" />
+        android:layout_alignTop="@+id/spinner_maritalstatus"
+        android:text="Marital Status:"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView17"
@@ -70,33 +74,35 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/textView13"
-        android:layout_marginBottom="190dp"
-        android:text="Race:" />
+        android:layout_marginBottom="168dp"
+        android:text="Race:"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="116dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_alignBottom="@+id/et_contactnumber"
         android:layout_alignStart="@+id/textViewTitle2"
         android:layout_marginStart="13dp"
-        android:text="Contact Number:" />
+        android:text="Contact Number:"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView8"
-        android:layout_marginTop="80dp"
-        android:text="Name:" />
+        android:layout_alignStart="@+id/textView13"
+        android:layout_marginTop="119dp"
+        android:text="Name:"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewTitle2"
         android:layout_width="173dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView9"
         android:layout_marginTop="6dp"
         android:text="   Enter Profile"
         android:textColor="@android:color/holo_red_dark"
@@ -107,48 +113,51 @@
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_alignStart="@+id/textView13"
         android:layout_alignTop="@+id/et_address"
-        android:text="Address:" />
+        android:layout_marginTop="9dp"
+        android:text="Address:"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/et_contactnumber"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/et_name"
-        android:layout_marginTop="163dp"
+        android:layout_marginTop="215dp"
         android:ems="10"
         android:inputType="number" />
 
     <EditText
         android:id="@+id/et_address"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_above="@+id/et_contactnumber"
-        android:layout_alignStart="@+id/et_name"
-        android:layout_marginBottom="-155dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/et_contactnumber"
+        android:layout_marginTop="161dp"
         android:ems="10"
         android:inputType="textPostalAddress" />
 
     <EditText
         android:id="@+id/et_name"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_alignStart="@+id/et_nric"
         android:layout_alignTop="@+id/textView10"
+        android:layout_marginTop="-16dp"
         android:ems="10"
         android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/et_dob"
         android:layout_width="217dp"
-        android:layout_height="30dp"
-        android:layout_alignBottom="@+id/textView13"
+        android:layout_height="wrap_content"
         android:layout_alignStart="@+id/et_contactnumber"
+        android:layout_centerVertical="true"
         android:ems="10"
-        android:hint="Select date"/>
+        android:hint="pick the date" />
 
     <RadioGroup
         android:id="@+id/radio_gender"
@@ -156,7 +165,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/et_contactnumber"
-        android:layout_marginBottom="216dp">
+        android:layout_marginBottom="202dp"
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/radio_male"
@@ -164,6 +174,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/spinner_race"
             android:layout_centerHorizontal="true"
+            android:paddingRight="20dp"
             android:text="Male"
             android:textSize="12sp" />
 
@@ -183,30 +194,31 @@
         android:id="@+id/spinner_citizenship"
         android:layout_width="213dp"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/et_contactnumber"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="256dp" />
+        android:layout_alignStart="@+id/et_contactnumber"
+        android:layout_alignTop="@+id/textView14" />
 
     <Spinner
         android:id="@+id/spinner_race"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/et_contactnumber"
-        android:layout_alignTop="@+id/textView17" />
+        android:layout_alignBottom="@+id/textView17"
+        android:layout_alignStart="@+id/et_contactnumber" />
 
     <Spinner
         android:id="@+id/spinner_languages"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView16"
-        android:layout_alignStart="@+id/et_contactnumber" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/et_contactnumber"
+        android:layout_marginBottom="136dp" />
 
     <Spinner
         android:id="@+id/spinner_maritalstatus"
         android:layout_width="211dp"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/et_contactnumber"
-        android:layout_alignTop="@+id/textView19"
+        android:layout_marginBottom="102dp"
         android:ems="10"
         android:inputType="textPersonName" />
 
@@ -216,24 +228,27 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textView13"
         android:layout_alignTop="@+id/et_nric"
-        android:text="NRIC:" />
+        android:layout_marginTop="15dp"
+        android:text="NRIC:"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/et_nric"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/spinner_chas"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="53dp"
         android:ems="10"
         android:inputType="textPersonName" />
 
     <Spinner
         android:id="@+id/spinner_chas"
-        android:layout_width="86dp"
+        android:layout_width="122dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="64dp" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="66dp"
+        android:layout_marginEnd="103dp" />
 
 </RelativeLayout>
