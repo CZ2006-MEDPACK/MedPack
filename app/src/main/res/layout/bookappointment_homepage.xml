@@ -5,14 +5,6 @@
     android:background="@android:color/white">
 
     <TextView
-        android:id="@+id/text_firstname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/text_lastname"
-        android:layout_toEndOf="@+id/text_dob"
-        android:text="First Name" />
-
-    <TextView
         android:id="@+id/text_spokenlanguage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,7 +40,7 @@
         android:text="Welcome, " />
 
     <TextView
-        android:id="@+id/text_lastname"
+        android:id="@+id/text_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

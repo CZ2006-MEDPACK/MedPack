@@ -16,15 +16,14 @@ import java.util.ArrayList;
  */
 public class HomeFragment extends Fragment {
 
-    TextView lastName, firstName, address, contactNo, dateOfBirth, citizenship, gender, race, spokenLanguage, maritalStatus, chasInfo;
+    TextView name, address, contactNo, dateOfBirth, citizenship, gender, race, spokenLanguage, maritalStatus, chasInfo;
     ArrayList<Patient> patientList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.bookappointment_homepage, container, false);
 
-        lastName = view.findViewById(R.id.text_lastname);
-        firstName = view.findViewById(R.id.text_firstname);
+        name = view.findViewById(R.id.text_name);
         address = view.findViewById(R.id.text_address);
         contactNo = view.findViewById(R.id.text_contactNo);
         dateOfBirth = view.findViewById(R.id.text_dob);
@@ -41,9 +40,9 @@ public class HomeFragment extends Fragment {
         patientList = (ArrayList<Patient>) bundle.getSerializable("ListPatient");
         for(Patient patient : patientList)
         {
-            lastName.setText(patient.getLastName());
-            firstName.setText(patient.getFirstName());
+            name.setText(patient.getName());
             address.setText(patient.getAddress());
+            contactNo.setText(patient.getContactNo());
             dateOfBirth.setText(patient.getDateOfBirth());
             citizenship.setText(patient.getCitizenship());
             gender.setText(patient.getGender());

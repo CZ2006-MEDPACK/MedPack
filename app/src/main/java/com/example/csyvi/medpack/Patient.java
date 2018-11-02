@@ -5,10 +5,9 @@ package com.example.csyvi.medpack;
  */
 public class Patient {
     private String nric;
-    private String lastName;
-    private String firstName;
+    private String name;
     private String address;
-    private int contactNo;
+    private String contactNo;
     private String dateOfBirth;
     private String citizenship;
     private String gender;
@@ -21,8 +20,7 @@ public class Patient {
      * Instantiates a new Patient.
      *
      * @param nric            the nric
-     * @param lastName        the last name
-     * @param firstName       the first name
+     * @param name        the name
      * @param address         the address
      * @param contactNo       the contact no
      * @param dateOfBirth     the date of birth
@@ -33,10 +31,9 @@ public class Patient {
      * @param maritalStatus   the marital status
      * @param chasInfo     the chas info
      */
-    public Patient(String nric, String lastName, String firstName, String address, int contactNo, String dateOfBirth, String citizenship, String gender, String race, String spokenLanguage, String maritalStatus, String chasInfo) {
+    public Patient(String nric, String name, String address, String contactNo, String dateOfBirth, String citizenship, String gender, String race, String spokenLanguage, String maritalStatus, String chasInfo) {
         this.nric = nric;
-        this.lastName = lastName;
-        this.firstName = firstName;
+        this.name= name;
         this.address = address;
         this.contactNo = contactNo;
         this.dateOfBirth = dateOfBirth;
@@ -67,39 +64,21 @@ public class Patient {
     }
 
     /**
-     * Gets last name.
+     * Gets name.
      *
-     * @return the last name
+     * @return the name
      */
-    public String getLastName() {
-        return lastName;
+    public String getName() {
+        return name;
     }
 
     /**
-     * Sets last name.
+     * Sets name.
      *
-     * @param lastName the last name
+     * @param name the name
      */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    /**
-     * Gets first name.
-     *
-     * @return the first name
-     */
-    public String getFirstName() {
-        return firstName;
-    }
-
-    /**
-     * Sets first name.
-     *
-     * @param firstName the first name
-     */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -125,7 +104,7 @@ public class Patient {
      *
      * @return the contact no
      */
-    public int getContactNo() {
+    public String getContactNo() {
         return contactNo;
     }
 
@@ -134,7 +113,7 @@ public class Patient {
      *
      * @param contactNo the contact no
      */
-    public void setContactNo(int contactNo) {
+    public void setContactNo(String contactNo) {
         this.contactNo = contactNo;
     }
 
@@ -268,10 +247,9 @@ public class Patient {
     public String toString() {
         return "Patient{" +
                 "nric='" + nric + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
+                ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", contactNo=" + contactNo +
+                ", contactNo=" + contactNo + '\'' +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
                 ", citizenship='" + citizenship + '\'' +
                 ", gender='" + gender + '\'' +

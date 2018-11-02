@@ -1,5 +1,6 @@
 package com.example.csyvi.medpack;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,33 +20,31 @@ import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    EditText et_nric, et_lastName, et_firstName, et_address, et_contactNo;
-    DatePicker dp_dob;
+    EditText et_nric, et_name, et_address, et_contactNo, et_dob;
     Spinner spinner_race,spinner_citizenship, spinner_maritalStatus, spinner_languages, spinner_chas;
     RadioGroup radio_gender;
     RadioButton radio_male, radio_female;
     Button submit_profile;
-    ArrayList<Patient> patientList;
+    ArrayList<Patient> patientList = new ArrayList<Patient>();
+    DatePickerDialog datePickerDialog;
+    Boolean genderMale;
 
-    String nric, lastName, firstName, address, dob, race, citizenship, maritalStatus, gender, spokenLanguage, chas;
-    int contactNo;
+    String nric, name, address, contactNo, dob, race, citizenship, maritalStatus, gender, spokenLanguage, chas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enterprofile);
 
-
-        Log.d("errorMsg","test1");
         et_nric = findViewById(R.id.et_nric);
-        et_lastName = findViewById(R.id.et_lastname);
-        et_firstName = findViewById(R.id.et_firstname);
+        et_name = findViewById(R.id.et_name);
         et_address = findViewById(R.id.et_address);
         et_contactNo = findViewById(R.id.et_contactnumber);
-        dp_dob = findViewById(R.id.dp_dateofbirth);
+        et_dob = findViewById(R.id.et_dob);
         spinner_race = findViewById(R.id.spinner_race);
         spinner_citizenship = findViewById(R.id.spinner_citizenship);
         spinner_maritalStatus = findViewById(R.id.spinner_maritalstatus);
@@ -54,31 +53,51 @@ public class ProfileActivity extends AppCompatActivity {
         radio_gender = findViewById(R.id.radio_gender);
         submit_profile = findViewById(R.id.submitProfileButton);
 
-        Log.d("errorMsg","test2");
         setProfileAdapters();
 
-        Log.d("errorMsg","test3");
-        nric = et_nric.getText().toString();
-        lastName = et_lastName.getText().toString();
-        firstName = et_firstName.getText().toString();
-        address = et_address.getText().toString();
-        contactNo = Integer.parseInt(et_lastName.getText().toString());
-        dob = Integer.toString(dp_dob.getDayOfMonth()) + "/" + Integer.toString(dp_dob.getMonth()) + "/" + Integer.toString(dp_dob.getYear());
+        et_dob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // calender class's instance and get current date , month and year from calender
+                final Calendar c = Calendar.getInstance();
+                int mYear = c.get(Calendar.YEAR); // current year
+                int mMonth = c.get(Calendar.MONTH); // current month
+                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+                // date picker dialog
+                datePickerDialog = new DatePickerDialog(ProfileActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
 
-        Log.d("errorMsg","test4");
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // set day of month , month and year value in the edit text
+                                et_dob.setText(dayOfMonth + "/"
+                                        + (monthOfYear + 1) + "/" + year);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
+
+
+
         radio_gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+
                 switch(checkedId)
                 {
                     case R.id.radio_male:
                         radio_male = findViewById(checkedId);
                         gender = radio_male.getText().toString();
+                        genderMale = true;
                         break;
 
                     case R.id.radio_female:
                         radio_female = findViewById(checkedId);
                         gender = radio_female.getText().toString();
+                        genderMale = false;
                         break;
                 }
             }
@@ -87,10 +106,37 @@ public class ProfileActivity extends AppCompatActivity {
         submit_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validateProfile(nric,lastName,firstName,address,contactNo,dob,citizenship,gender,race,spokenLanguage,maritalStatus,chas))
+                nric = et_nric.getText().toString();
+                name = et_name.getText().toString();
+                address = et_address.getText().toString();
+                contactNo = et_contactNo.getText().toString();
+                dob = et_dob.getText().toString();
+                citizenship = spinner_citizenship.getSelectedItem().toString();
+                race = spinner_race.getSelectedItem().toString();
+                spokenLanguage = spinner_languages.getSelectedItem().toString();
+                maritalStatus = spinner_maritalStatus.getSelectedItem().toString();
+                chas = spinner_chas.getSelectedItem().toString();
+
+                if(validateProfile(nric,name,address,contactNo,dob,citizenship,gender,race,spokenLanguage,maritalStatus,chas))
                 {
+                    Log.d("errorMsg","test3");
+                    if(genderMale)
+                    {
+                        gender = radio_male.getText().toString();
+                    }
+
+                    else
+                    {
+                        gender = radio_female.getText().toString();
+                    }
+
                     // store the patient info into the arraylist
-                    patientList.add(new Patient(nric,lastName,firstName,address,contactNo,dob,citizenship,gender,race,spokenLanguage,maritalStatus,chas));
+                    patientList.add(new Patient(nric,name,address,contactNo,dob,citizenship,gender,race,spokenLanguage,maritalStatus,chas));
+                    
+                    /*for(Patient patient : patientList)
+                    {
+                        Log.d("errorMsg",patient.toString());
+                    }*/
 
                     Toast.makeText(ProfileActivity.this, "Profile entered! Redirecting ..", Toast.LENGTH_SHORT).show();
 
@@ -114,68 +160,87 @@ public class ProfileActivity extends AppCompatActivity {
     // set the adapters for the race, languages, citizenship and marital status spinners
     public void setProfileAdapters()
     {
-        Log.d("errorMsg","adapter1");
         ArrayAdapter<CharSequence>  raceAdapter = ArrayAdapter.createFromResource(this,R.array.race, android.R.layout.simple_spinner_item);
-        Log.d("errorMsg","adapter1-1");
         raceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_race.setAdapter(raceAdapter);
-        Log.d("errorMsg","adapter1-2");
-        spinner_race.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        spinner_race.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Log.d("errorMsg","adapter1-3");
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 race = adapterView.getItemAtPosition(position).toString();
             }
-        });
-        Log.d("errorMsg","adapter2");
-        ArrayAdapter<CharSequence>  languagesAdapter = ArrayAdapter.createFromResource(this,R.array.languages, android.R.layout.simple_spinner_item);
-        languagesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_languages.setAdapter(languagesAdapter);
-        spinner_languages.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                spokenLanguage = adapterView.getItemAtPosition(position).toString();
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
-        Log.d("errorMsg","adapter3");
+        ArrayAdapter<CharSequence>  languagesAdapter = ArrayAdapter.createFromResource(this,R.array.languages, android.R.layout.simple_spinner_item);
+        languagesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_languages.setAdapter(languagesAdapter);
+        spinner_languages.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                spokenLanguage = adapterView.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         ArrayAdapter<CharSequence>  citizenshipAdapter = ArrayAdapter.createFromResource(this,R.array.citizenship, android.R.layout.simple_spinner_item);
         citizenshipAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_citizenship.setAdapter(citizenshipAdapter);
-        spinner_citizenship.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        spinner_citizenship.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 citizenship = adapterView.getItemAtPosition(position).toString();
             }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
         });
-        Log.d("errorMsg","adapter4");
+
         ArrayAdapter<CharSequence>  maritalStatusAdapter = ArrayAdapter.createFromResource(this,R.array.maritalstatus, android.R.layout.simple_spinner_item);
         maritalStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_maritalStatus.setAdapter(maritalStatusAdapter);
-        spinner_maritalStatus.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        spinner_maritalStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 maritalStatus = adapterView.getItemAtPosition(position).toString();
             }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
         });
-        Log.d("errorMsg","adapter5");
+
         ArrayAdapter<CharSequence>  chasAdapter = ArrayAdapter.createFromResource(this,R.array.chas, android.R.layout.simple_spinner_item);
         chasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_chas.setAdapter(chasAdapter);
-        spinner_chas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        spinner_chas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 chas = adapterView.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
     }
 
-    public Boolean validateProfile(String nric, String lastName, String firstName, String address, int contactNo, String dob, String citizenship, String gender, String race, String spokenLanguage, String maritalStatus, String chas)
+    public Boolean validateProfile(String nric, String name, String address, String contactNo, String dob, String citizenship, String gender, String race, String spokenLanguage, String maritalStatus, String chas)
     {
         Boolean result;
-        String contactString = Integer.toString(contactNo);
 
-        if(nric.isEmpty() || lastName.isEmpty() || firstName.isEmpty() || address.isEmpty() || TextUtils.isEmpty(contactString) || dob.isEmpty() ||
+        if(nric.isEmpty() || name.isEmpty() || address.isEmpty() || contactNo.isEmpty() || dob.isEmpty() ||
                 citizenship.isEmpty() || gender.isEmpty() || race.isEmpty() || spokenLanguage.isEmpty() || maritalStatus.isEmpty() || chas.isEmpty())
         {
             result = false;
