@@ -1,9 +1,11 @@
 package com.example.csyvi.medpack;
 
+import java.io.Serializable;
+
 /**
  * The type Patient.
  */
-public class Patient {
+public class Patient implements Serializable {
     private String nric;
     private String name;
     private String address;

@@ -3,6 +3,7 @@ package com.example.csyvi.medpack;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,9 +36,8 @@ public class HomeFragment extends Fragment {
         chasInfo = view.findViewById(R.id.text_chas);
 
         Intent intent = getActivity().getIntent();
-        Bundle bundle = intent.getExtras();
-
-        patientList = (ArrayList<Patient>) bundle.getSerializable("ListPatient");
+        patientList = (ArrayList<Patient>) intent.getSerializableExtra("ListPatient");
+        //patientList = (ArrayList<Patient>) getArguments().getSerializable("ListPatient");
         for(Patient patient : patientList)
         {
             name.setText(patient.getName());
@@ -51,7 +51,6 @@ public class HomeFragment extends Fragment {
             spokenLanguage.setText(patient.getSpokenLanguage());
             chasInfo.setText(patient.getChasInfo());
         }
-
 
         Button button = view.findViewById(R.id.bookAppointment);
         button.setOnClickListener(new View.OnClickListener() {

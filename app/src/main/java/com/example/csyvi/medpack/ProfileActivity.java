@@ -1,7 +1,9 @@
 package com.example.csyvi.medpack;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -18,11 +20,12 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity{
 
     EditText et_nric, et_name, et_address, et_contactNo, et_dob;
     Spinner spinner_race,spinner_citizenship, spinner_maritalStatus, spinner_languages, spinner_chas;
@@ -38,6 +41,12 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*if(!isFirstTimeUser())
+        {
+            startMainActivity();
+            finish();
+        }*/
+
         setContentView(R.layout.activity_enterprofile);
 
         et_nric = findViewById(R.id.et_nric);
@@ -119,7 +128,6 @@ public class ProfileActivity extends AppCompatActivity {
 
                 if(validateProfile(nric,name,address,contactNo,dob,citizenship,gender,race,spokenLanguage,maritalStatus,chas))
                 {
-                    Log.d("errorMsg","test3");
                     if(genderMale)
                     {
                         gender = radio_male.getText().toString();
@@ -132,19 +140,17 @@ public class ProfileActivity extends AppCompatActivity {
 
                     // store the patient info into the arraylist
                     patientList.add(new Patient(nric,name,address,contactNo,dob,citizenship,gender,race,spokenLanguage,maritalStatus,chas));
-                    
+
                     /*for(Patient patient : patientList)
                     {
                         Log.d("errorMsg",patient.toString());
                     }*/
 
                     Toast.makeText(ProfileActivity.this, "Profile entered! Redirecting ..", Toast.LENGTH_SHORT).show();
-
                     // bring patientList arraylist to the home page
                     Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("ListPatient", patientList);
-                    intent.putExtras(bundle);
+                    // implemented serializable on Patient entity class instead
+                    intent.putExtra("ListPatient", patientList);
                     startActivity(intent);
                 }
 
@@ -253,4 +259,25 @@ public class ProfileActivity extends AppCompatActivity {
 
         return result;
     }
+
+    /*private boolean isFirstTimeUser()
+    {
+        SharedPreferences ref = getApplicationContext().getSharedPreferences("MedPack", Context.MODE_PRIVATE);
+        return ref.getBoolean("FirstTimeStartFlag",true);
+    }
+
+    private void startMainActivity()
+    {
+        setFirstTimeUserStatus(false);
+        startActivity(new Intent(ProfileActivity.this,MainActivity.class));
+        finish();
+    }
+
+    private void setFirstTimeUserStatus(boolean stt)
+    {
+        SharedPreferences ref = getApplicationContext().getSharedPreferences("MedPack", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = ref.edit();
+        editor.putBoolean("FirstTimeStartFlag", stt);
+        editor.commit();
+    }*/
 }
