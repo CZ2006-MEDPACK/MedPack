@@ -13,13 +13,13 @@
         android:text="First Name" />
 
     <TextView
-        android:id="@+id/text_spokenlanguages"
+        android:id="@+id/text_spokenlanguage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/textView"
         android:layout_marginBottom="141dp"
-        android:text="Spoken Languages" />
+        android:text="Spoken Language" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -93,7 +93,7 @@
         android:text="Address" />
 
     <TextView
-        android:id="@+id/text_allergy"
+        android:id="@+id/text_chas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

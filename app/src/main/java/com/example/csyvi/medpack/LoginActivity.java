@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (user != null) {
             finish();
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
             startActivity(intent);
         }
 

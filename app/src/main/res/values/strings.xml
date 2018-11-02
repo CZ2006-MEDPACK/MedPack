@@ -34,4 +34,16 @@
         <item>Others</item>
     </string-array>
 
+    <string-array name="languages">
+        <item>English</item>
+        <item>Mandarin Chinese</item>
+        <item>Bahasa Melayu</item>
+        <item>Tamil</item>
+    </string-array>
+
+    <string-array name="chas">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
 </resources>

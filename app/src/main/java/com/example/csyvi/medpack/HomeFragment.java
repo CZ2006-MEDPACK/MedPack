@@ -9,12 +9,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * The type Home fragment.
  */
 public class HomeFragment extends Fragment {
 
-    TextView lastName, firstName, address, contactNo, dateOfBirth, citizenship, gender, race, spokenLanguages, maritalStatus, allergyInfo;
+    TextView lastName, firstName, address, contactNo, dateOfBirth, citizenship, gender, race, spokenLanguage, maritalStatus, chasInfo;
+    ArrayList<Patient> patientList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,8 +32,27 @@ public class HomeFragment extends Fragment {
         gender = view.findViewById(R.id.text_gender);
         race = view.findViewById(R.id.text_race);
         maritalStatus = view.findViewById(R.id.text_maritalstatus);
-        spokenLanguages = view.findViewById(R.id.text_spokenlanguages);
-        allergyInfo = view.findViewById(R.id.text_allergy);
+        spokenLanguage = view.findViewById(R.id.text_spokenlanguage);
+        chasInfo = view.findViewById(R.id.text_chas);
+
+        Intent intent = getActivity().getIntent();
+        Bundle bundle = intent.getExtras();
+
+        patientList = (ArrayList<Patient>) bundle.getSerializable("ListPatient");
+        for(Patient patient : patientList)
+        {
+            lastName.setText(patient.getLastName());
+            firstName.setText(patient.getFirstName());
+            address.setText(patient.getAddress());
+            dateOfBirth.setText(patient.getDateOfBirth());
+            citizenship.setText(patient.getCitizenship());
+            gender.setText(patient.getGender());
+            race.setText(patient.getRace());
+            maritalStatus.setText(patient.getMaritalStatus());
+            spokenLanguage.setText(patient.getSpokenLanguage());
+            chasInfo.setText(patient.getChasInfo());
+        }
+
 
         Button button = view.findViewById(R.id.bookAppointment);
         button.setOnClickListener(new View.OnClickListener() {

@@ -13,9 +13,9 @@ public class Patient {
     private String citizenship;
     private String gender;
     private String race;
-    private String spokenLanguages;
+    private String spokenLanguage;
     private String maritalStatus;
-    private String allergyInfo;
+    private String chasInfo;
 
     /**
      * Instantiates a new Patient.
@@ -29,11 +29,11 @@ public class Patient {
      * @param citizenship     the citizenship
      * @param gender          the gender
      * @param race            the race
-     * @param spokenLanguages the spoken languages
+     * @param spokenLanguage the spoken language
      * @param maritalStatus   the marital status
-     * @param allergyInfo     the allergy info
+     * @param chasInfo     the chas info
      */
-    public Patient(String nric, String lastName, String firstName, String address, int contactNo, String dateOfBirth, String citizenship, String gender, String race, String spokenLanguages, String maritalStatus, String allergyInfo) {
+    public Patient(String nric, String lastName, String firstName, String address, int contactNo, String dateOfBirth, String citizenship, String gender, String race, String spokenLanguage, String maritalStatus, String chasInfo) {
         this.nric = nric;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -43,9 +43,9 @@ public class Patient {
         this.citizenship = citizenship;
         this.gender = gender;
         this.race = race;
-        this.spokenLanguages = spokenLanguages;
+        this.spokenLanguage = spokenLanguage;
         this.maritalStatus = maritalStatus;
-        this.allergyInfo = allergyInfo;
+        this.chasInfo = chasInfo;
     }
 
     /**
@@ -211,21 +211,21 @@ public class Patient {
     }
 
     /**
-     * Gets spoken languages.
+     * Gets spoken language.
      *
-     * @return the spoken languages
+     * @return the spoken language
      */
-    public String getSpokenLanguages() {
-        return spokenLanguages;
+    public String getSpokenLanguage() {
+        return spokenLanguage;
     }
 
     /**
      * Sets spoken languages.
      *
-     * @param spokenLanguages the spoken languages
+     * @param spokenLanguage the spoken language
      */
-    public void setSpokenLanguages(String spokenLanguages) {
-        this.spokenLanguages = spokenLanguages;
+    public void setSpokenLanguage(String spokenLanguage) {
+        this.spokenLanguage = spokenLanguage;
     }
 
     /**
@@ -247,21 +247,21 @@ public class Patient {
     }
 
     /**
-     * Gets allergy info.
+     * Gets chas info.
      *
-     * @return the allergy info
+     * @return the chas info
      */
-    public String getAllergyInfo() {
-        return allergyInfo;
+    public String getChasInfo() {
+        return chasInfo;
     }
 
     /**
-     * Sets allergy info.
+     * Sets chas info.
      *
-     * @param allergyInfo the allergy info
+     * @param chasInfo the chas info
      */
-    public void setAllergyInfo(String allergyInfo) {
-        this.allergyInfo = allergyInfo;
+    public void setChasInfo(String chasInfo) {
+        this.chasInfo = chasInfo;
     }
 
     @Override
@@ -276,9 +276,9 @@ public class Patient {
                 ", citizenship='" + citizenship + '\'' +
                 ", gender='" + gender + '\'' +
                 ", race='" + race + '\'' +
-                ", spokenLanguages='" + spokenLanguages + '\'' +
+                ", spokenLanguage='" + spokenLanguage + '\'' +
                 ", maritalStatus='" + maritalStatus + '\'' +
-                ", allergyInfo='" + allergyInfo + '\'' +
+                ", chasInfo='" + chasInfo + '\'' +
                 '}';
     }
 }

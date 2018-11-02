@@ -33,8 +33,9 @@
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textViewTitle2"
-        android:layout_alignTop="@+id/radio_male"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView11"
+        android:layout_marginBottom="252dp"
         android:text="Gender:" />
 
     <TextView
@@ -42,26 +43,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textViewTitle2"
-        android:layout_marginBottom="179dp"
-        android:text="Spoken Languages:" />
+        android:layout_alignStart="@+id/textView13"
+        android:layout_marginBottom="149dp"
+        android:text="Spoken Language:" />
 
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textViewTitle2"
-        android:layout_marginBottom="85dp"
-        android:text="Any Allergy?" />
+        android:layout_alignStart="@+id/textView13"
+        android:layout_marginBottom="77dp"
+        android:text="Do you have CHAS?" />
 
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textViewTitle2"
-        android:layout_marginBottom="132dp"
+        android:layout_alignStart="@+id/textView13"
+        android:layout_marginBottom="116dp"
         android:text="Marital Status:" />
 
     <TextView
@@ -69,8 +70,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textViewTitle2"
-        android:layout_marginBottom="223dp"
+        android:layout_alignStart="@+id/textView13"
+        android:layout_marginBottom="190dp"
         android:text="Race:" />
 
     <TextView
@@ -103,10 +104,10 @@
     <TextView
         android:id="@+id/textViewTitle2"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/textView9"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="6dp"
         android:text="Enter Profile"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="20sp"
@@ -167,24 +168,33 @@
         android:ems="10"
         android:inputType="date" />
 
-    <RadioButton
-        android:id="@+id/radio_male"
+    <RadioGroup
+        android:id="@+id/radio_gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/spinner_race"
-        android:layout_centerHorizontal="true"
-        android:text="Male"
-        android:textSize="12sp" />
+        android:layout_toEndOf="@+id/textView16">
 
-    <RadioButton
-        android:id="@+id/radio_female"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/radio_male"
-        android:layout_marginStart="-139dp"
-        android:layout_toEndOf="@+id/checkbox_english"
-        android:text="Female"
-        android:textSize="12sp" />
+        <RadioButton
+            android:id="@+id/radio_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/spinner_race"
+            android:layout_centerHorizontal="true"
+            android:text="Male"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/radio_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/textView15"
+            android:layout_marginEnd="66dp"
+            android:text="Female"
+            android:textSize="12sp" />
+
+    </RadioGroup>
 
     <Spinner
         android:id="@+id/spinner_citizenship"
@@ -201,44 +211,12 @@
         android:layout_alignBottom="@+id/textView17"
         android:layout_toEndOf="@+id/textView16" />
 
-    <CheckBox
-        android:id="@+id/checkbox_english"
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/spinner_languages"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/textView17"
-        android:layout_marginEnd="139dp"
-        android:layout_marginTop="-223dp"
-        android:text="English"
-        android:textSize="12sp" />
-
-    <CheckBox
-        android:id="@+id/checkbox_mandarin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/et_address"
-        android:layout_below="@+id/textView17"
-        android:layout_marginTop="-223dp"
-        android:text="Mandarin"
-        android:textSize="12sp" />
-
-    <CheckBox
-        android:id="@+id/checkbox_malay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/checkbox_english"
-        android:layout_below="@+id/checkbox_english"
-        android:text="Malay"
-        android:textSize="12sp" />
-
-    <CheckBox
-        android:id="@+id/checkbox_tamil"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/checkbox_mandarin"
-        android:layout_alignTop="@+id/checkbox_malay"
-        android:text="Tamil"
-        android:textSize="12sp" />
+        android:layout_alignBottom="@+id/textView16"
+        android:layout_toEndOf="@+id/textView16" />
 
     <Spinner
         android:id="@+id/spinner_maritalstatus"
@@ -249,13 +227,31 @@
         android:ems="10"
         android:inputType="textPersonName" />
 
+
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView13"
+        android:layout_alignTop="@+id/et_nric"
+        android:text="NRIC:" />
+
     <EditText
-        android:id="@+id/et_allergy"
-        android:layout_width="234dp"
+        android:id="@+id/et_nric"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_alignTop="@+id/textView18"
+        android:layout_above="@+id/et_lastname"
         android:layout_toEndOf="@+id/textView16"
         android:ems="10"
         android:inputType="textPersonName" />
+
+    <Spinner
+        android:id="@+id/spinner_chas"
+        android:layout_width="86dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/textView18"
+        android:layout_marginStart="145dp" />
 
 </RelativeLayout>
