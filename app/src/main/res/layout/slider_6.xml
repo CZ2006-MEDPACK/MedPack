@@ -10,14 +10,14 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_icons_medicalrecords" />
+        android:src="@drawable/ic_icons_calendar_plus" />
 
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/open_sans_extrabold"
-        android:text="Medical Records"
+        android:text="Healthcare Events"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="30dp"
@@ -26,9 +26,9 @@
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="12dp"
         android:fontFamily="@font/open_sans"
-        android:text="View your medical records &amp; appointments within the past one year at any time."
+        android:text="Lastly, MedPack helps you keep up-to-date with the latest healthcare events."
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textStyle="normal" />
