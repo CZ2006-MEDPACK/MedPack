@@ -20,6 +20,14 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -35,18 +43,22 @@ public class ProfileActivity extends AppCompatActivity{
     ArrayList<Patient> patientList = new ArrayList<Patient>();
     DatePickerDialog datePickerDialog;
     Boolean genderMale;
+    FirebaseDatabase database;
+    FirebaseAuth mAuth;
+    String userId;
+
+    DatabaseReference databaseRef;
 
     String nric, name, address, contactNo, dob, race, citizenship, maritalStatus, gender, spokenLanguage, chas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*if(!isFirstTimeUser())
+        if(!isFirstTimeUser())
         {
             startMainActivity();
             finish();
-        }*/
-
+        }
         setContentView(R.layout.activity_enterprofile);
 
         et_nric = findViewById(R.id.et_nric);
@@ -125,7 +137,6 @@ public class ProfileActivity extends AppCompatActivity{
                 spokenLanguage = spinner_languages.getSelectedItem().toString();
                 maritalStatus = spinner_maritalStatus.getSelectedItem().toString();
                 chas = spinner_chas.getSelectedItem().toString();
-
                 if(validateProfile(nric,name,address,contactNo,dob,citizenship,gender,race,spokenLanguage,maritalStatus,chas))
                 {
                     if(genderMale)
@@ -138,8 +149,19 @@ public class ProfileActivity extends AppCompatActivity{
                         gender = radio_female.getText().toString();
                     }
 
+                    database = FirebaseDatabase.getInstance();
+                    mAuth = FirebaseAuth.getInstance();
+                    databaseRef = database.getReference("patient");
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    userId = user.getUid();
+                    Log.d("errorMsg", userId);
+
+                    //String id = databaseRef.push().getKey();
+                    // store patient info into the Firebase database
+                    Patient patient = new Patient(nric,name,address,contactNo,dob,citizenship,gender,race,spokenLanguage,maritalStatus,chas);
+                    databaseRef.child(userId).setValue(patient);
                     // store the patient info into the arraylist
-                    patientList.add(new Patient(nric,name,address,contactNo,dob,citizenship,gender,race,spokenLanguage,maritalStatus,chas));
+                    //patientList.add(new Patient(nric,name,address,contactNo,dob,citizenship,gender,race,spokenLanguage,maritalStatus,chas));
 
                     /*for(Patient patient : patientList)
                     {
@@ -150,7 +172,7 @@ public class ProfileActivity extends AppCompatActivity{
                     // bring patientList arraylist to the home page
                     Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
                     // implemented serializable on Patient entity class instead
-                    intent.putExtra("ListPatient", patientList);
+                    //intent.putExtra("ListPatient", patientList);
                     startActivity(intent);
                 }
 
@@ -260,7 +282,7 @@ public class ProfileActivity extends AppCompatActivity{
         return result;
     }
 
-    /*private boolean isFirstTimeUser()
+    private boolean isFirstTimeUser()
     {
         SharedPreferences ref = getApplicationContext().getSharedPreferences("MedPack", Context.MODE_PRIVATE);
         return ref.getBoolean("FirstTimeStartFlag",true);
@@ -279,5 +301,5 @@ public class ProfileActivity extends AppCompatActivity{
         SharedPreferences.Editor editor = ref.edit();
         editor.putBoolean("FirstTimeStartFlag", stt);
         editor.commit();
-    }*/
+    }
 }

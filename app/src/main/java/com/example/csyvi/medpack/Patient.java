@@ -1,11 +1,15 @@
 package com.example.csyvi.medpack;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The type Patient.
  */
-public class Patient implements Serializable {
+public class Patient {
     private String nric;
     private String name;
     private String address;
@@ -260,5 +264,23 @@ public class Patient implements Serializable {
                 ", maritalStatus='" + maritalStatus + '\'' +
                 ", chasInfo='" + chasInfo + '\'' +
                 '}';
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("nric", nric);
+        result.put("name", name);
+        result.put("address", address);
+        result.put("contactNo", contactNo);
+        result.put("dateOfBirth", dateOfBirth);
+        result.put("citizenship", citizenship);
+        result.put("gender", gender);
+        result.put("race", race);
+        result.put("spokenLanguage", spokenLanguage);
+        result.put("maritalStatus", maritalStatus);
+        result.put("chasInfo", chasInfo);
+
+        return result;
     }
 }

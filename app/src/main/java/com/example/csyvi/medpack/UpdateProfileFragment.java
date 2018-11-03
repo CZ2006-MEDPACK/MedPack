@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,194 +18,162 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * The type First fragment.
  */
 public class UpdateProfileFragment extends Fragment {
 
-    EditText et_nric, et_name, et_address, et_contactNo, et_dob;
-    Spinner spinner_race,spinner_citizenship, spinner_maritalStatus, spinner_languages, spinner_chas;
-    RadioGroup radio_gender;
-    RadioButton radio_male, radio_female;
+    EditText et_address, et_contactNo;
+    Spinner spinner_citizenship, spinner_maritalStatus, spinner_chasInfo;
     Button update_profile;
     ArrayList<Patient> patientList = new ArrayList<Patient>();
-    DatePickerDialog datePickerDialog;
-    Boolean genderMale;
-
-    String nric, name, address, contactNo, dob, race, citizenship, maritalStatus, gender, spokenLanguage, chas;
+    String address, contactNo, citizenship, maritalStatus, chas;
+    DatabaseReference databaseReference;
+    FirebaseDatabase database;
+    FirebaseAuth mAuth;
+    String userId;
+    String s_nric, s_name, s_address, s_contactNo, s_dob, s_citizenship, s_gender, s_race, s_spokenlanguage, s_maritalstatus, s_chasinfo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.activity_updateprofile, container, false);
 
-        Intent intent = getActivity().getIntent();
-        patientList = (ArrayList<Patient>) intent.getSerializableExtra("ListPatient");
+        //Intent intent = getActivity().getIntent();
+        //patientList = (ArrayList<Patient>) intent.getSerializableExtra("ListPatient");
 
-        et_nric = view.findViewById(R.id.et_nric);
-        et_name = view.findViewById(R.id.et_name);
-        et_address = view.findViewById(R.id.et_address);
-        et_contactNo = view.findViewById(R.id.et_contactnumber);
-        et_dob = view.findViewById(R.id.et_dob);
-        spinner_race = view.findViewById(R.id.spinner_race);
-        spinner_citizenship = view.findViewById(R.id.spinner_citizenship);
-        spinner_maritalStatus = view.findViewById(R.id.spinner_maritalstatus);
-        spinner_languages = view.findViewById(R.id.spinner_languages);
-        spinner_chas = view.findViewById(R.id.spinner_chas);
-        radio_gender = view.findViewById(R.id.radio_gender);
-        update_profile = view.findViewById(R.id.submitProfileButton);
+        et_address = view.findViewById(R.id.et_address2);
+        et_contactNo = view.findViewById(R.id.et_contactnumber2);
+        spinner_citizenship = view.findViewById(R.id.spinner_citizenship2);
+        spinner_maritalStatus = view.findViewById(R.id.spinner_maritalstatus2);
+        spinner_chasInfo = view.findViewById(R.id.spinner_chas2);
+        update_profile = view.findViewById(R.id.updateProfileButton);
 
-        for(Patient patient : patientList)
-        {
-            et_nric.setText(patient.getNric());
-            et_name.setText(patient.getName());
-            et_address.setText(patient.getAddress());
-            et_contactNo.setText(patient.getContactNo());
-            et_dob.setText(patient.getDateOfBirth());
-            setProfileAdapters();
-            //spinner_race.setSelection(patient.getRace());
-            //spinner_citizenship.setText(patient.getNric());
-            //spinner_maritalStatus.setText(patient.getNric());
-            //spinner_languages.setText(patient.getNric());
-            //radio_gender.setText(patient.getNric());
-        }
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        userId = user.getUid();
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("patient").child(userId);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                try {
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren())
+                    {
+                        s_nric = dataSnapshot.child("nric").getValue().toString();
+                        s_name = dataSnapshot.child("name").getValue().toString();
+                        s_address = dataSnapshot.child("address").getValue().toString();
+                        s_contactNo = dataSnapshot.child("contactNo").getValue().toString();
+                        s_dob = dataSnapshot.child("dateOfBirth").getValue().toString();
+                        s_citizenship = dataSnapshot.child("citizenship").getValue().toString();
+                        s_gender = dataSnapshot.child("gender").getValue().toString();
+                        s_race = dataSnapshot.child("race").getValue().toString();
+                        s_maritalstatus = dataSnapshot.child("maritalStatus").getValue().toString();
+                        s_spokenlanguage = dataSnapshot.child("spokenLanguage").getValue().toString();
+                        s_chasinfo = dataSnapshot.child("chasInfo").getValue().toString();
+                    }
+
+                    et_address.setText(s_address);
+                    et_contactNo.setText(s_contactNo);
+
+                    ArrayAdapter<CharSequence>  citizenshipAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.citizenship, android.R.layout.simple_spinner_item);
+                    citizenshipAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner_citizenship.setAdapter(citizenshipAdapter);
+                    spinner_citizenship.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                            citizenship = adapterView.getItemAtPosition(position).toString();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+                    ArrayAdapter<CharSequence>  maritalStatusAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.maritalstatus, android.R.layout.simple_spinner_item);
+                    maritalStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner_maritalStatus.setAdapter(maritalStatusAdapter);
+                    spinner_maritalStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                            maritalStatus = adapterView.getItemAtPosition(position).toString();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+                    ArrayAdapter<CharSequence>  chasAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.chas, android.R.layout.simple_spinner_item);
+                    chasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner_chasInfo.setAdapter(chasAdapter);
+                    spinner_chasInfo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                            chas = adapterView.getItemAtPosition(position).toString();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+                    spinner_citizenship.setSelection(citizenshipAdapter.getPosition(s_citizenship));
+                    spinner_maritalStatus.setSelection(maritalStatusAdapter.getPosition(s_maritalstatus));
+                    spinner_chasInfo.setSelection(chasAdapter.getPosition(s_chasinfo));
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
 
         update_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nric = et_nric.getText().toString();
-                name = et_name.getText().toString();
-                address = et_address.getText().toString();
-                contactNo = et_contactNo.getText().toString();
-                dob = et_dob.getText().toString();
-                citizenship = spinner_citizenship.getSelectedItem().toString();
-                race = spinner_race.getSelectedItem().toString();
-                spokenLanguage = spinner_languages.getSelectedItem().toString();
-                maritalStatus = spinner_maritalStatus.getSelectedItem().toString();
-                chas = spinner_chas.getSelectedItem().toString();
-
-                if(validateProfile(nric,name,address,contactNo,dob,citizenship,gender,race,spokenLanguage,maritalStatus,chas))
+                if (validateProfile(address, contactNo, citizenship, maritalStatus, chas))
                 {
-                    if(genderMale)
-                    {
-                        gender = radio_male.getText().toString();
-                    }
-
-                    else
-                    {
-                        gender = radio_female.getText().toString();
-                    }
-
-                    // store the patient info into the arraylist
-                    patientList.remove(0);
-                    patientList.add(new Patient(nric,name,address,contactNo,dob,citizenship,gender,race,spokenLanguage,maritalStatus,chas));
-
-                    /*for(Patient patient : patientList)
-                    {
-                        Log.d("errorMsg",patient.toString());
-                    }*/
+                    Patient patient = new Patient(s_nric,s_name,s_address,s_contactNo,s_dob,s_citizenship,s_gender,s_race,s_spokenlanguage,s_maritalstatus,s_chasinfo);
+                    Map<String, Object> postValues = patient.toMap();
+                    databaseReference.updateChildren(postValues);
 
                     Toast.makeText(getActivity(), "Profile updated!", Toast.LENGTH_SHORT).show();
                 }
 
-                else
-                {
+                else {
                     Toast.makeText(getActivity(), "Please enter all the details.", Toast.LENGTH_SHORT).show();
                 }
 
-            }
-        });
+               }
+            });
 
-        return view;
+                return view;
     }
 
-    // set the adapters for the race, languages, citizenship and marital status spinners
-    public void setProfileAdapters()
-    {
-        ArrayAdapter<CharSequence> raceAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.race, android.R.layout.simple_spinner_item);
-        raceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_race.setAdapter(raceAdapter);
-        spinner_race.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                race = adapterView.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        ArrayAdapter<CharSequence>  languagesAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.languages, android.R.layout.simple_spinner_item);
-        languagesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_languages.setAdapter(languagesAdapter);
-        spinner_languages.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                spokenLanguage = adapterView.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        ArrayAdapter<CharSequence>  citizenshipAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.citizenship, android.R.layout.simple_spinner_item);
-        citizenshipAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_citizenship.setAdapter(citizenshipAdapter);
-        spinner_citizenship.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                citizenship = adapterView.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        ArrayAdapter<CharSequence>  maritalStatusAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.maritalstatus, android.R.layout.simple_spinner_item);
-        maritalStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_maritalStatus.setAdapter(maritalStatusAdapter);
-        spinner_maritalStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                maritalStatus = adapterView.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        ArrayAdapter<CharSequence>  chasAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.chas, android.R.layout.simple_spinner_item);
-        chasAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_chas.setAdapter(chasAdapter);
-        spinner_chas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                chas = adapterView.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-    }
-
-    public Boolean validateProfile(String nric, String name, String address, String contactNo, String dob, String citizenship, String gender, String race, String spokenLanguage, String maritalStatus, String chas)
+    public Boolean validateProfile(String address, String contactNo, String citizenship, String maritalStatus, String chas)
     {
         Boolean result;
 
-        if(nric.isEmpty() || name.isEmpty() || address.isEmpty() || contactNo.isEmpty() || dob.isEmpty() ||
-                citizenship.isEmpty() || gender.isEmpty() || race.isEmpty() || spokenLanguage.isEmpty() || maritalStatus.isEmpty() || chas.isEmpty())
+        if(address.isEmpty() || contactNo.isEmpty() || citizenship.isEmpty() ||  maritalStatus.isEmpty() || chas.isEmpty())
         {
             result = false;
         }
