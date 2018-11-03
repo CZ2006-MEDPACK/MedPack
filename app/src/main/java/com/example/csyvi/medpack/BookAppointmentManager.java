@@ -23,15 +23,37 @@ import static android.content.Context.MODE_PRIVATE;
 public class BookAppointmentManager {
 
     private ArrayList<Appointment> appointmentList = new ArrayList<>();
+    private String[] availDatetime = new String[]{"4:30 pm", "5:00 pm", "6:00 pm"};
     private static final String FILE_NAME = "MedPack.txt";
 
     EditText SaveAppointment;
 
     /**
+     * This method will return available Appointment timeslots to the patient (to be retrieved from Clinic server in actual implementation)
+     */
+    public String[] viewDatetimeAvailable(){
+        return availDatetime;
+    }
+
+    /**
+     * This method will create a new Appointment based on user input
+     */
+    public void createAppointment(){
+
+    }
+
+    /**
+     * This method will return the patient's existing Appointments
+     */
+    public ArrayList<Appointment> viewAppointment(){
+        return appointmentList;
+    }
+
+
+    /**
      * This method will insert patient's info into the textfile database
      */
-    private void insertAppointment(View view)
-    {
+    private void insertAppointment(View view) {
         /*SaveAppointment = view.findViewById(R.id.bookAppointment);
         String text = SaveAppointment.getText().toString();
         FileOutputStream fos = null;
@@ -60,7 +82,7 @@ public class BookAppointmentManager {
     /**
      * This method will update patient's info in the textfile database
      */
-    private void updateAppointment(View view){
+    private void updateAppointment(View view) {
         /*FileInputStream fis = null;
         try{fis = openFileInput(FILE_NAME);
             InputStreamReader isr = new InputStreamReader(fis);
@@ -91,14 +113,14 @@ public class BookAppointmentManager {
     /**
      * This method will delete patient from the textfile database
      */
-    private void deleteAppointment()
-    {
+    private void deleteAppointment() {
         PrintWriter delete = null;
         try {
-        delete = new PrintWriter("MedPack.txt");
-    } catch (FileNotFoundException e) {
-        e.printStackTrace();
-    }
+            delete = new PrintWriter("MedPack.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         delete.close();
     }
 }
+

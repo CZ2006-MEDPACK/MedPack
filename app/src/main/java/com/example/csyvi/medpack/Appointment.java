@@ -5,20 +5,20 @@ package com.example.csyvi.medpack;
  */
 public class Appointment {
     private int queueNo;
-    private int waitingTime;
     private String datetime;
+    private String serialNo;
 
     /**
      * Instantiates a new Appointment.
      *
-     * @param queueNo     the queue no
-     * @param waitingTime the waiting time
-     * @param datetime    the datetime
+     * @param queueNo     the queue number
+     * @param datetime    the date & time of the appointment
+     * @param serialNo    the appointment serial number
      */
-    public Appointment(int queueNo, int waitingTime, String datetime) {
+    public Appointment(int queueNo, String datetime, String serialNo) {
         this.queueNo = queueNo;
-        this.waitingTime = waitingTime;
         this.datetime = datetime;
+        this.serialNo = serialNo;
     }
 
     /**
@@ -40,24 +40,6 @@ public class Appointment {
     }
 
     /**
-     * Gets waiting time.
-     *
-     * @return the waiting time
-     */
-    public int getWaitingTime() {
-        return waitingTime;
-    }
-
-    /**
-     * Sets waiting time.
-     *
-     * @param waitingTime the waiting time
-     */
-    public void setWaitingTime(int waitingTime) {
-        this.waitingTime = waitingTime;
-    }
-
-    /**
      * Gets datetime.
      *
      * @return the datetime
@@ -73,5 +55,23 @@ public class Appointment {
      */
     public void setDatetime(String datetime) {
         this.datetime = datetime;
+    }
+
+    /**
+     * Gets serial number.
+     *
+     * @return the serial number
+     */
+    public String getSerialNo() {
+        return serialNo;
+    }
+
+    /**
+     * Sets the serial number.
+     *
+     * @param serialNo the serial number
+     */
+    public void setSerialNo(String serialNo) {
+        this.serialNo = serialNo;
     }
 }
