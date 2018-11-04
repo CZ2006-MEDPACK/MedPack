@@ -34,7 +34,7 @@
         android:layout_marginLeft="35dp"
         android:layout_marginTop="170dp"
         android:layout_marginRight="35dp"
-        android:fontFamily="@font/open_sans"
+        android:fontFamily="@font/open_sans_semibold"
         android:text="Place your finger on the optical sensor and tap 'Begin Scan' to measure your vital signs."
         android:textAlignment="center" />
 
@@ -45,6 +45,7 @@
         android:layout_above="@id/scanButton"
         android:layout_marginBottom="1dp"
         android:background="@color/colorPrimary"
+        android:fontFamily="@font/open_sans_semibold"
         android:text="Confirm"
         android:textColor="#fff" />
 
@@ -54,6 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimaryLight"
+        android:fontFamily="@font/open_sans_semibold"
         android:text="Begin Scan"
         android:textColor="#fff" />
 
