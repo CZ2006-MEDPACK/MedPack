@@ -152,6 +152,7 @@ public class UpdateProfileFragment extends Fragment {
             public void onClick(View view) {
                 if (validateProfile(address, contactNo, citizenship, maritalStatus, chas))
                 {
+                    // update to the database if the input is not empty
                     Patient patient = new Patient(s_nric,s_name,s_address,s_contactNo,s_dob,s_citizenship,s_gender,s_race,s_spokenlanguage,s_maritalstatus,s_chasinfo);
                     Map<String, Object> postValues = patient.toMap();
                     databaseReference.updateChildren(postValues);

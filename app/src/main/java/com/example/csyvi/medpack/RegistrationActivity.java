@@ -93,6 +93,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                     Toast.makeText(RegistrationActivity.this,"Registration Successful! Redirecting to Login Page ..",Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
                                     startActivity(intent);
+                                    finish();
                                 }
 
                                 else
@@ -119,6 +120,7 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

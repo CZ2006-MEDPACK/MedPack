@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             finish();
             Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
             startActivity(intent);
+            finish();
         }
 
         userRegistration.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -105,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(LoginActivity.this, "Login Successful! Redirecting ..", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                                     startActivity(intent);
+                                    finish();
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Login Failed! Account is not valid!", Toast.LENGTH_SHORT).show();
                                     progressDialog.dismiss();
