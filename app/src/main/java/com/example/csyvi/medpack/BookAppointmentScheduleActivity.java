@@ -1,6 +1,8 @@
 package com.example.csyvi.medpack;
 
 import android.app.DatePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -49,9 +51,10 @@ public class BookAppointmentScheduleActivity extends AppCompatActivity {
 
                 DatePickerDialog dialog = new DatePickerDialog(
                         BookAppointmentScheduleActivity.this,
-                        android.R.style.Theme_DeviceDefault,
+                        android.R.style.Theme_Holo_Dialog_MinWidth,
                         setListener,
                         year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
         });
