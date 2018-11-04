@@ -26,36 +26,83 @@ public class VitalSignsFragment extends Fragment {
 
     EditText PulseRate, OxygenSaturation, Temperature;
     EditText BloodPressureSystolic, BloodPressureDiastolic, RespiratoryRate;
-    RadioButton radioButton;
+    RadioButton radio_1, radio_2, radio_3, radio_4, radio_5;
+    RadioGroup radioPainScale;
     MeasureVitalSignsManager vs = new MeasureVitalSignsManager();
     LocateClinicManager clinicManager;
     ProgressDialog progressDialog;
+    String painScale;
+    int pain;
+    View view = null;
+    RadioButton radioButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         clinicManager = new LocateClinicManager(this.getActivity(), this.getFragmentManager(), new LocateClinicActivity(), progressDialog);
 
-        View view = inflater.inflate(R.layout.measurevitalsigns_inputvitalsigns, container, false);
+        view = inflater.inflate(R.layout.measurevitalsigns_inputvitalsigns, container, false);
         PulseRate = (EditText) view.findViewById(R.id.editTextPulseRate);
         OxygenSaturation = (EditText) view.findViewById(R.id.editTextOxygenSaturation);
         BloodPressureSystolic = (EditText) view.findViewById(R.id.editTextBPSystolic);
         BloodPressureDiastolic = (EditText) view.findViewById(R.id.editTextBPDiastolic);
         Temperature = (EditText) view.findViewById(R.id.editTextEnterTemperature);
         RespiratoryRate = (EditText) view.findViewById(R.id.editTextRespiratoryRate);
-        final RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
+        radioPainScale = (RadioGroup) view.findViewById(R.id.radioGroup);
 
-        radioGroup.setOnClickListener(new View.OnClickListener() {
+        /*
+        radioPainScale.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+
+                switch(checkedId)
+                {
+                    case R.id.radio_one:
+                        radio_1 = view.findViewById(checkedId);
+                        painScale = radio_1.getText().toString();
+                        pain = 1;
+                        break;
+
+                    case R.id.radio_two:
+                        radio_2 = view.findViewById(checkedId);
+                        painScale = radio_2.getText().toString();
+                        pain = 2;
+                        break;
+
+                    case R.id.radio_three:
+                        radio_3 = view.findViewById(checkedId);
+                        painScale = radio_3.getText().toString();
+                        pain = 3;
+                        break;
+
+                    case R.id.radio_four:
+                        radio_4 = view.findViewById(checkedId);
+                        painScale = radio_4.getText().toString();
+                        pain = 4;
+                        break;
+
+                    case R.id.radio_five:
+                        radio_5 = view.findViewById(checkedId);
+                        painScale = radio_5.getText().toString();
+                        pain = 5;
+                        break;
+
+                }
+            }
+        });*/
+
+        radioPainScale.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
+
+
                 // get selected radio button from radioGroup
-                int selectedId = radioGroup.getCheckedRadioButtonId();
+                int selectedId = radioPainScale.getCheckedRadioButtonId();
                 Log.d("tag","selectId" + selectedId);
 
                 // find the radiobutton by returned id
                 radioButton = (RadioButton) view.findViewById(selectedId);
-
 
             }
 
@@ -69,7 +116,6 @@ public class VitalSignsFragment extends Fragment {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 boolean failFlag = false;
                 if (BloodPressureSystolic.getText().toString().trim().length() == 0 || Integer.parseInt((BloodPressureSystolic.getText().toString())) < 0 || Integer.parseInt(BloodPressureSystolic.getText().toString()) > 250)
                 {
@@ -92,19 +138,53 @@ public class VitalSignsFragment extends Fragment {
                     RespiratoryRate.setError("Please enter a valid input from range of 10 to 25");
                 }
                 if (failFlag == false) {
+                    /*if(pain == 1)
+                    {
+                        painScale = radio_1.getText().toString();
+                    }
+
+                    if(pain == 2)
+                    {
+                        painScale = radio_2.getText().toString();
+                    }
+
+                    if(pain == 3)
+                    {
+                        painScale = radio_3.getText().toString();
+                    }
+
+                    if(pain == 4)
+                    {
+                        painScale = radio_4.getText().toString();
+                    }
+
+                    if(pain == 5)
+                    {
+                        painScale = radio_5.getText().toString();
+                    }*/
+
                     int pulse = 68;
                     double oxygen = 100;
-                    int bloodPressureSystolic = Integer.parseInt(BloodPressureSystolic.getText().toString());
+                    //Log.d("testMsg", Integer.toString(pulse));
+                    /*int bloodPressureSystolic = Integer.parseInt(BloodPressureSystolic.getText().toString());
                     int bloodPressureDiastolic = Integer.parseInt(BloodPressureDiastolic.getText().toString());
                     StringBuilder bloodPressure = new StringBuilder();
                     bloodPressure.append(bloodPressureSystolic).append("/").append(bloodPressureDiastolic);
                     float temperature = Float.valueOf(Temperature.getText().toString());
-                    int respiratoryRate = Integer.parseInt(RespiratoryRate.getText().toString());
+                    int respiratoryRate = Integer.parseInt(RespiratoryRate.getText().toString());*/
 
-                    int pain = Integer.parseInt(radioButton.getText().toString());
+                    //Log.d("testMsg", bloodPressure.toString());
+                    //Log.d("testMsg", Float.toString(temperature));
+                    //Log.d("testMsg", Integer.toString(respiratoryRate));
 
-                    new VitalSigns(temperature, pulse, respiratoryRate, bloodPressure.toString(), oxygen, pain);
+                    //int pain = Integer.parseInt(radioButton.getText().toString());
 
+                    //Log.d("testMsg", painScale);
+                    //int painScale1 = Integer.parseInt(painScale);
+
+                    //new VitalSigns(temperature, pulse, respiratoryRate, bloodPressure.toString(), oxygen, pain);
+
+                    //Log.d("testMsg", Integer.toString(VitalSigns.getPainScale()));
 
                     Log.d("storeDATA", "entering user location");
                     Log.d("timeCheck", "timeStart");

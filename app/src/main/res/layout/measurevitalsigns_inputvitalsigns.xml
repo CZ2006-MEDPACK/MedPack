@@ -41,19 +41,18 @@
         android:id="@+id/editTextBPDiastolic"
         android:layout_width="168dp"
         android:layout_height="34dp"
-        android:layout_alignTop="@+id/textViewBPDiastolic"
-        android:layout_alignEnd="@+id/editTextPulseRate"
-        android:layout_marginTop="-9dp"
-        android:layout_marginEnd="-206dp"
+
+        android:layout_alignBottom="@+id/textViewBPDiastolic"
+        android:layout_alignStart="@+id/editTextRespiratoryRate"
         android:ems="10" />
 
     <EditText
         android:id="@+id/editTextPulseRate"
         android:layout_width="164dp"
         android:layout_height="35dp"
-        android:layout_toRightOf="@id/textViewPulseRate"
-        android:layout_marginTop="75dp"
-        android:layout_marginEnd="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/editTextRespiratoryRate"
+        android:layout_marginTop="77dp"
         android:text="68"
         android:textSize="12sp" />
 
@@ -68,17 +67,6 @@
         android:text="100"
         android:textSize="12sp" />
 
-    <!--<EditText
-        android:id="@+id/editText4"
-        android:layout_width="164dp"
-        android:layout_height="27dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="169dp"
-        android:ems="10"
-        android:text="Name" /> -->
-
     <EditText
         android:id="@+id/editTextBox"
         android:layout_width="357dp"
@@ -87,6 +75,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="81dp"
         android:ems="10"
+        android:text="nil"
         android:inputType="textLongMessage" />
 
     <TextView
@@ -214,36 +203,35 @@
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editTextBPDiastolic"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="13dp"
-        android:layout_toEndOf="@+id/textView6"
+        android:layout_alignEnd="@+id/editTextRespiratoryRate"
+        android:layout_alignTop="@+id/textView6"
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/radio_one"
             android:layout_width="wrap_content"
             android:layout_height="22dp"
             android:layout_alignTop="@+id/radioButton4"
             android:layout_toEndOf="@+id/textViewAnySymptoms"
+            android:checked="true"
             android:scaleX="0.5"
             android:scaleY="0.5"
             android:text="1"
             android:textColor="@android:color/black" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/radio_two"
             android:layout_width="wrap_content"
             android:layout_height="22dp"
-            android:layout_alignTop="@+id/radioButton4"
             android:layout_alignEnd="@+id/textViewTitle"
+            android:layout_alignTop="@+id/radioButton4"
             android:scaleX="0.5"
             android:scaleY="0.5"
             android:text="2"
             android:textColor="@android:color/black" />
 
         <RadioButton
-            android:id="@+id/radioButton4"
+            android:id="@+id/radio_three"
             android:layout_width="wrap_content"
             android:layout_height="22dp"
             android:layout_alignTop="@+id/radioButton6"
@@ -254,7 +242,7 @@
             android:textColor="@android:color/black" />
 
         <RadioButton
-            android:id="@+id/radioButton5"
+            android:id="@+id/radio_four"
             android:layout_width="wrap_content"
             android:layout_height="22dp"
             android:layout_alignTop="@+id/textView6"
@@ -265,7 +253,7 @@
             android:textColor="@android:color/black" />
 
         <RadioButton
-            android:id="@+id/radioButton6"
+            android:id="@+id/radio_five"
             android:layout_width="wrap_content"
             android:layout_height="22dp"
             android:layout_alignTop="@+id/textView6"

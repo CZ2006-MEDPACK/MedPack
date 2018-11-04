@@ -36,7 +36,6 @@ public class BookAppointmentManager {
     Appointment currentAppointment;
     String appointmentId, datetime;
     int queueNo, waitingTime;
-    VitalSigns patientVS;
     String[] data;
 
     /**
@@ -61,7 +60,6 @@ public class BookAppointmentManager {
                 .append("~" + CurrentPatient.getChasInfo() + "~")
                 .append(which.toString())
                 .append(currentAppointment.toString());
-                //.append(patientVS.toString());
 
         FileOutputStream fos = null;
         Log.d("testMsg",data.toString());

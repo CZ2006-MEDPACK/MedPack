@@ -22,7 +22,7 @@ import java.util.Arrays;
  * The type Second fragment.
  */
 public class AppointmentFragment extends Fragment {
-    
+
     ListView listView;
     CustomAdapter adapter = new CustomAdapter();
     Context mContext;
