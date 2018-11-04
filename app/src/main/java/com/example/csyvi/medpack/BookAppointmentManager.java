@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The type Book appointment manager.
@@ -32,17 +33,16 @@ public class BookAppointmentManager {
         this.mContext = mContext;
     }
 
-    private ArrayList<Appointment> appointmentList = new ArrayList<>();
+    Appointment currentAppointment;
     String appointmentId, datetime;
     int queueNo, waitingTime;
     VitalSigns patientVS;
-    String appointment;
+    String[] data;
 
     /**
      * This method will insert patient's info into the textfile database
      */
     public void insertAppointment(Clinic which) {
-        Appointment currentAppointment;
         queueNo = generateQueueNo();
         appointmentId = generateAppointmentID(queueNo);
         datetime = generateAppointmentDateTime();
@@ -50,17 +50,16 @@ public class BookAppointmentManager {
 
         currentAppointment = new Appointment(appointmentId,queueNo,waitingTime,datetime);
         Log.d("testMsg",currentAppointment.toString());
-        appointmentList.add(currentAppointment);
 
         StringBuilder data = new StringBuilder();
         //data.append(patient.toString()).append("chasSupport{chas=\"" + chasSupport + "\"}").append(which.toString());
-        data.append("chasSupport{nric=\"" + CurrentPatient.getNric() + "\"")
-                .append("name=\"" + CurrentPatient.getName() + "\"")
-                .append("contactNo=\"" + CurrentPatient.getContactNo() + "\"")
-                .append("spokenLanguage=\"" + CurrentPatient.getSpokenLanguage() + "\"")
-                .append("chas=\"" + CurrentPatient.getChasInfo() + "\"}")
+        data.append("~" + CurrentPatient.getNric())
+                .append("~" + CurrentPatient.getName())
+                .append("~" + CurrentPatient.getContactNo())
+                .append("~" + CurrentPatient.getSpokenLanguage())
+                .append("~" + CurrentPatient.getChasInfo() + "~")
                 .append(which.toString())
-                .append(appointmentList.toString());
+                .append(currentAppointment.toString());
                 //.append(patientVS.toString());
 
         FileOutputStream fos = null;
@@ -83,21 +82,23 @@ public class BookAppointmentManager {
         }
     }
 
-    public String loadAppointment(){
+    public String[] loadAppointment(){
         FileInputStream fis = null;
         try{
             fis = mContext.openFileInput("appointment.txt");
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             StringBuilder sb = new StringBuilder();
-            String text;
-            while ((text = br.readLine()) != null)
+            String text = br.readLine();
+            while (text != null)
             {
-                sb.append(text).append("\n");
+                data = text.split("~");
+                //sb.append(text).append("\n");
+                text = br.readLine();
             }
-            appointment = sb.toString();
+
             Log.d("APPOINTMENT", "LOAD");
-            Toast.makeText(mContext, sb.toString(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(mContext, sb.toString(), Toast.LENGTH_LONG).show();
         }catch (IOException e )
         {
             e.printStackTrace();
@@ -111,7 +112,7 @@ public class BookAppointmentManager {
             }
         }
 
-        return appointment;
+        return data;
     }
 
     // used to save the current date

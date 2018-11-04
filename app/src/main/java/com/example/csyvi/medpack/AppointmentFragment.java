@@ -26,6 +26,7 @@ public class AppointmentFragment extends Fragment {
     ListView listView;
     CustomAdapter adapter = new CustomAdapter();
     Clinic clinic;
+    Context mContext;
 
     class CustomAdapter extends BaseAdapter {
 
@@ -69,6 +70,9 @@ public class AppointmentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.locateclinic, container, false);
+
+        BookAppointmentManager bookAppointmentManager = new BookAppointmentManager(mContext);
+        bookAppointmentManager.loadAppointment();
 
         listView = view.findViewById(R.id.listView);
         listView.setAdapter(adapter);

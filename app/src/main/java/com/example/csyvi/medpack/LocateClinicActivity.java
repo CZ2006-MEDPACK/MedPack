@@ -140,7 +140,11 @@ public class LocateClinicActivity extends Fragment {
                                     bookAppointmentManager.insertAppointment(clinic);
                                     Toast.makeText(getActivity(), "You have booked your Appointment successfully! Check out Your Records!", Toast.LENGTH_LONG).show();
                                     bookingCount++;
-                                    //bookAppointmentManager.loadAppointment();
+                                    String[] test = bookAppointmentManager.loadAppointment();
+                                    for(int a=0;a<test.length;a++)
+                                    {
+                                        Log.d("APPOINTMENT",test[a]);
+                                    }
                                     //Intent intent = new Intent(getActivity(), MainActivity.class);
                                     //startActivity(intent);
                                 }
