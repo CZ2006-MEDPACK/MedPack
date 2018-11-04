@@ -4,18 +4,16 @@ package com.example.csyvi.medpack;
  * The type Vital signs.
  */
 public class VitalSigns {
-    private String vitals_Id;
-    private float bodyTemperature;
-    private int pulseRate;
-    private int respiratoryRate;
-    private String bloodPressure;
-    private int oxygenSaturation;
-    private int painScale;
+    private static float bodyTemperature;
+    private static int pulseRate;
+    private static int respiratoryRate;
+    private static String bloodPressure;
+    private static double oxygenSaturation;
+    private static int painScale;
 
     /**
      * Instantiates a new Vital signs.
      *
-     * @param vitals_Id        the vitals id
      * @param bodyTemperature  the body temperature
      * @param pulseRate        the pulse rate
      * @param respiratoryRate  the respiratory rate
@@ -23,32 +21,13 @@ public class VitalSigns {
      * @param oxygenSaturation the oxygen saturation
      * @param painScale        the pain scale
      */
-    public VitalSigns(String vitals_Id, float bodyTemperature, int pulseRate, int respiratoryRate, String bloodPressure, int oxygenSaturation, int painScale) {
-        this.vitals_Id = vitals_Id;
-        this.bodyTemperature = bodyTemperature;
-        this.pulseRate = pulseRate;
-        this.respiratoryRate = respiratoryRate;
-        this.bloodPressure = bloodPressure;
-        this.oxygenSaturation = oxygenSaturation;
-        this.painScale = painScale;
-    }
-
-    /**
-     * Gets vitals id.
-     *
-     * @return the vitals id
-     */
-    public String getVitals_Id() {
-        return vitals_Id;
-    }
-
-    /**
-     * Sets vitals id.
-     *
-     * @param vitals_Id the vitals id
-     */
-    public void setVitals_Id(String vitals_Id) {
-        this.vitals_Id = vitals_Id;
+    public VitalSigns( float bodyTemperature, int pulseRate, int respiratoryRate, String bloodPressure, double oxygenSaturation, int painScale) {
+        VitalSigns.bodyTemperature = bodyTemperature;
+        VitalSigns.pulseRate = pulseRate;
+        VitalSigns.respiratoryRate = respiratoryRate;
+        VitalSigns.bloodPressure = bloodPressure;
+        VitalSigns.oxygenSaturation = oxygenSaturation;
+        VitalSigns.painScale = painScale;
     }
 
     /**
@@ -56,7 +35,7 @@ public class VitalSigns {
      *
      * @return the body temperature
      */
-    public float getBodyTemperature() {
+    public static float getBodyTemperature() {
         return bodyTemperature;
     }
 
@@ -65,8 +44,8 @@ public class VitalSigns {
      *
      * @param bodyTemperature the body temperature
      */
-    public void setBodyTemperature(float bodyTemperature) {
-        this.bodyTemperature = bodyTemperature;
+    public static void setBodyTemperature(float bodyTemperature) {
+        VitalSigns.bodyTemperature = bodyTemperature;
     }
 
     /**
@@ -74,7 +53,7 @@ public class VitalSigns {
      *
      * @return the pulse rate
      */
-    public int getPulseRate() {
+    public static int getPulseRate() {
         return pulseRate;
     }
 
@@ -83,8 +62,8 @@ public class VitalSigns {
      *
      * @param pulseRate the pulse rate
      */
-    public void setPulseRate(int pulseRate) {
-        this.pulseRate = pulseRate;
+    public static void setPulseRate(int pulseRate) {
+        VitalSigns.pulseRate = pulseRate;
     }
 
     /**
@@ -92,7 +71,7 @@ public class VitalSigns {
      *
      * @return the respiratory rate
      */
-    public int getRespiratoryRate() {
+    public static int getRespiratoryRate() {
         return respiratoryRate;
     }
 
@@ -101,8 +80,8 @@ public class VitalSigns {
      *
      * @param respiratoryRate the respiratory rate
      */
-    public void setRespiratoryRate(int respiratoryRate) {
-        this.respiratoryRate = respiratoryRate;
+    public static void setRespiratoryRate(int respiratoryRate) {
+        VitalSigns.respiratoryRate = respiratoryRate;
     }
 
     /**
@@ -110,7 +89,7 @@ public class VitalSigns {
      *
      * @return the blood pressure
      */
-    public String getBloodPressure() {
+    public static String getBloodPressure() {
         return bloodPressure;
     }
 
@@ -119,8 +98,8 @@ public class VitalSigns {
      *
      * @param bloodPressure the blood pressure
      */
-    public void setBloodPressure(String bloodPressure) {
-        this.bloodPressure = bloodPressure;
+    public static void setBloodPressure(String bloodPressure) {
+        VitalSigns.bloodPressure = bloodPressure;
     }
 
     /**
@@ -128,7 +107,7 @@ public class VitalSigns {
      *
      * @return the oxygen saturation
      */
-    public int getOxygenSaturation() {
+    public static double getOxygenSaturation() {
         return oxygenSaturation;
     }
 
@@ -137,8 +116,8 @@ public class VitalSigns {
      *
      * @param oxygenSaturation the oxygen saturation
      */
-    public void setOxygenSaturation(int oxygenSaturation) {
-        this.oxygenSaturation = oxygenSaturation;
+    public static void setOxygenSaturation(double oxygenSaturation) {
+        VitalSigns.oxygenSaturation = oxygenSaturation;
     }
 
     /**
@@ -146,7 +125,7 @@ public class VitalSigns {
      *
      * @return the pain scale
      */
-    public int getPainScale() {
+    public static int getPainScale() {
         return painScale;
     }
 
@@ -155,7 +134,7 @@ public class VitalSigns {
      *
      * @param painScale the pain scale
      */
-    public void setPainScale(int painScale) {
-        this.painScale = painScale;
+    public static void setPainScale(int painScale) {
+        VitalSigns.painScale = painScale;
     }
 }

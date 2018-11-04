@@ -8,14 +8,16 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
+import java.time.temporal.TemporalAccessor;
 
 /**
  * The type First fragment.
@@ -24,6 +26,7 @@ public class VitalSignsFragment extends Fragment {
 
     EditText PulseRate, OxygenSaturation, Temperature;
     EditText BloodPressureSystolic, BloodPressureDiastolic, RespiratoryRate;
+    RadioButton radioButton;
     MeasureVitalSignsManager vs = new MeasureVitalSignsManager();
     LocateClinicManager clinicManager;
     ProgressDialog progressDialog;
@@ -39,6 +42,25 @@ public class VitalSignsFragment extends Fragment {
         BloodPressureDiastolic = (EditText) view.findViewById(R.id.editTextBPDiastolic);
         Temperature = (EditText) view.findViewById(R.id.editTextEnterTemperature);
         RespiratoryRate = (EditText) view.findViewById(R.id.editTextRespiratoryRate);
+        final RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
+
+        radioGroup.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                // get selected radio button from radioGroup
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                Log.d("tag","selectId" + selectedId);
+
+                // find the radiobutton by returned id
+                radioButton = (RadioButton) view.findViewById(selectedId);
+
+
+            }
+
+        });
+
         progressDialog = new ProgressDialog(getActivity());
 
         final Button submitButton = view.findViewById(R.id.button);
@@ -49,16 +71,6 @@ public class VitalSignsFragment extends Fragment {
             public void onClick(View view) {
 
                 boolean failFlag = false;
-                if (PulseRate.getText().toString().trim().length() == 0 || Integer.parseInt((PulseRate.getText().toString())) < 30 || Integer.parseInt((PulseRate.getText().toString())) >150)
-                {
-                    failFlag = true;
-                    PulseRate.setError("Please enter a valid input from the range of 30 to 150");
-                }
-                if (OxygenSaturation.getText().toString().trim().length() == 0 || Integer.parseInt((OxygenSaturation.getText().toString())) < 70 || Integer.parseInt((OxygenSaturation.getText().toString())) > 100)
-                {
-                    failFlag = true;
-                    OxygenSaturation.setError("Please enter a valid input from the range of 70% to 100%");
-                }
                 if (BloodPressureSystolic.getText().toString().trim().length() == 0 || Integer.parseInt((BloodPressureSystolic.getText().toString())) < 0 || Integer.parseInt(BloodPressureSystolic.getText().toString()) > 250)
                 {
                     failFlag = true;
@@ -69,7 +81,7 @@ public class VitalSignsFragment extends Fragment {
                     failFlag = true;
                     BloodPressureDiastolic.setError("Please enter a valid input from the range of 0 to 200");
                 }
-                if (Temperature.getText().toString().trim().length() == 0 || Integer.parseInt(Temperature.getText().toString()) < 10 || Integer.parseInt(Temperature.getText().toString()) > 70)
+                if (Temperature.getText().toString().trim().length() == 0 || Float.valueOf(Temperature.getText().toString()) < 10.0 || Float.valueOf(Temperature.getText().toString()) > 70.0)
                 {
                     failFlag = true;
                     Temperature.setError("Please enter a valid input from range of 24°C to 50°C");
@@ -80,11 +92,26 @@ public class VitalSignsFragment extends Fragment {
                     RespiratoryRate.setError("Please enter a valid input from range of 10 to 25");
                 }
                 if (failFlag == false) {
+                    int pulse = 68;
+                    double oxygen = 100;
+                    int bloodPressureSystolic = Integer.parseInt(BloodPressureSystolic.getText().toString());
+                    int bloodPressureDiastolic = Integer.parseInt(BloodPressureDiastolic.getText().toString());
+                    StringBuilder bloodPressure = new StringBuilder();
+                    bloodPressure.append(bloodPressureSystolic).append("/").append(bloodPressureDiastolic);
+                    float temperature = Float.valueOf(Temperature.getText().toString());
+                    int respiratoryRate = Integer.parseInt(RespiratoryRate.getText().toString());
+
+                    int pain = Integer.parseInt(radioButton.getText().toString());
+
+                    new VitalSigns(temperature, pulse, respiratoryRate, bloodPressure.toString(), oxygen, pain);
+
+
                     Log.d("storeDATA", "entering user location");
                     Log.d("timeCheck", "timeStart");
                     progressDialog.setMessage("Searching for nearby clinics. Please wait.");
                     progressDialog.show();
                     Log.d("chasClinic", "entering user location");
+
                     clinicManager.userLocation();
                     //submitButton.setVisibility(View.INVISIBLE);
                 }
