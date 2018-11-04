@@ -88,7 +88,7 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return "~" + appointmentId +
+        return appointmentId +
                 "~" + queueNo +
                 "~" + waitingTime +
                 "~" + datetime +

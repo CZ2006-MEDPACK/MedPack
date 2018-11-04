@@ -53,7 +53,7 @@ public class BookAppointmentManager {
 
         StringBuilder data = new StringBuilder();
         //data.append(patient.toString()).append("chasSupport{chas=\"" + chasSupport + "\"}").append(which.toString());
-        data.append("~" + CurrentPatient.getNric())
+        data.append(CurrentPatient.getNric())
                 .append("~" + CurrentPatient.getName())
                 .append("~" + CurrentPatient.getContactNo())
                 .append("~" + CurrentPatient.getSpokenLanguage())

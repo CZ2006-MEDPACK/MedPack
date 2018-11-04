@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="User could book a medical appointment with a clinic that is near to his or her current location."
+        android:text="Patients could book a scheduled medical appointment with a nearby GP Clinic with maximum of 25KM from current location."
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textStyle="bold"/>

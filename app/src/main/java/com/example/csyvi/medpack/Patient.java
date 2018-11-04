@@ -251,7 +251,7 @@ public class Patient {
 
     @Override
     public String toString() {
-        return "~" + nric +
+        return nric +
                 "~" + name +
                 "~" + address +
                 "~" + contactNo +

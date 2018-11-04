@@ -15,8 +15,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * The type Second fragment.
@@ -24,26 +26,26 @@ import java.util.Arrays;
 public class AppointmentFragment extends Fragment {
 
     ListView listView;
-    CustomAdapter adapter = new CustomAdapter();
     Context mContext;
+    CustomAdapter adapter = new CustomAdapter();
     String[] test;
-    ArrayList<String> arrayList = new ArrayList<>();
+    List<String> arrayList;
 
     class CustomAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
-            return 0;
+            return 1;
         }
 
         @Override
         public Object getItem(int position) {
-            return null;
+            return arrayList.get(position);
         }
 
         @Override
         public long getItemId(int position) {
-            return 0;
+            return position;
         }
 
         @Override
@@ -57,12 +59,12 @@ public class AppointmentFragment extends Fragment {
             TextView textView_cliniccontactno = view.findViewById(R.id.tv_cliniccontactno);
             TextView textView_cliniclocation = view.findViewById(R.id.tv_cliniclocation);
 
-            textView_queuenumber.setText("nigga");
-            textView_waitingtime.setText(arrayList.get(position));
-            textView_datetime.setText(arrayList.get(position));
-            textView_clinicname.setText(arrayList.get(position));
-            textView_cliniccontactno.setText(arrayList.get(position));
-            String location = arrayList.get(position) + arrayList.get(position);
+            textView_queuenumber.setText(arrayList.get(14));
+            textView_waitingtime.setText(arrayList.get(15));
+            textView_datetime.setText(arrayList.get(16));
+            textView_clinicname.setText(arrayList.get(5));
+            textView_cliniccontactno.setText(arrayList.get(8));
+            String location = arrayList.get(6) + " " + arrayList.get(7);
             textView_cliniclocation.setText(location);
 
             /*textView_queuenumber.setText(test[14]);
@@ -80,23 +82,17 @@ public class AppointmentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContext = this.getActivity();
-
         BookAppointmentManager bookAppointmentManager = new BookAppointmentManager(mContext);
         test = bookAppointmentManager.loadAppointment();
-        Log.d("testMsg", test[5]);
+        Log.d("testMsg", Integer.toString(test.length));
 
-        arrayList = new ArrayList<String>(Arrays.asList(test));
+        arrayList = Arrays.asList(test);
         Log.d("testMsg",arrayList.toString());
+        Log.d("testMsg",Integer.toString(arrayList.size()));
+
         View view = inflater.inflate(R.layout.medicalrecord, container, false);
 
         listView = view.findViewById(R.id.listViewRecord);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-        });
-
         listView.setAdapter(adapter);
 
         return view;
