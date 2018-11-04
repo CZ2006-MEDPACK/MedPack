@@ -505,8 +505,8 @@ public class LocateClinicManager implements Serializable {
                     + user_LatLng.latitude + "," + user_LatLng.longitude +
                     "&destinations=");
             for (int a = 0; a < 25; a++) {
-                if (index < clinicList.size()) {
-                    urlBuilder.append(clinicList.get(index).getLatitude() + "," + clinicList.get(index).getLongitude() + "|");
+                if (index < readClinic.size()) {
+                    urlBuilder.append(readClinic.get(index).getLatitude() + "," + readClinic.get(index).getLongitude() + "|");
                 } else {
                     break;
                 }
@@ -535,14 +535,14 @@ public class LocateClinicManager implements Serializable {
                     JSONArray elements = row.getJSONArray("elements");
 //                Log.d("ReturnResult", "elements: " + elements.toString());
                     for (int i = 0; i < 25; i++) {
-                        if (index2 < clinicList.size()) {
+                        if (index2 < readClinic.size()) {
                             JSONObject element = elements.getJSONObject(i);
 //                    Log.d("ReturnResult", "element single record: " + element.toString());
                             JSONObject distanceRecord = element.getJSONObject("distance");
 //                    Log.d("ReturnResult", "distance Record: " + distanceRecord.toString());
                             Double distanceText = distanceRecord.getDouble("value");
 //                    Log.d("ReturnResult", "clinic index " + index2 + " distance: " + distanceText);
-                            clinicList.get(index2).setDistance(distanceText);
+                            readClinic.get(index2).setDistance(distanceText);
                         }
                         index2++;
                     }
@@ -560,7 +560,7 @@ public class LocateClinicManager implements Serializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            if (index >= clinicList.size())
+            if (index >= readClinic.size())
                 operating = false;
         }
     }
@@ -632,8 +632,6 @@ public class LocateClinicManager implements Serializable {
                     siteRetrieve();
                     Log.d("chasClinic", "processData");
                     processData();
-                    Log.d("chasClinic", "distSearch");
-                    distSearch();
                     Log.d("chasClinic", "writeFile");
                     writeFile(a);
                     Log.d("chasClinic", "clinicList size is: " + clinicList.size());
@@ -650,6 +648,9 @@ public class LocateClinicManager implements Serializable {
 
             Log.d("chasClinic", "readKML");
             readKML();
+
+            Log.d("chasClinic", "distSearch");
+            distSearch();
 
             Log.d("chasClinic", "sorting");
             Collections.sort(readClinic, new Comparator<Clinic>() {
