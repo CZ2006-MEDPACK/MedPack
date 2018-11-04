@@ -26,33 +26,35 @@
         app:textIsShow="true"
         app:textSize="16sp"/>
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/progressText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Place finger and tap on 'Scan' button to scan for your Vital Signs ..."
         android:layout_alignTop="@id/progress_bar_1"
-        android:layout_marginTop="170dp"
         android:layout_marginLeft="35dp"
+        android:layout_marginTop="170dp"
         android:layout_marginRight="35dp"
-        android:id="@+id/progressText"/>
+        android:fontFamily="@font/open_sans"
+        android:text="Place your finger on the optical sensor and tap 'Begin Scan' to measure your vital signs."
+        android:textAlignment="center" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Confirm"
-        android:textColor="#fff"
-        android:background="@color/colorPrimary"
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/submitButton"
-        android:layout_above="@id/scanButton"
-        android:layout_marginBottom="1dp"/>
-
-    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Scan for Vital Signs"
-        android:textColor="#fff"
-        android:background="@color/colorAccent"
+        android:layout_above="@id/scanButton"
+        android:layout_marginBottom="1dp"
+        android:background="@color/colorPrimary"
+        android:text="Confirm"
+        android:textColor="#fff" />
+
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/scanButton"
-        android:layout_alignParentBottom="true"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimaryLight"
+        android:text="Begin Scan"
+        android:textColor="#fff" />
 
 </RelativeLayout>

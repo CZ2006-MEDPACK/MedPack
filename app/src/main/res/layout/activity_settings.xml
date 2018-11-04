@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="3dp"
-        android:text="Settings"
-        android:textAllCaps="true"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:textSize="20sp"
         android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
-        android:layout_marginTop="10dp"/>
+        android:padding="12dp"
+        android:text="Settings"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        app:fontFamily="@font/open_sans_extrabold" />
 
     <android.support.v7.widget.SwitchCompat
+        android:id="@+id/switchLocation"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Enable/Disable Location"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:id="@+id/switchLocation"/>
+        android:padding="12dp"
+        android:text="Enable/Disable Location" />
 
     <android.support.v7.widget.SwitchCompat
+        android:id="@+id/switchMessages"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Enable/Disable Messages"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:id="@+id/switchMessages"/>
+        android:padding="12dp"
+        android:text="Enable/Disable Messages" />
 
 </LinearLayout>

@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@color/colorNeutral"
+    android:orientation="vertical">
 
     <RadioButton
         android:id="@+id/radioButton4"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_alignTop="@+id/radioButton6"
-        android:layout_marginStart="-22dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginStart="-8dp"
+        android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/textViewTitle"
         android:scaleX="0.5"
         android:scaleY="0.5"
@@ -22,8 +25,8 @@
         android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_alignTop="@+id/textView6"
-        android:layout_marginStart="-1dp"
-        android:layout_marginTop="-1dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
         android:layout_toEndOf="@+id/radioButton4"
         android:scaleX="0.5"
         android:scaleY="0.5"
@@ -35,8 +38,8 @@
         android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_alignTop="@+id/textView6"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="-4dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="2dp"
         android:layout_toEndOf="@+id/radioButton5"
         android:scaleX="0.5"
         android:scaleY="0.5"
@@ -50,14 +53,14 @@
         android:layout_alignTop="@id/radioButton2"
         android:layout_alignEnd="@+id/textViewTitle"
         android:layout_marginLeft="35dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="22dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="9dp"
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:text="2"
         android:textColor="@android:color/black" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewTitle"
         android:layout_width="236dp"
         android:layout_height="40dp"
@@ -66,10 +69,9 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:text="Your Vital Signs"
-        android:textColor="@android:color/holo_red_dark"
+        android:textColor="@color/colorPrimary"
         android:textSize="20sp"
-        android:textStyle="bold|italic"
-        android:typeface="sans" />
+        app:fontFamily="@font/open_sans_extrabold" />
 
     <EditText
         android:id="@+id/editTextRespiratoryRate"
@@ -156,47 +158,52 @@
         android:ems="10"
         android:inputType="textLongMessage" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewAnySymptoms"
-        android:layout_width="157dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/textViewTitle"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="156dp"
-        android:text="Any Symptoms?"
-        android:textColor="@android:color/black" />
+        android:text="Any other symptoms?"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        app:fontFamily="@font/open_sans_extrabold" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textView6"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textViewTitle"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="204dp"
-        android:text="Enter Pain Scale:"
-        android:textColor="@android:color/black" />
+        android:text="Select Pain Scale:"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewBPSystolic"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textViewTitle"
         android:layout_alignTop="@+id/editTextBPSystolic"
         android:layout_marginStart="0dp"
-        android:text="Enter BP(Systolic): "
-        android:textColor="@android:color/black" />
+        android:text="Enter BP (Systolic): "
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewBPDiastolic"
         android:layout_width="136dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/textViewTitle"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="246dp"
-        android:text="Enter BP(Diastolic): "
-        android:textColor="@android:color/black" />
+        android:text="Enter BP (Diastolic): "
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewRespiratoryRate"
         android:layout_width="157dp"
         android:layout_height="wrap_content"
@@ -205,9 +212,10 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="8dp"
         android:text="Enter Respiratory Rate: "
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewEnterTemperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -216,9 +224,10 @@
         android:layout_marginStart="1dp"
         android:layout_marginTop="201dp"
         android:text="Enter Temperature: "
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewOxygen"
         android:layout_width="wrap_content"
         android:layout_height="31dp"
@@ -227,21 +236,24 @@
         android:layout_marginStart="-1dp"
         android:layout_marginTop="118dp"
         android:text="Your Oxygen Saturation: "
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        app:fontFamily="@font/open_sans_semibold" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewPleaseEnterBelow"
-        android:layout_width="161dp"
-        android:layout_height="33dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignStart="@+id/textViewTitle"
         android:layout_alignParentTop="true"
         android:layout_marginStart="1dp"
         android:layout_marginTop="158dp"
-        android:text="Please Enter Below"
-        android:textColor="@android:color/black"
-        android:textSize="16dp" />
+        android:text="Please enter the following:"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        app:fontFamily="@font/open_sans_extrabold" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewPulseRate"
         android:layout_width="122dp"
         android:layout_height="29dp"
@@ -250,16 +262,18 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="80dp"
         android:text="Your Pulse Rate:"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        app:fontFamily="@font/open_sans_semibold" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewDegreesCelcius"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/textViewEnterTemperature"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="78dp"
+        android:layout_marginTop="-2dp"
+        android:layout_marginEnd="106dp"
         android:text="\u2103"
         android:textColor="@android:color/black" />
 
@@ -282,21 +296,24 @@
         android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_alignTop="@+id/radioButton4"
-        android:layout_marginStart="-22dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginStart="-36dp"
+        android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/textViewAnySymptoms"
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:text="1"
         android:textColor="@android:color/black" />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/button"
-        android:layout_width="191dp"
-        android:layout_height="59dp"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:text="Submit" />
+        android:layout_marginBottom="18dp"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="Submit"
+        android:textColor="@color/colorNeutral" />
 
 </RelativeLayout>

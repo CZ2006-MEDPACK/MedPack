@@ -20,7 +20,7 @@
         android:text="Vitals Measurement"
         android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:textSize="25dp"
+        android:textSize="30dp"
         android:textStyle="normal" />
 
     <android.support.v7.widget.AppCompatTextView
