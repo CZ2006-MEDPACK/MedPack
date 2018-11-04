@@ -18,9 +18,6 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -74,9 +71,6 @@ public class LocateClinicManager implements Serializable {
     android.support.v4.app.FragmentManager fragmentManager;
     LocateClinicActivity myFragment;
     ProgressDialog myProgress;
-    DatabaseReference databaseReference;
-    FirebaseDatabase database;
-    FirebaseAuth mAuth;
     String s_chasinfo, userId;
     FileOutputStream fos = null;
 

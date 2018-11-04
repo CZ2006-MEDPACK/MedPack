@@ -8,6 +8,8 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,61 +41,53 @@ public class VitalSignsFragment extends Fragment {
         RespiratoryRate = (EditText) view.findViewById(R.id.editTextRespiratoryRate);
         progressDialog = new ProgressDialog(getActivity());
 
-        PulseRate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-
-            }
-        });
-
-        OxygenSaturation.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-
-            }
-        });
-
-        BloodPressureSystolic.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-
-            }
-        });
-
-        BloodPressureDiastolic.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-
-            }
-        });
-
-        Temperature.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-
-            }
-        });
-
-        RespiratoryRate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-
-            }
-        });
-
         final Button submitButton = view.findViewById(R.id.button);
         progressDialog = new ProgressDialog(getActivity());
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("storeDATA", "entering user location");
-                Log.d("timeCheck", "timeStart");
-                progressDialog.setMessage("Searching for nearby clinics. Please wait.");
-                progressDialog.show();
-                Log.d("chasClinic", "entering user location");
-                clinicManager.userLocation();
-                //submitButton.setVisibility(View.INVISIBLE);
+
+                boolean failFlag = false;
+                if (PulseRate.getText().toString().trim().length() == 0 || Integer.parseInt((PulseRate.getText().toString())) < 30 || Integer.parseInt((PulseRate.getText().toString())) >150)
+                {
+                    failFlag = true;
+                    PulseRate.setError("Please enter a valid input from the range of 30 to 150");
+                }
+                if (OxygenSaturation.getText().toString().trim().length() == 0 || Integer.parseInt((OxygenSaturation.getText().toString())) < 70 || Integer.parseInt((OxygenSaturation.getText().toString())) > 100)
+                {
+                    failFlag = true;
+                    OxygenSaturation.setError("Please enter a valid input from the range of 70% to 100%");
+                }
+                if (BloodPressureSystolic.getText().toString().trim().length() == 0 || Integer.parseInt((BloodPressureSystolic.getText().toString())) < 0 || Integer.parseInt(BloodPressureSystolic.getText().toString()) > 250)
+                {
+                    failFlag = true;
+                    BloodPressureSystolic.setError("Please enter a valid input from the range of 0 to 250");
+                }
+                if (BloodPressureDiastolic.getText().toString().trim().length() == 0 || Integer.parseInt(BloodPressureDiastolic.getText().toString()) < 0 || Integer.parseInt(BloodPressureDiastolic.getText().toString()) > 200)
+                {
+                    failFlag = true;
+                    BloodPressureDiastolic.setError("Please enter a valid input from the range of 0 to 200");
+                }
+                if (Temperature.getText().toString().trim().length() == 0 || Integer.parseInt(Temperature.getText().toString()) < 10 || Integer.parseInt(Temperature.getText().toString()) > 70)
+                {
+                    failFlag = true;
+                    Temperature.setError("Please enter a valid input from range of 24°C to 50°C");
+                }
+                if (RespiratoryRate.getText().toString().trim().length() == 0 || Integer.parseInt(RespiratoryRate.getText().toString()) < 10 || Integer.parseInt(RespiratoryRate.getText().toString()) > 25)
+                {
+                    failFlag = true;
+                    RespiratoryRate.setError("Please enter a valid input from range of 10 to 25");
+                }
+                if (failFlag == false) {
+                    Log.d("storeDATA", "entering user location");
+                    Log.d("timeCheck", "timeStart");
+                    progressDialog.setMessage("Searching for nearby clinics. Please wait.");
+                    progressDialog.show();
+                    Log.d("chasClinic", "entering user location");
+                    clinicManager.userLocation();
+                    //submitButton.setVisibility(View.INVISIBLE);
+                }
             }
         });
 
@@ -119,5 +113,4 @@ public class VitalSignsFragment extends Fragment {
         super.onDestroy();
         LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(receiver);
     }
-
 }

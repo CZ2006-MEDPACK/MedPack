@@ -222,10 +222,10 @@
         android:id="@+id/textViewDegreesCelcius"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/textViewEnterTemperature"
+        android:layout_alignParentEnd="true"
         android:layout_marginEnd="68dp"
-        android:text="\u2103"
+        android:text="°C"
         android:textColor="@android:color/black" />
 
     <EditText
