@@ -4,49 +4,6 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
-    <RadioButton
-        android:id="@+id/radioButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_alignTop="@+id/radioButton6"
-        android:layout_toEndOf="@+id/textViewTitle"
-        android:scaleX="0.5"
-        android:scaleY="0.5"
-        android:text="3"
-        android:textColor="@android:color/black" />
-
-    <RadioButton
-        android:id="@+id/radioButton5"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_alignTop="@+id/textView6"
-        android:layout_toEndOf="@+id/radioButton4"
-        android:scaleX="0.5"
-        android:scaleY="0.5"
-        android:text="4"
-        android:textColor="@android:color/black" />
-
-    <RadioButton
-        android:id="@+id/radioButton6"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_alignTop="@+id/textView6"
-        android:layout_toEndOf="@+id/radioButton5"
-        android:scaleX="0.5"
-        android:scaleY="0.5"
-        android:text="5"
-        android:textColor="@android:color/black" />
-
-    <RadioButton
-        android:id="@+id/radioButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_alignEnd="@+id/textViewTitle"
-        android:layout_alignTop="@+id/radioButton4"
-        android:scaleX="0.5"
-        android:scaleY="0.5"
-        android:text="2"
-        android:textColor="@android:color/black" />
 
     <TextView
         android:id="@+id/textViewTitle"
@@ -84,18 +41,19 @@
         android:id="@+id/editTextBPDiastolic"
         android:layout_width="168dp"
         android:layout_height="34dp"
-        android:layout_alignEnd="@+id/editTextPulseRate"
         android:layout_alignTop="@+id/textViewBPDiastolic"
+        android:layout_alignEnd="@+id/editTextPulseRate"
+        android:layout_marginTop="-9dp"
+        android:layout_marginEnd="-206dp"
         android:ems="10" />
 
     <EditText
         android:id="@+id/editTextPulseRate"
         android:layout_width="164dp"
         android:layout_height="35dp"
-        android:layout_alignEnd="@+id/radioButton6"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="77dp"
-        android:ems="10"
+        android:layout_toRightOf="@id/textViewPulseRate"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="8dp"
         android:text="68"
         android:textSize="12sp" />
 
@@ -145,9 +103,10 @@
         android:id="@+id/textView6"
         android:layout_width="157dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/textViewTitle"
-        android:layout_marginBottom="199dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="194dp"
         android:text="Enter Pain Scale:"
         android:textColor="@android:color/black" />
 
@@ -164,9 +123,10 @@
         android:id="@+id/textViewBPDiastolic"
         android:layout_width="136dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/textViewTitle"
-        android:layout_marginBottom="246dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="234dp"
         android:text="Enter BP(Diastolic): "
         android:textColor="@android:color/black" />
 
@@ -240,16 +200,6 @@
         android:singleLine="true"
         android:textSize="12sp" />
 
-    <RadioButton
-        android:id="@+id/radioButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_alignTop="@+id/radioButton4"
-        android:layout_toEndOf="@+id/textViewAnySymptoms"
-        android:scaleX="0.5"
-        android:scaleY="0.5"
-        android:text="1"
-        android:textColor="@android:color/black" />
 
     <Button
         android:id="@+id/button"
@@ -259,5 +209,72 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:text="Submit" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextBPDiastolic"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="13dp"
+        android:layout_toEndOf="@+id/textView6"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_alignTop="@+id/radioButton4"
+            android:layout_toEndOf="@+id/textViewAnySymptoms"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:text="1"
+            android:textColor="@android:color/black" />
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_alignTop="@+id/radioButton4"
+            android:layout_alignEnd="@+id/textViewTitle"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:text="2"
+            android:textColor="@android:color/black" />
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_alignTop="@+id/radioButton6"
+            android:layout_toEndOf="@+id/textViewTitle"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:text="3"
+            android:textColor="@android:color/black" />
+
+        <RadioButton
+            android:id="@+id/radioButton5"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_alignTop="@+id/textView6"
+            android:layout_toEndOf="@+id/radioButton4"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:text="4"
+            android:textColor="@android:color/black" />
+
+        <RadioButton
+            android:id="@+id/radioButton6"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_alignTop="@+id/textView6"
+            android:layout_toEndOf="@+id/radioButton5"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:text="5"
+            android:textColor="@android:color/black" />
+
+    </RadioGroup>
 
 </RelativeLayout>

@@ -51,6 +51,7 @@ public class BookAppointmentManager {
         currentAppointment = new Appointment(appointmentId,queueNo,waitingTime,datetime);
         Log.d("testMsg",currentAppointment.toString());
 
+
         StringBuilder data = new StringBuilder();
         //data.append(patient.toString()).append("chasSupport{chas=\"" + chasSupport + "\"}").append(which.toString());
         data.append("~" + CurrentPatient.getNric())

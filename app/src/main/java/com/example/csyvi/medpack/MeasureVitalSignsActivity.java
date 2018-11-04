@@ -11,8 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
-
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.*;
+//import com.google.firebase.auth.FirebaseAuth;
 
 public class MeasureVitalSignsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
