@@ -2,8 +2,6 @@ package com.example.csyvi.medpack;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,16 +12,11 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * The type Home fragment.
@@ -31,12 +24,12 @@ import java.util.Map;
 public class HomeFragment extends Fragment {
 
     TextView name, address, contactNo, dateOfBirth, citizenship, gender, race, spokenLanguage, maritalStatus, chasInfo;
-    ArrayList<Patient> patientList = new ArrayList<>();
     DatabaseReference databaseReference;
     FirebaseDatabase database;
     FirebaseAuth mAuth;
+    Patient patient;
     String userId;
-    String s_name, s_address, s_contactNo, s_dob, s_citizenship, s_gender, s_race, s_spokenlanguage, s_maritalstatus, s_chasinfo;
+    String s_nric, s_name, s_address, s_contactNo, s_dob, s_citizenship, s_gender, s_race, s_spokenlanguage, s_maritalstatus, s_chasinfo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,7 +46,6 @@ public class HomeFragment extends Fragment {
         spokenLanguage = view.findViewById(R.id.text_spokenlanguage);
         chasInfo = view.findViewById(R.id.text_chas);
 
-        Log.d("errorMsg", "test1");
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         userId = user.getUid();
@@ -66,6 +58,7 @@ public class HomeFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 try {
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        s_nric = dataSnapshot.child("nric").getValue().toString();
                         s_name = dataSnapshot.child("name").getValue().toString();
                         s_address = dataSnapshot.child("address").getValue().toString();
                         s_contactNo = dataSnapshot.child("contactNo").getValue().toString();
@@ -77,6 +70,7 @@ public class HomeFragment extends Fragment {
                         s_spokenlanguage = dataSnapshot.child("spokenLanguage").getValue().toString();
                         s_chasinfo = dataSnapshot.child("chasInfo").getValue().toString();
                     }
+
                     name.setText(s_name);
                     address.setText(s_address);
                     contactNo.setText(s_contactNo);
@@ -88,11 +82,12 @@ public class HomeFragment extends Fragment {
                     spokenLanguage.setText(s_spokenlanguage);
                     chasInfo.setText(s_chasinfo);
 
-                    Log.d("errorMsg", "test4");
-
-
-                    //Note: use to share chas Info across activities
-                    chasHolder.setData(s_chasinfo);
+                    //Note: use to share Current Patient Info across activities
+                    CurrentPatient.setNric(s_nric);
+                    CurrentPatient.setName(s_name);
+                    CurrentPatient.setContactNo(s_contactNo);
+                    CurrentPatient.setSpokenLanguage(s_spokenlanguage);
+                    CurrentPatient.setChasInfo(s_chasinfo);
 
                 } catch (Exception e) {
                     e.printStackTrace();

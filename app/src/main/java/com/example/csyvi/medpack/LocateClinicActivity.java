@@ -1,18 +1,25 @@
 package com.example.csyvi.medpack;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,19 +27,28 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 /**
  * The type Maps activity.
  */
-public class MapsActivity extends Fragment {
+public class LocateClinicActivity extends Fragment {
 
     ArrayList<Clinic> clinicList = new ArrayList<>();
     ListView listView;
-    ArrayAdapter<String> adapter;
-    //Clinic[] clinic_array;
+    CustomAdapter adapter = new CustomAdapter();
+    //ArrayAdapter<String> adapter;
+    Clinic clinic;
     Context mContext;
+    int bookingCount = 0;
 
     class CustomAdapter extends BaseAdapter {
 
@@ -74,7 +90,7 @@ public class MapsActivity extends Fragment {
             return view;
         }
     }
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContext = this.getActivity();
@@ -83,14 +99,6 @@ public class MapsActivity extends Fragment {
         clinicList = (ArrayList<Clinic>) args.getSerializable("ListClinic");
         View view = inflater.inflate(R.layout.locateclinic, container, false);
         Log.d("storeDATA", "testMaps");
-
-        /*ArrayList<String> testArray = new ArrayList<String>();
-        testArray.add("clinic1");
-        testArray.add("clinic2");
-        testArray.add("clinic3");
-        testArray.add("clinic4");
-        testArray.add("clinic5");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,testArray);*/
 
         /*clinic_array = new Clinic[clinicList.size()];
         Log.d("chasClinic", "testMaps");
@@ -105,7 +113,6 @@ public class MapsActivity extends Fragment {
         Log.d("chasClinic", "testMaps");
         adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,name);*/
 
-
         //testing code
 //        BookAppointmentManager bookam = new BookAppointmentManager(this.getActivity());
 //        bookam.insertAppointment(new Patient("testNRIC", "testLAST", "testFIRST"
@@ -116,13 +123,49 @@ public class MapsActivity extends Fragment {
 //
 //        bookam.loadAppointment();
 
-
-
-        CustomAdapter adapter = new CustomAdapter();
         listView = view.findViewById(R.id.listView);
-        Log.d("storeDATA", "testMaps");
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                if (bookingCount < 1) {
+                    clinic = clinicList.get(position);
+                    Log.d("testMsg", clinic.toString());
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    builder.setTitle("Book Appointment").setMessage("Do you want to book appointment on this clinic?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    BookAppointmentManager bookAppointmentManager = new BookAppointmentManager(mContext);
+                                    bookAppointmentManager.insertAppointment(clinic);
+                                    Toast.makeText(getActivity(), "You have booked your Appointment successfully! Check out Your Records!", Toast.LENGTH_LONG).show();
+                                    bookingCount++;
+                                    //bookAppointmentManager.loadAppointment();
+                                    //Intent intent = new Intent(getActivity(), MainActivity.class);
+                                    //startActivity(intent);
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            });
+
+                    builder.create();
+                    builder.show();
+                }
+
+                else
+                {
+                    Toast.makeText(getActivity(), "You can only book appointment once.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         listView.setAdapter(adapter);
         Log.d("timeCheck", "timeStart");
+
         return view;
     }
 }

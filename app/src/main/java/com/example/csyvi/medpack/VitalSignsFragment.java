@@ -1,14 +1,11 @@
 package com.example.csyvi.medpack;
 
-import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
@@ -17,8 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-
-import com.google.android.gms.maps.MapFragment;
 
 /**
  * The type First fragment.
@@ -33,7 +28,7 @@ public class VitalSignsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        clinicManager = new LocateClinicManager(this.getActivity(), this.getFragmentManager(), new MapsActivity(), progressDialog);
+        clinicManager = new LocateClinicManager(this.getActivity(), this.getFragmentManager(), new LocateClinicActivity(), progressDialog);
 
         View view = inflater.inflate(R.layout.measurevitalsigns_inputvitalsigns, container, false);
         PulseRate = (EditText) view.findViewById(R.id.editTextPulseRate);

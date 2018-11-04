@@ -4,6 +4,7 @@ package com.example.csyvi.medpack;
  * The type Appointment.
  */
 public class Appointment {
+    private String appointmentId;
     private int queueNo;
     private int waitingTime;
     private String datetime;
@@ -11,14 +12,24 @@ public class Appointment {
     /**
      * Instantiates a new Appointment.
      *
+     * @param appointmentId     the appointment id
      * @param queueNo     the queue no
      * @param waitingTime the waiting time
      * @param datetime    the datetime
      */
-    public Appointment(int queueNo, int waitingTime, String datetime) {
+    public Appointment(String appointmentId, int queueNo, int waitingTime, String datetime) {
+        this.appointmentId = appointmentId;
         this.queueNo = queueNo;
         this.waitingTime = waitingTime;
         this.datetime = datetime;
+    }
+
+    public String getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(String appointmentId) {
+        this.appointmentId = appointmentId;
     }
 
     /**
@@ -73,5 +84,15 @@ public class Appointment {
      */
     public void setDatetime(String datetime) {
         this.datetime = datetime;
+    }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "appointmentId='" + appointmentId + '\'' +
+                ", queueNo=" + queueNo +
+                ", waitingTime=" + waitingTime +
+                ", datetime='" + datetime + '\'' +
+                '}';
     }
 }

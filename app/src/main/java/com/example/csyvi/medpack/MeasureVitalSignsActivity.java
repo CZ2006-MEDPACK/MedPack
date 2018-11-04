@@ -61,7 +61,7 @@ public class MeasureVitalSignsActivity extends AppCompatActivity implements Navi
 
             case R.id.show_records:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new MedicalRecordFragment()).commit();
+                        new AppointmentFragment()).commit();
                 break;
 
             case R.id.search_events:

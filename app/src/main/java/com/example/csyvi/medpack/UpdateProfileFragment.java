@@ -38,7 +38,6 @@ public class UpdateProfileFragment extends Fragment {
     Spinner spinner_citizenship, spinner_maritalStatus, spinner_chasInfo;
     Button update_profile;
     ArrayList<Patient> patientList = new ArrayList<Patient>();
-    String address, contactNo, citizenship, maritalStatus, chas;
     DatabaseReference databaseReference;
     FirebaseDatabase database;
     FirebaseAuth mAuth;
@@ -49,9 +48,6 @@ public class UpdateProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.activity_updateprofile, container, false);
-
-        //Intent intent = getActivity().getIntent();
-        //patientList = (ArrayList<Patient>) intent.getSerializableExtra("ListPatient");
 
         et_address = view.findViewById(R.id.et_address2);
         et_contactNo = view.findViewById(R.id.et_contactnumber2);
@@ -85,16 +81,13 @@ public class UpdateProfileFragment extends Fragment {
                         s_chasinfo = dataSnapshot.child("chasInfo").getValue().toString();
                     }
 
-                    et_address.setText(s_address);
-                    et_contactNo.setText(s_contactNo);
-
                     ArrayAdapter<CharSequence>  citizenshipAdapter = ArrayAdapter.createFromResource(getActivity(),R.array.citizenship, android.R.layout.simple_spinner_item);
                     citizenshipAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner_citizenship.setAdapter(citizenshipAdapter);
                     spinner_citizenship.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                            citizenship = adapterView.getItemAtPosition(position).toString();
+                            s_citizenship = adapterView.getItemAtPosition(position).toString();
                         }
 
                         @Override
@@ -109,7 +102,7 @@ public class UpdateProfileFragment extends Fragment {
                     spinner_maritalStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                            maritalStatus = adapterView.getItemAtPosition(position).toString();
+                            s_maritalstatus = adapterView.getItemAtPosition(position).toString();
                         }
 
                         @Override
@@ -124,7 +117,7 @@ public class UpdateProfileFragment extends Fragment {
                     spinner_chasInfo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                            chas = adapterView.getItemAtPosition(position).toString();
+                            s_chasinfo = adapterView.getItemAtPosition(position).toString();
                         }
 
                         @Override
@@ -133,6 +126,8 @@ public class UpdateProfileFragment extends Fragment {
                         }
                     });
 
+                    et_address.setText(s_address);
+                    et_contactNo.setText(s_contactNo);
                     spinner_citizenship.setSelection(citizenshipAdapter.getPosition(s_citizenship));
                     spinner_maritalStatus.setSelection(maritalStatusAdapter.getPosition(s_maritalstatus));
                     spinner_chasInfo.setSelection(chasAdapter.getPosition(s_chasinfo));
@@ -150,10 +145,17 @@ public class UpdateProfileFragment extends Fragment {
         update_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (validateProfile(address, contactNo, citizenship, maritalStatus, chas))
+                s_address = et_address.getText().toString();
+                s_contactNo = et_contactNo.getText().toString();
+                s_citizenship = spinner_citizenship.getSelectedItem().toString();
+                s_maritalstatus = spinner_maritalStatus.getSelectedItem().toString();
+                s_chasinfo = spinner_chasInfo.getSelectedItem().toString();
+
+                if (validateProfile(s_address, s_contactNo, s_citizenship, s_maritalstatus, s_chasinfo))
                 {
                     // update to the database if the input is not empty
                     Patient patient = new Patient(s_nric,s_name,s_address,s_contactNo,s_dob,s_citizenship,s_gender,s_race,s_spokenlanguage,s_maritalstatus,s_chasinfo);
+                    Log.d("testMsg",patient.toString());
                     Map<String, Object> postValues = patient.toMap();
                     databaseReference.updateChildren(postValues);
 

@@ -9,7 +9,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -75,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.show_records:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new MedicalRecordFragment()).commit();
+                        new AppointmentFragment()).commit();
                 break;
 
             case R.id.search_events:

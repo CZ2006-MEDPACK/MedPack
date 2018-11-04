@@ -72,7 +72,7 @@ public class LocateClinicManager implements Serializable {
     LocationManager locationManager;
     LocationListener locationListener;
     android.support.v4.app.FragmentManager fragmentManager;
-    MapsActivity myFragment;
+    LocateClinicActivity myFragment;
     ProgressDialog myProgress;
     DatabaseReference databaseReference;
     FirebaseDatabase database;
@@ -84,7 +84,7 @@ public class LocateClinicManager implements Serializable {
     private ArrayList<Clinic> surroundingChas = new ArrayList<>();
     private ArrayList<Clinic> clinicList = new ArrayList<>();
 
-    public LocateClinicManager(Context mContext, android.support.v4.app.FragmentManager fragmentManager, MapsActivity myFragment, ProgressDialog myProgress) {
+    public LocateClinicManager(Context mContext, android.support.v4.app.FragmentManager fragmentManager, LocateClinicActivity myFragment, ProgressDialog myProgress) {
         this.mContext = mContext;
         geocoder = new Geocoder(mContext);
         this.fragmentManager = fragmentManager;
@@ -660,8 +660,8 @@ public class LocateClinicManager implements Serializable {
                 }
             });
 
-            s_chasinfo = chasHolder.getData();
-            Log.d("chasClinic", "s_chasinfo: " + chasHolder.getData());
+            s_chasinfo = CurrentPatient.getChasInfo();
+            Log.d("chasClinic", "s_chasinfo: " + CurrentPatient.getChasInfo());
             Log.d("chasClinic", "s_chasinfo: " + s_chasinfo.equals("Yes"));
             if (s_chasinfo.equals("Yes")){
                 compare();
@@ -683,7 +683,7 @@ public class LocateClinicManager implements Serializable {
 
             Log.d("chasClinic", "testingOnPostExecute");
             LocalBroadcastManager.getInstance(mContext).sendBroadcast(new Intent("com.blah.DISMISS_DIALOG"));
-            MapsActivity myFragment = new MapsActivity();
+            LocateClinicActivity myFragment = new LocateClinicActivity();
             Bundle arguments = new Bundle();
             Log.d("chasClinic", "readClinic: " + readClinic.size());
             Log.d("chasClinic", "surroundingChas: " + surroundingChas.size());
