@@ -16,33 +16,34 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The type Second fragment.
  */
 public class AppointmentFragment extends Fragment {
-
-    ArrayList<Clinic> clinicList = new ArrayList<>();
+    
     ListView listView;
     CustomAdapter adapter = new CustomAdapter();
-    Clinic clinic;
     Context mContext;
+    String[] test;
+    ArrayList<String> arrayList = new ArrayList<>();
 
     class CustomAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
-            return clinicList.size();
+            return 0;
         }
 
         @Override
         public Object getItem(int position) {
-            return clinicList.get(position);
+            return null;
         }
 
         @Override
         public long getItemId(int position) {
-            return position;
+            return 0;
         }
 
         @Override
@@ -56,12 +57,21 @@ public class AppointmentFragment extends Fragment {
             TextView textView_cliniccontactno = view.findViewById(R.id.tv_cliniccontactno);
             TextView textView_cliniclocation = view.findViewById(R.id.tv_cliniclocation);
 
-            textView_queuenumber.setText(clinicList.get(position).getName());
-            textView_waitingtime.setText(clinicList.get(position).getName());
-            textView_datetime.setText(clinicList.get(position).getName());
-            textView_clinicname.setText(clinicList.get(position).getName());
-            textView_cliniccontactno.setText(clinicList.get(position).getName());
-            textView_cliniclocation.setText(clinicList.get(position).getName());
+            textView_queuenumber.setText("nigga");
+            textView_waitingtime.setText(arrayList.get(position));
+            textView_datetime.setText(arrayList.get(position));
+            textView_clinicname.setText(arrayList.get(position));
+            textView_cliniccontactno.setText(arrayList.get(position));
+            String location = arrayList.get(position) + arrayList.get(position);
+            textView_cliniclocation.setText(location);
+
+            /*textView_queuenumber.setText(test[14]);
+            textView_waitingtime.setText(test[15]);
+            textView_datetime.setText(test[16]);
+            textView_clinicname.setText(test[5]);
+            textView_cliniccontactno.setText(test[8]);
+            String location = test[6] + test[7];
+            textView_cliniclocation.setText(location);*/
 
             return view;
         }
@@ -69,12 +79,24 @@ public class AppointmentFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.locateclinic, container, false);
+        mContext = this.getActivity();
 
         BookAppointmentManager bookAppointmentManager = new BookAppointmentManager(mContext);
-        bookAppointmentManager.loadAppointment();
+        test = bookAppointmentManager.loadAppointment();
+        Log.d("testMsg", test[5]);
 
-        listView = view.findViewById(R.id.listView);
+        arrayList = new ArrayList<String>(Arrays.asList(test));
+        Log.d("testMsg",arrayList.toString());
+        View view = inflater.inflate(R.layout.medicalrecord, container, false);
+
+        listView = view.findViewById(R.id.listViewRecord);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        });
+
         listView.setAdapter(adapter);
 
         return view;
