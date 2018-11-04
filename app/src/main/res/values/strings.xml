@@ -11,4 +11,24 @@
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
     <string name="appbar_scrolling_view_behavior">Scrolling Behaviour</string>
+
+    <!--
+        Selecting date and time for appointment
+    -->
+    <string name="calendar_title">Schedule your Appointment</string>
+    <string name="calendar_prompt">Tap on the calendar below to select a date.</string>
+    <string name="calendar_selecteddate">Selected appointment date:</string>
+    <string name="retrieving_date">Select an available timeslot:</string>
+
+    <!--
+        Available timeslots for appointment
+        To be retrieved fromt Clinic server in actual implementation
+    -->
+    <string-array name="array_timeslots">
+        <item>4:30pm</item>
+        <item>4:45pm</item>
+        <item>5:00pm</item>
+        <item>5:45pm</item>
+        <item>6:30pm</item>
+    </string-array>
 </resources>
