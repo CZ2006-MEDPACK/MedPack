@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "458722935183-kj2uju4pd0e8q6veitgvuou7nds083ag.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.csyvi.medpack",
+            "certificate_hash": "364e1f52db2328d4625c8dc7451c4b58c86091ba"
+          }
+        },
+        {
           "client_id": "458722935183-sdi9t6dp24p7vjkb7k8tq5ni4v4fon2f.apps.googleusercontent.com",
           "client_type": 3
         }
