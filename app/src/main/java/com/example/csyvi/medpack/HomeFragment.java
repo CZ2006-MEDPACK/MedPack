@@ -53,14 +53,14 @@ public class HomeFragment extends Fragment {
         spokenLanguage = view.findViewById(R.id.text_spokenlanguage);
         chasInfo = view.findViewById(R.id.text_chas);
 
-        Log.d("errorMsg","test1");
+        Log.d("errorMsg", "test1");
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         userId = user.getUid();
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("patient").child(userId);
 
-        Log.d("errorMsg",databaseReference.toString());
+        Log.d("errorMsg", databaseReference.toString());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -77,18 +77,22 @@ public class HomeFragment extends Fragment {
                         s_spokenlanguage = dataSnapshot.child("spokenLanguage").getValue().toString();
                         s_chasinfo = dataSnapshot.child("chasInfo").getValue().toString();
                     }
-                        name.setText(s_name);
-                        address.setText(s_address);
-                        contactNo.setText(s_contactNo);
-                        dateOfBirth.setText(s_dob);
-                        citizenship.setText(s_citizenship);
-                        gender.setText(s_gender);
-                        race.setText(s_race);
-                        maritalStatus.setText(s_maritalstatus);
-                        spokenLanguage.setText(s_spokenlanguage);
-                        chasInfo.setText(s_chasinfo);
+                    name.setText(s_name);
+                    address.setText(s_address);
+                    contactNo.setText(s_contactNo);
+                    dateOfBirth.setText(s_dob);
+                    citizenship.setText(s_citizenship);
+                    gender.setText(s_gender);
+                    race.setText(s_race);
+                    maritalStatus.setText(s_maritalstatus);
+                    spokenLanguage.setText(s_spokenlanguage);
+                    chasInfo.setText(s_chasinfo);
 
-                        Log.d("errorMsg","test4");
+                    Log.d("errorMsg", "test4");
+
+
+                    //Note: use to share chas Info across activities
+                    chasHolder.setData(s_chasinfo);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -103,7 +107,6 @@ public class HomeFragment extends Fragment {
         //Intent intent = getActivity().getIntent();
         //patientList = (ArrayList<Patient>) intent.getSerializableExtra("ListPatient");
         //patientList = (ArrayList<Patient>) getArguments().getSerializable("ListPatient");
-
         Button button = view.findViewById(R.id.bookAppointment);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

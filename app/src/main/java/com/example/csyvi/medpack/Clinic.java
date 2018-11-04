@@ -31,12 +31,14 @@ public class Clinic {
         this.distance = distance;
     }
 
-    public Clinic(String name, String address, String postalCode, String phone_number, String operating_hour) {
+    public Clinic(String name, String address, String postalCode, String phone_number, String operating_hour, double longitude, double latitude) {
         this.name = name;
         this.address = address;
         this.postalCode = postalCode;
         this.phone_number = phone_number;
         this.operating_hour = operating_hour;
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     public Clinic (String name, String postalCode)

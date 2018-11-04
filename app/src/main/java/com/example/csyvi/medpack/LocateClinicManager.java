@@ -1,9 +1,7 @@
 package com.example.csyvi.medpack;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,21 +13,14 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,8 +54,6 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-import static android.content.Context.LOCATION_SERVICE;
-
 /**
  * The type Locate clinic manager.
  */
@@ -79,11 +68,17 @@ public class LocateClinicManager implements Serializable {
     private Geocoder geocoder;
     private String fileTodownload = "https://data.gov.sg/dataset/31e92629-980d-4672-af33-cec147c18102/download";
     private ArrayList<Clinic> chasClinic = new ArrayList<>();
+    private ArrayList<Clinic> readClinic = new ArrayList<>();
     LocationManager locationManager;
     LocationListener locationListener;
     android.support.v4.app.FragmentManager fragmentManager;
     MapsActivity myFragment;
     ProgressDialog myProgress;
+    DatabaseReference databaseReference;
+    FirebaseDatabase database;
+    FirebaseAuth mAuth;
+    String s_chasinfo, userId;
+    FileOutputStream fos = null;
 
     //use either surroundingChas or clinicList to populate the surrounding general practitioner
     private ArrayList<Clinic> surroundingChas = new ArrayList<>();
@@ -164,7 +159,6 @@ public class LocateClinicManager implements Serializable {
     }
 
     public void locatingName(String direction) {
-        locationAL.clear();
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(
@@ -189,11 +183,11 @@ public class LocateClinicManager implements Serializable {
                 }
             }
         }
+        Log.d("chasClinic", "getting location name");
     }
 
     public void siteRetrieve() {
         for (String s : locationAL) {
-//            Log.d("storeDATA", s);
             String keyword = s;
             Document doc = null;
             try {
@@ -201,6 +195,7 @@ public class LocateClinicManager implements Serializable {
                 doc = Jsoup.connect("https://www.singhealth.com.sg/PatientCare/GP/Pages/" + keyword + ".aspx").get();
                 String title = doc.title();
                 Elements rows = doc.select("tbody > tr > td");
+                keyword = checkKeyword(keyword);
                 for (Element row : rows) {
                     if (!row.text().equals(" ") && !row.text().equals("")) {
                         if ((row.text()).equals(keyword))
@@ -215,14 +210,20 @@ public class LocateClinicManager implements Serializable {
                 e.printStackTrace();
             }
         }
+        Log.d("chasClinic", "storage: " + storage.size());
     }
 
     public void processData() {
-
         int i = 0;
+        double lng = 0.0;
+        double lat = 0.0;
+        List<Address> list;
         String name, postalCode, address, phoneNumber, operating_hour;
+        Log.d("chasClinic", "processing the data");
         for (String a : storage) {
+//            Log.d("chasClinic", "Enter loops");
             if (!a.equals(clinicName.get(i))) {
+//                Log.d("chasClinic", "getting name1");
                 a = a.replace(clinicName.get(i), "");
                 a = a.trim();
                 address = a.substring(0, a.indexOf(" Singapore "));
@@ -238,11 +239,25 @@ public class LocateClinicManager implements Serializable {
                     phoneNumber = a.substring((a.indexOf("Tel No: ") + 8), (a.indexOf("Tel No: ") + 16));
                     a = a.replace("Tel No: ", "");
                 }
+//                Log.d("chasClinic", "getting operating hour1");
                 a = a.replace(phoneNumber, "");
                 a = a.trim();
                 operating_hour = a;
-                clinicList.add(new Clinic(clinicName.get(i), address, postalCode, phoneNumber, operating_hour));
+//                Log.d("chasClinic", "try to get lng and lat1");
+                try {
+//                    Log.d("chasClinic", "getting lng and lat1");
+                    list = (geocoder.getFromLocationName(postalCode, 1));
+                    lat = list.get(0).getLatitude();
+//                    Log.d("chasClinic", "getting lat1:" + lat);
+                    lng = list.get(0).getLongitude();
+//                    Log.d("chasClinic", "getting lng1:" + lng);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+//                Log.d("chasClinic", "records1");
+                clinicList.add(new Clinic(clinicName.get(i), address, postalCode, phoneNumber, operating_hour, lng, lat));
             } else {
+//                Log.d("chasClinic", "getting operating hour2");
                 operating_hour = a.substring(a.indexOf("Operating Hours: "), a.length());
                 a = a.replace(operating_hour, "");
                 a = a.trim();
@@ -262,26 +277,24 @@ public class LocateClinicManager implements Serializable {
                 a = a.replace(name, "");
                 a = a.trim();
                 address = a;
-                clinicList.add(new Clinic(name, address, postalCode, phoneNumber, operating_hour));
+//                Log.d("chasClinic", "try to get lng and lat2");
+                try {
+//                    Log.d("chasClinic", "getting lng and lat2");
+                    list = (geocoder.getFromLocationName(postalCode, 1));
+//                    Log.d("chasClinic", "getting lat2:" + lat);
+                    lng = list.get(0).getLongitude();
+//                    Log.d("chasClinic", "getting lng2:" + lng);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+//                Log.d("chasClinic", "records2");
+                clinicList.add(new Clinic(name, address, postalCode, phoneNumber, operating_hour, lng, lat));
             }
             i++;
         }
-    }
-
-    public void latLngChecker() {
-        geocoder = new Geocoder(mContext);
-        List<Address> list;
-        int z = 0;
-        for (Clinic a : clinicList) {
-            try {
-                list = (geocoder.getFromLocationName(clinicList.get(z).getPostalCode(), 1));
-                clinicList.get(z).setLatitude(list.get(0).getLatitude());
-                clinicList.get(z).setLongitude(list.get(0).getLongitude());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            z++;
-        }
+        storage.removeAll(storage);
+        clinicName.removeAll(clinicName);
+        Log.d("chasClinic", "processed all the data");
     }
 
     public void writeFile(String direction) {
@@ -297,8 +310,6 @@ public class LocateClinicManager implements Serializable {
             data.append(clinic.toString()).append("\n");
         }
 
-        FileOutputStream fos = null;
-
         try {
             fos = mContext.openFileOutput(direction + ".txt", mContext.MODE_PRIVATE);
             fos.write(data.toString().getBytes());
@@ -307,6 +318,7 @@ public class LocateClinicManager implements Serializable {
         } finally {
             if (fos != null) {
                 try {
+                    fos.flush();
                     fos.close();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -333,7 +345,7 @@ public class LocateClinicManager implements Serializable {
                         text = text.replace("Clinic{", "");
                         text = text.replace("}", "");
                         String[] separated = text.split("~");
-                        clinicList.add(new Clinic(separated[0], separated[1], separated[2], separated[3]
+                        readClinic.add(new Clinic(separated[0], separated[1], separated[2], separated[3]
                                 , separated[4], Double.valueOf(separated[5]), Double.valueOf(separated[6]), Double.valueOf(separated[7])));
                     }
                 } else {
@@ -412,6 +424,48 @@ public class LocateClinicManager implements Serializable {
         return null;
     }
 
+    public String checkKeyword(String keyword) {
+        switch (keyword) {
+            case "BeachRoad":
+                    keyword = "Beach Road";
+                break;
+            case "BuonaVista":
+                    keyword = "Buona Vista";
+                break;
+            case "BukitMerah":
+                    keyword = "Bukit Merah";
+                break;
+            case "BukitTimah":
+                    keyword = "Bukit Timah";
+                break;
+            case "CityHall":
+                    keyword = "City Hall";
+                break;
+            case "DeportRoad":
+                    keyword = "Deport Road";
+                break;
+            case "BedokReservoir":
+                    keyword = "Bedok Reservoir";
+                break;
+            case "ChaiChee":
+                keyword = "Chai Chee";
+                break;
+            case "JooChiat":
+                keyword = "Joo Chiat";
+                break;
+            case "MarineParade":
+                keyword = "Marine Parade";
+                break;
+            case "PasirRis":
+                keyword = "Pasir Ris";
+                break;
+            case "PayaLebar":
+                keyword = "Paya Lebar";
+                break;
+        }
+        return keyword;
+    }
+
     public boolean fileExist(String direction) {
         File file = new File(mContext.getApplicationContext().getFilesDir(), direction + ".txt");
         Log.d("storeDATA", "The file exist: " + file.exists());
@@ -451,8 +505,8 @@ public class LocateClinicManager implements Serializable {
                     + user_LatLng.latitude + "," + user_LatLng.longitude +
                     "&destinations=");
             for (int a = 0; a < 25; a++) {
-                if (index < clinicList.size()) {
-                    urlBuilder.append(clinicList.get(index).getLatitude() + "," + clinicList.get(index).getLongitude() + "|");
+                if (index < readClinic.size()) {
+                    urlBuilder.append(readClinic.get(index).getLatitude() + "," + readClinic.get(index).getLongitude() + "|");
                 } else {
                     break;
                 }
@@ -481,14 +535,14 @@ public class LocateClinicManager implements Serializable {
                     JSONArray elements = row.getJSONArray("elements");
 //                Log.d("ReturnResult", "elements: " + elements.toString());
                     for (int i = 0; i < 25; i++) {
-                        if (index2 < clinicList.size()) {
+                        if (index2 < readClinic.size()) {
                             JSONObject element = elements.getJSONObject(i);
 //                    Log.d("ReturnResult", "element single record: " + element.toString());
                             JSONObject distanceRecord = element.getJSONObject("distance");
 //                    Log.d("ReturnResult", "distance Record: " + distanceRecord.toString());
                             Double distanceText = distanceRecord.getDouble("value");
 //                    Log.d("ReturnResult", "clinic index " + index2 + " distance: " + distanceText);
-                            clinicList.get(index2).setDistance(distanceText);
+                            readClinic.get(index2).setDistance(distanceText);
                         }
                         index2++;
                     }
@@ -506,7 +560,7 @@ public class LocateClinicManager implements Serializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            if (index >= clinicList.size())
+            if (index >= readClinic.size())
                 operating = false;
         }
     }
@@ -541,56 +595,85 @@ public class LocateClinicManager implements Serializable {
         }
     }
 
+    public void compare() {
+        int i = 1;
+        for (Clinic c : readClinic) {
+            String name = c.getName().toUpperCase();
+            String postal = c.getPostalCode();
+            postal = postal.replace("Singapore ", "");
+            postal = postal.trim();
+            for (Clinic chas : chasClinic) {
+                String chasPostal = chas.getPostalCode();
+                if (((chas.getName()).contains(name)) && chasPostal.equals(postal)) {
+                    surroundingChas.add(c);
+                }
+                i++;
+            }
+        }
+    }
 
     private class dataOperation extends AsyncTask<String, Void, Void> {
         @Override
         protected void onPreExecute() {
+            Log.d("chasClinic", "testingPreExecute");
+            calculatingDirection();
         }
 
-        public void compare() {
-            int i = 1;
-            for (Clinic c : clinicList) {
-                String name = c.getName().toUpperCase();
-                String postal = c.getPostalCode();
-                postal = postal.replace("Singapore ", "");
-                postal = postal.trim();
-                for (Clinic chas : chasClinic) {
-                    String chasPostal = chas.getPostalCode();
-                    if (((chas.getName()).contains(name)) && chasPostal.equals(postal)) {
-                        surroundingChas.add(c);
-                    }
-                    i++;
-                }
-            }
-        }
 
         @Override
         protected Void doInBackground(String... strings) {
             Log.d("chasClinic", "testingDoInBackground");
-            calculatingDirection();
+
             for (String a : direction) {
-                if (fileExist(a)) {
-                    readFile(a);
-                } else {
+                if (!fileExist(a)) {
+                    Log.d("chasClinic", "locatingName");
                     locatingName(a);
+                    Log.d("chasClinic", "siteRetrieve");
                     siteRetrieve();
+                    Log.d("chasClinic", "processData");
                     processData();
-                    latLngChecker();
+                    Log.d("chasClinic", "writeFile");
                     writeFile(a);
+                    Log.d("chasClinic", "clinicList size is: " + clinicList.size());
+                    clinicList.removeAll(clinicList);
+                    Log.d("chasClinic", "locationAL size was: " + locationAL.size());
+                    locationAL.removeAll(locationAL);
+
+                }
+                if (fileExist(a)) {
+                    Log.d("chasClinic", "reading file");
+                    readFile(a);
                 }
             }
+
+            Log.d("chasClinic", "readKML");
             readKML();
+
+            Log.d("chasClinic", "distSearch");
             distSearch();
-            Collections.sort(clinicList, new Comparator<Clinic>() {
+
+            Log.d("chasClinic", "sorting");
+            Collections.sort(readClinic, new Comparator<Clinic>() {
                 @Override
                 public int compare(Clinic o1, Clinic o2) {
                     return Double.compare(o1.getDistance(), o2.getDistance());
-                    //return (Double.toString(o1.getDistance())).comp(Double.toString(o2.getDistance()));
                 }
             });
-            compare();
-            //if user have chas then take 10 from surroundingChas
-            //else take 10 from clinicList
+
+            s_chasinfo = chasHolder.getData();
+            Log.d("chasClinic", "s_chasinfo: " + chasHolder.getData());
+            Log.d("chasClinic", "s_chasinfo: " + s_chasinfo.equals("Yes"));
+            if (s_chasinfo.equals("Yes")){
+                compare();
+                for (int i = 0; i < 10; i++) {
+                    clinicList.add(surroundingChas.get(i));
+                }
+            }
+            else{
+                for (int i = 0; i < 10; i++) {
+                    clinicList.add(readClinic.get(i));
+                }
+            }
 
             return null;
         }
@@ -602,9 +685,10 @@ public class LocateClinicManager implements Serializable {
             LocalBroadcastManager.getInstance(mContext).sendBroadcast(new Intent("com.blah.DISMISS_DIALOG"));
             MapsActivity myFragment = new MapsActivity();
             Bundle arguments = new Bundle();
-            Log.d("chasClinic" , ""+surroundingChas.size());
-            Log.d("chasClinic", ""+clinicList.size());
-            arguments.putSerializable("ListClinic", surroundingChas);
+            Log.d("chasClinic", "readClinic: " + readClinic.size());
+            Log.d("chasClinic", "surroundingChas: " + surroundingChas.size());
+            Log.d("chasClinic", "resultClinic: " + clinicList.size());
+            arguments.putSerializable("ListClinic", clinicList);
             myFragment.setArguments(arguments);
             fragmentManager.beginTransaction().replace(R.id.fragment_container, myFragment).commit();
         }
