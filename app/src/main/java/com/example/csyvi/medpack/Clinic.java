@@ -113,7 +113,7 @@ public class Clinic {
 
     @Override
     public String toString() {
-        return name +
+        return "ClinicInfo{" + name +
                 "~" + address  +
                 "~" + postalCode +
                 "~" + phone_number +
@@ -121,7 +121,7 @@ public class Clinic {
                 "~" + longitude +
                 "~" + latitude +
                 "~" + distance +
-                "~";
+                "}";
     }
 
 }

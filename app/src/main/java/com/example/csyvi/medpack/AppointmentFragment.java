@@ -29,18 +29,19 @@ public class AppointmentFragment extends Fragment {
     Context mContext;
     CustomAdapter adapter = new CustomAdapter();
     String[] test;
-    List<String> arrayList;
+    ArrayList<Record> recordList;
+    TextView textView_appointmentid, textView_appointmentdate, textView_datetime, textView_clinicname, textView_cliniccontactno, textView_cliniclocation;
 
     class CustomAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
-            return 1;
+            return recordList.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return arrayList.get(position);
+            return recordList.get(position);
         }
 
         @Override
@@ -52,28 +53,17 @@ public class AppointmentFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup viewGroup) {
             View view = View.inflate(getActivity(),R.layout.medicalrecord_customlayout,null);
 
-            TextView textView_queuenumber = view.findViewById(R.id.tv_queueno);
-            TextView textView_waitingtime = view.findViewById(R.id.tv_waitingtime);
-            TextView textView_datetime = view.findViewById(R.id.tv_datetime);
-            TextView textView_clinicname = view.findViewById(R.id.tv_clinicname);
-            TextView textView_cliniccontactno = view.findViewById(R.id.tv_cliniccontactno);
-            TextView textView_cliniclocation = view.findViewById(R.id.tv_cliniclocation);
+            textView_appointmentid = view.findViewById(R.id.tv_appointmentid);
+            textView_appointmentdate = view.findViewById(R.id.tv_appointmentdate);
+            textView_clinicname = view.findViewById(R.id.tv_clinicname);
+            textView_cliniccontactno = view.findViewById(R.id.tv_cliniccontactno);
+            textView_cliniclocation = view.findViewById(R.id.tv_cliniclocation);
 
-            textView_queuenumber.setText(arrayList.get(14));
-            textView_waitingtime.setText(arrayList.get(15));
-            textView_datetime.setText(arrayList.get(16));
-            textView_clinicname.setText(arrayList.get(5));
-            textView_cliniccontactno.setText(arrayList.get(8));
-            String location = arrayList.get(6) + " " + arrayList.get(7);
-            textView_cliniclocation.setText(location);
-
-            /*textView_queuenumber.setText(test[14]);
-            textView_waitingtime.setText(test[15]);
-            textView_datetime.setText(test[16]);
-            textView_clinicname.setText(test[5]);
-            textView_cliniccontactno.setText(test[8]);
-            String location = test[6] + test[7];
-            textView_cliniclocation.setText(location);*/
+            textView_appointmentid.setText(recordList.get(position).getAppointmentId());
+            textView_appointmentdate.setText(recordList.get(position).getAppointmentDate());
+            textView_clinicname.setText(recordList.get(position).getClinicName());
+            textView_cliniccontactno.setText(recordList.get(position).getClinicContactNo());
+            textView_cliniclocation.setText(recordList.get(position).getClinicLocation());
 
             return view;
         }
@@ -83,13 +73,12 @@ public class AppointmentFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mContext = this.getActivity();
         BookAppointmentManager bookAppointmentManager = new BookAppointmentManager(mContext);
-        test = bookAppointmentManager.loadAppointment();
-        Log.d("testMsg", Integer.toString(test.length));
 
-        arrayList = Arrays.asList(test);
-        Log.d("testMsg",arrayList.toString());
-        Log.d("testMsg",Integer.toString(arrayList.size()));
+        //test = bookAppointmentManager.loadAppointment();
+        recordList = bookAppointmentManager.loadAppointment();
+        //arrayList = Arrays.asList(test);
 
+        Log.d("testMsg",recordList.toString());
         View view = inflater.inflate(R.layout.medicalrecord, container, false);
 
         listView = view.findViewById(R.id.listViewRecord);

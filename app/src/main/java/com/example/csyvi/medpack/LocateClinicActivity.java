@@ -109,7 +109,7 @@ public class LocateClinicActivity extends Fragment {
                     Log.d("testMsg", clinic.toString());
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                    builder.setTitle("Book Appointment").setMessage("Do you want to book appointment on this clinic?")
+                    builder.setTitle("Book Appointment").setMessage("Do you want to book appointment on this clinic for today?")
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -117,11 +117,7 @@ public class LocateClinicActivity extends Fragment {
                                     bookAppointmentManager.insertAppointment(clinic);
                                     Toast.makeText(getActivity(), "You have booked your Appointment successfully! Check out Your Records!", Toast.LENGTH_LONG).show();
                                     bookingCount++;
-                                    String[] test = bookAppointmentManager.loadAppointment();
-                                    for(int a=0;a<test.length;a++)
-                                    {
-                                        Log.d("APPOINTMENT",test[a]);
-                                    }
+                                    //ArrayList<String> test = bookAppointmentManager.loadAppointment();
                                     //Intent intent = new Intent(getActivity(), MainActivity.class);
                                     //startActivity(intent);
                                 }

@@ -137,4 +137,6 @@ public class VitalSigns {
     public static void setPainScale(int painScale) {
         VitalSigns.painScale = painScale;
     }
+
+
 }

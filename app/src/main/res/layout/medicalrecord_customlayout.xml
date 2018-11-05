@@ -10,7 +10,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="12dp"
         android:layout_marginTop="17dp"
-        android:text="Queue No:"
+        android:text="Appointment ID:"
         android:textStyle="bold" />
 
     <TextView
@@ -20,7 +20,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/textView9"
         android:layout_marginTop="44dp"
-        android:text="Appointment Date and Time:"
+        android:text="Appointment Date:"
         android:textStyle="bold" />
 
     <TextView
@@ -54,31 +54,20 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tv_waitingtime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/textView9"
-        android:layout_marginEnd="12dp"
-        android:text="Waiting Time"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tv_queueno"
+        android:id="@+id/tv_appointmentid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/textView9"
-        android:layout_toEndOf="@+id/textView21"
+        android:layout_toEndOf="@+id/textView23"
         android:text="Number" />
 
     <TextView
-        android:id="@+id/tv_datetime"
+        android:id="@+id/tv_appointmentdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/textView20"
-        android:layout_marginEnd="88dp"
-        android:text="Date and Time" />
+        android:layout_toEndOf="@+id/tv_clinicname"
+        android:text="Date" />
 
     <TextView
         android:id="@+id/tv_clinicname"
