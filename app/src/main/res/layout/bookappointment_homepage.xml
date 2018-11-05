@@ -1,123 +1,291 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:id="@+id/relativeLayout">
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/text_spokenlanguage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginBottom="141dp"
-        android:text="Spoken Language" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Spoken Language"
+        android:textColor="@color/colorBlack"
+        app:fontFamily="@font/dosis"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/text_spokenlanguage2"
+        app:layout_constraintTop_toBottomOf="@+id/text_race" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/text_spokenlanguage2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Spoken Language:"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:fontFamily="@font/dosis_semibold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/text_spokenlanguage"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="151dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/cover" />
+        android:background="@drawable/cover"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/bookAppointment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorSecondary"
         android:text="Book Appointment"
         android:textColor="#fff"
-        android:background="@color/colorAccent"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/bookAppointment"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="168dp"
-        android:text="Welcome, " />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Welcome to MedPack,"
+        android:textColor="@color/colorSecondaryDark"
+        android:textSize="18sp"
+        app:fontFamily="@font/dosis_extrabold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/text_name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginTop="197dp"
-        android:text="Name" />
+        android:layout_height="19dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Name"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:fontFamily="@font/dosis_extrabold"
+        app:layout_constraintStart_toEndOf="@+id/text_name2"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/text_name2"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginStart="24dp"
+        android:text="Name:"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:fontFamily="@font/dosis_extrabold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/text_name"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/text_contactNo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginTop="256dp"
-        android:text="Contact Number" />
+        android:layout_height="19dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Contact Number"
+        android:textColor="@color/colorBlack"
+        app:fontFamily="@font/dosis"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/text_contactNo2"
+        app:layout_constraintTop_toBottomOf="@+id/text_address" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/text_contactNo2"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginStart="24dp"
+        android:text="Contact Number:"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:fontFamily="@font/dosis_semibold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/text_contactNo"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/text_dob"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginBottom="261dp"
-        android:text="Date of Birth" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Date of Birth"
+        android:textColor="@color/colorBlack"
+        app:fontFamily="@font/dosis"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/text_dob2"
+        app:layout_constraintTop_toBottomOf="@+id/text_contactNo" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/text_dob2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Date of Birth:"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:fontFamily="@font/dosis_semibold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/text_dob"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/text_citizenship"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginBottom="231dp"
-        android:text="Citizenship" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Citizenship"
+        android:textColor="@color/colorBlack"
+        app:fontFamily="@font/dosis"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/text_citizenship2"
+        app:layout_constraintTop_toBottomOf="@+id/text_dob" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/text_citizenship2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Citizenship:"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:fontFamily="@font/dosis_semibold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/text_citizenship"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/text_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginTop="228dp"
-        android:text="Address" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Address"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:fontFamily="@font/dosis"
+        app:layout_constraintStart_toEndOf="@+id/text_address2"
+        app:layout_constraintTop_toBottomOf="@+id/text_name" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/text_address2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Address:"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:fontFamily="@font/dosis_semibold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/text_address"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/text_chas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginBottom="76dp"
-        android:text="CHAS Info" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="CHAS Info"
+        android:textColor="@color/colorBlack"
+        app:fontFamily="@font/dosis"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/text_chas2"
+        app:layout_constraintTop_toBottomOf="@+id/text_maritalstatus" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/text_chas2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="CHAS Eligibility:"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:fontFamily="@font/dosis_semibold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/text_chas"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/text_gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginBottom="201dp"
-        android:text="Gender" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Gender"
+        android:textColor="@color/colorBlack"
+        app:fontFamily="@font/dosis"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/text_gender2"
+        app:layout_constraintTop_toBottomOf="@+id/text_citizenship" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/text_gender2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Gender:"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:fontFamily="@font/dosis_semibold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/text_gender"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/text_race"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginBottom="172dp"
-        android:text="Race" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Race"
+        android:textColor="@color/colorBlack"
+        app:fontFamily="@font/dosis"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/text_race2"
+        app:layout_constraintTop_toBottomOf="@+id/text_gender" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/text_race2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Race:"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:fontFamily="@font/dosis_semibold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/text_race"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/text_maritalstatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView"
-        android:layout_marginBottom="110dp"
-        android:text="Marital Status" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Marital Status"
+        android:textColor="@color/colorBlack"
+        app:fontFamily="@font/dosis"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/text_maritalstatus2"
+        app:layout_constraintTop_toBottomOf="@+id/text_spokenlanguage" />
 
-</RelativeLayout>
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/text_maritalstatus2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Marital Status:"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:fontFamily="@font/dosis_semibold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/text_maritalstatus"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

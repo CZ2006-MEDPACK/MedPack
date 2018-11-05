@@ -9,4 +9,5 @@
     <color name="colorSecondaryDark">#ab000d</color>
     <color name="colorNeutral">#ffffff</color>
     <color name="colorGray">#e0e0e0</color>
+    <color name="colorBlack">#000000</color>
 </resources>
