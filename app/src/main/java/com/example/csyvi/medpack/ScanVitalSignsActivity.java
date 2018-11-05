@@ -71,16 +71,16 @@ public class ScanVitalSignsActivity extends AppCompatActivity  {
         scanButton.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
-                textView.setText("Scanning ...");
+                textView.setText("Scan in progress, please do not remove your finger...");
                 submitButton.setVisibility(View.INVISIBLE);
                 scanButton.setVisibility(View.INVISIBLE);
                 ringProgressBar1 = findViewById(R.id.progress_bar_1);
                 ringProgressBar1.setOnProgressListener(new RingProgressBar.OnProgressListener( ) {
                     @Override
                     public void progressToComplete() {
-                        textView.setText("Scan Completed!!");
+                        textView.setText("Scan complete!");
                         submitButton.setVisibility(View.VISIBLE);
-                        scanButton.setText("Rescan Vital Signs");
+                        scanButton.setText("Rescan Vitals");
                         scanButton.setVisibility(View.VISIBLE);
                     }
                 });

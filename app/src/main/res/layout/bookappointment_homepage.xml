@@ -47,6 +47,7 @@
         android:background="@color/colorSecondary"
         android:text="Book Appointment"
         android:textColor="#fff"
+        app:fontFamily="@font/dosis_semibold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
