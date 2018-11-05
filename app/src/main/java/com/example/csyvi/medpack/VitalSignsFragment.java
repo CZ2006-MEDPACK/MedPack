@@ -30,6 +30,7 @@ public class VitalSignsFragment extends Fragment {
     LocateClinicManager clinicManager;
     ProgressDialog progressDialog;
     int pain = 1;
+    View view = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
