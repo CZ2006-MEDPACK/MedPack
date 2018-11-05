@@ -93,7 +93,7 @@ public class ScanVitalSignsActivity extends AppCompatActivity  {
                         {
                             try
                             {
-                                Thread.sleep(1); //TODO 100
+                                Thread.sleep(100); //TODO 100
                                 myHandler.sendEmptyMessage(0);
                             }
 

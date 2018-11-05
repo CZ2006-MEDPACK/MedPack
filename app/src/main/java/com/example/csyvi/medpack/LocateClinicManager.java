@@ -668,7 +668,7 @@ public class LocateClinicManager implements Serializable {
                     clinicList.add(readClinic.get(i));
                 }
             }
-
+            Log.d("chasClinic", "exit chas selection");
             return null;
         }
 

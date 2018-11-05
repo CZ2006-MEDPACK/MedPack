@@ -101,7 +101,7 @@ public class BookAppointmentManager {
                 Log.d("testMsg", "first: " + records[1]);
                 Log.d("testMsg", "first: " + records[2]);
 
-                records[1] = records[1].replace("ClinicInfo{", "");
+                records[1] = records[1].replace("Clinic{", "");
                 records[1] = records[1].replace("}", "");
                 clinic = records[1].split("~");
 
