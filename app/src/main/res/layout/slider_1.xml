@@ -1,34 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorGray"
     android:gravity="center"
-    android:background="@color/colorPrimary">
+    android:orientation="vertical">
 
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_icons_ambulance"/>
+        android:src="@drawable/ic_icons_ambulance" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Book Appointment"
         android:layout_marginTop="10dp"
+        android:text="Book Appointments"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="30dp"
-        android:textStyle="bold"/>
+        android:textStyle="normal"
+        app:fontFamily="@font/dosis_extrabold" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="Patients could book a scheduled medical appointment with a nearby GP Clinic with maximum of 25KM from current location."
+        android:layout_margin="0dp"
+        android:text="Feeling unwell? No problem!"
         android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:textStyle="bold"/>
+        android:textStyle="italic"
+        app:fontFamily="@font/dosis" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:text="Use MedPack to quickly &amp; easily book an appointment with any nearby clinics."
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textStyle="normal"
+        app:fontFamily="@font/dosis_semibold" />
 
 </LinearLayout>

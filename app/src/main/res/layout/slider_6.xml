@@ -11,13 +11,13 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_icons_medications" />
+        android:src="@drawable/ic_icons_calendar_plus" />
 
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Medication Scheduler"
+        android:text="Healthcare Events"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="30dp"
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        android:text="After your appointment, MedPack can generate reminders so that  you'll never forget to take your medication ever again!"
+        android:text="Lastly, MedPack helps you keep up-to-date with the latest healthcare events."
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textStyle="normal"
