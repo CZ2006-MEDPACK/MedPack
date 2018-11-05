@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="User would be able to measure their vital signs if they choose to book an appointment,"
+        android:text="Patients would be able to measure and input their own vital signs if they choose to book an appointment with the specific GP Clinic."
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textStyle="bold"/>

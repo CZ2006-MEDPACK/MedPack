@@ -251,19 +251,18 @@ public class Patient {
 
     @Override
     public String toString() {
-        return "Patient{" +
-                "nric='" + nric + '\'' +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", contactNo=" + contactNo + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
-                ", citizenship='" + citizenship + '\'' +
-                ", gender='" + gender + '\'' +
-                ", race='" + race + '\'' +
-                ", spokenLanguage='" + spokenLanguage + '\'' +
-                ", maritalStatus='" + maritalStatus + '\'' +
-                ", chasInfo='" + chasInfo + '\'' +
-                '}';
+        return nric +
+                "~" + name +
+                "~" + address +
+                "~" + contactNo +
+                "~" + dateOfBirth +
+                "~" + citizenship +
+                "~" + gender +
+                "~" + race +
+                "~" + spokenLanguage +
+                "~" + maritalStatus +
+                "~" + chasInfo +
+                "~";
     }
 
     @Exclude

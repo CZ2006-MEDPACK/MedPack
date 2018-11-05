@@ -35,7 +35,7 @@ public class VitalSignsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         clinicManager = new LocateClinicManager(this.getActivity(), this.getFragmentManager(), new LocateClinicActivity(), progressDialog);
 
-        View view = inflater.inflate(R.layout.measurevitalsigns_inputvitalsigns, container, false);
+        view = inflater.inflate(R.layout.measurevitalsigns_inputvitalsigns, container, false);
         PulseRate = (EditText) view.findViewById(R.id.editTextPulseRate);
         OxygenSaturation = (EditText) view.findViewById(R.id.editTextOxygenSaturation);
         BloodPressureSystolic = (EditText) view.findViewById(R.id.editTextBPSystolic);
@@ -43,6 +43,7 @@ public class VitalSignsFragment extends Fragment {
         Temperature = (EditText) view.findViewById(R.id.editTextEnterTemperature);
         RespiratoryRate = (EditText) view.findViewById(R.id.editTextRespiratoryRate);
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
+
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
@@ -79,7 +80,6 @@ public class VitalSignsFragment extends Fragment {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 boolean failFlag = false;
                 if (BloodPressureSystolic.getText().toString().trim().length() == 0 || Integer.parseInt((BloodPressureSystolic.getText().toString())) < 0 || Integer.parseInt(BloodPressureSystolic.getText().toString()) > 250)
                 {
@@ -110,6 +110,7 @@ public class VitalSignsFragment extends Fragment {
                     bloodPressure.append(bloodPressureSystolic).append("/").append(bloodPressureDiastolic);
                     float temperature = Float.valueOf(Temperature.getText().toString());
                     int respiratoryRate = Integer.parseInt(RespiratoryRate.getText().toString());
+
 
                     new VitalSigns(temperature, pulse, respiratoryRate, bloodPressure.toString(), oxygen, pain);
 

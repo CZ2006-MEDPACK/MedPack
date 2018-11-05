@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="After completing their analysis, users would be able to view their medical records from the system."
+        android:text="After booking of an appointment, patients would be able to track their current or previous appointments."
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textStyle="bold"/>

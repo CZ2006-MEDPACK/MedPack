@@ -100,29 +100,6 @@ public class LocateClinicActivity extends Fragment {
         View view = inflater.inflate(R.layout.locateclinic, container, false);
         Log.d("storeDATA", "testMaps");
 
-        /*clinic_array = new Clinic[clinicList.size()];
-        Log.d("chasClinic", "testMaps");
-        clinic_array = clinicList.toArray(clinic_array);
-        Log.d("chasClinic", "testMaps");
-        String[] name = new String[clinic_array.length];
-        int i = 0;
-        for (Clinic a : clinic_array){
-            name[i] = a.getName();
-            i++;
-        }
-        Log.d("chasClinic", "testMaps");
-        adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,name);*/
-
-        //testing code
-//        BookAppointmentManager bookam = new BookAppointmentManager(this.getActivity());
-//        bookam.insertAppointment(new Patient("testNRIC", "testLAST", "testFIRST"
-//        , "testADDRESS", 12345678, "testBIRTH", "testCITIZEN"
-//        , "testGENDER", "testRACE", "testLANGUAGES", "testMARITAL"
-//        , "testALLERGY"), true, clinicList.get(0));
-//
-//
-//        bookam.loadAppointment();
-
         listView = view.findViewById(R.id.listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -140,7 +117,11 @@ public class LocateClinicActivity extends Fragment {
                                     bookAppointmentManager.insertAppointment(clinic);
                                     Toast.makeText(getActivity(), "You have booked your Appointment successfully! Check out Your Records!", Toast.LENGTH_LONG).show();
                                     bookingCount++;
-                                    //bookAppointmentManager.loadAppointment();
+                                    String[] test = bookAppointmentManager.loadAppointment();
+                                    for(int a=0;a<test.length;a++)
+                                    {
+                                        Log.d("APPOINTMENT",test[a]);
+                                    }
                                     //Intent intent = new Intent(getActivity(), MainActivity.class);
                                     //startActivity(intent);
                                 }

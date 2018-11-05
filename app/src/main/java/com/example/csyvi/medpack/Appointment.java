@@ -88,11 +88,10 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return "Appointment{" +
-                "appointmentId='" + appointmentId + '\'' +
-                ", queueNo=" + queueNo +
-                ", waitingTime=" + waitingTime +
-                ", datetime='" + datetime + '\'' +
-                '}';
+        return appointmentId +
+                "~" + queueNo +
+                "~" + waitingTime +
+                "~" + datetime +
+                "~";
     }
 }
