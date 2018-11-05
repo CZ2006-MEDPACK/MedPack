@@ -46,7 +46,7 @@ public class VitalSignsFragment extends Fragment {
         radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
 
 
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+     radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId){
                 if (checkedId == R.id.painScale1)

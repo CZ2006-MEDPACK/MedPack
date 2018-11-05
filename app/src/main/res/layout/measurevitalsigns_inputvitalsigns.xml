@@ -1,259 +1,373 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vitalsConstraintLayout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:orientation="vertical">
 
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewTitle"
-        android:layout_width="236dp"
-        android:layout_height="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/editTextBox"
-        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/dosis_extrabold"
         android:text="Your Vital Signs"
-        android:textColor="@android:color/holo_red_dark"
+        android:textColor="@color/colorSecondaryDark"
         android:textSize="20sp"
-        android:textStyle="bold|italic"
-        android:typeface="sans" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_conversion_absoluteHeight="40dp"
+        tools:layout_conversion_absoluteWidth="236dp" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/editTextRespiratoryRate"
-        android:layout_width="166dp"
-        android:layout_height="32dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="233dp"
-        android:ems="10" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="3"
+        android:fontFamily="@font/dosis"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewRespiratoryRate"
+        app:layout_constraintStart_toEndOf="@+id/textViewRespiratoryRate"
+        tools:layout_conversion_absoluteHeight="32dp"
+        tools:layout_conversion_absoluteWidth="166dp" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/editTextBPSystolic"
-        android:layout_width="166dp"
-        android:layout_height="21dp"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="15dp"
-        android:ems="10" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="5"
+        android:fontFamily="@font/dosis"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewBPSystolic"
+        app:layout_constraintStart_toEndOf="@+id/textViewBPSystolic"
+        tools:layout_conversion_absoluteHeight="21dp"
+        tools:layout_conversion_absoluteWidth="166dp" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/editTextBPDiastolic"
-        android:layout_width="168dp"
-        android:layout_height="34dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="5"
+        android:fontFamily="@font/dosis"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewBPDiastolic"
+        app:layout_constraintStart_toEndOf="@+id/textViewBPDiastolic"
+        tools:layout_conversion_absoluteHeight="34dp"
+        tools:layout_conversion_absoluteWidth="168dp" />
 
-        android:layout_alignBottom="@+id/textViewBPDiastolic"
-        android:layout_alignStart="@+id/editTextRespiratoryRate"
-        android:ems="10" />
-
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/editTextPulseRate"
-        android:layout_width="164dp"
-        android:layout_height="35dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/editTextRespiratoryRate"
-        android:layout_marginTop="77dp"
-        android:text="68"
-        android:textSize="12sp" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="3"
+        android:fontFamily="@font/dosis"
+        android:text="72"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewPulseRate"
+        app:layout_constraintStart_toEndOf="@+id/textViewPulseRate"
+        tools:layout_conversion_absoluteHeight="35dp"
+        tools:layout_conversion_absoluteWidth="164dp" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/editTextOxygenSaturation"
-        android:layout_width="163dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/editTextRespiratoryRate"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="119dp"
-        android:ems="10"
+        android:layout_marginStart="8dp"
+        android:ems="3"
+        android:fontFamily="@font/dosis"
         android:text="100"
-        android:textSize="12sp" />
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewOxygen"
+        app:layout_constraintStart_toEndOf="@+id/textViewOxygen"
+        tools:layout_conversion_absoluteHeight="37dp"
+        tools:layout_conversion_absoluteWidth="163dp" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/editTextBox"
-        android:layout_width="357dp"
-        android:layout_height="67dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="81dp"
-        android:ems="10"
-        android:text="nil"
-        android:inputType="textLongMessage" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:ems="12"
+        android:fontFamily="@font/dosis"
+        android:inputType="textLongMessage"
+        android:text="- nil -"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAnySymptoms"
+        tools:layout_conversion_absoluteHeight="67dp"
+        tools:layout_conversion_absoluteWidth="357dp" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewAnySymptoms"
-        android:layout_width="157dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textViewTitle"
-        android:layout_marginBottom="156dp"
-        android:text="Any Symptoms?"
-        android:textColor="@android:color/black" />
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/dosis_semibold"
+        android:text="Any other symptoms?"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        tools:layout_conversion_absoluteHeight="19dp"
+        tools:layout_conversion_absoluteWidth="157dp" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textView6"
-        android:layout_width="157dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textViewTitle"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="194dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/dosis_semibold"
         android:text="Enter Pain Scale:"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBPDiastolic"
+        tools:layout_conversion_absoluteHeight="19dp"
+        tools:layout_conversion_absoluteWidth="157dp" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewBPSystolic"
-        android:layout_width="130dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textViewTitle"
-        android:layout_centerVertical="true"
-        android:text="Enter BP(Systolic): "
-        android:textColor="@android:color/black" />
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/dosis_semibold"
+        android:text="Enter BP (systolic): "
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRespiratoryRate"
+        tools:layout_conversion_absoluteHeight="19dp"
+        tools:layout_conversion_absoluteWidth="130dp" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewBPDiastolic"
-        android:layout_width="136dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textViewTitle"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="234dp"
-        android:text="Enter BP(Diastolic): "
-        android:textColor="@android:color/black" />
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/dosis_semibold"
+        android:text="Enter BP (diastolic): "
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBPSystolic"
+        tools:layout_conversion_absoluteHeight="19dp"
+        tools:layout_conversion_absoluteWidth="136dp" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewRespiratoryRate"
-        android:layout_width="157dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/editTextRespiratoryRate"
-        android:layout_alignStart="@+id/textViewTitle"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/dosis_semibold"
         android:text="Enter Respiratory Rate: "
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEnterTemperature"
+        tools:layout_conversion_absoluteHeight="19dp"
+        tools:layout_conversion_absoluteWidth="157dp" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewEnterTemperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textViewTitle"
-        android:layout_marginTop="206dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/dosis_semibold"
         android:text="Enter Temperature: "
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPleaseEnterBelow"
+        tools:layout_conversion_absoluteHeight="19dp"
+        tools:layout_conversion_absoluteWidth="125dp" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewOxygen"
-        android:layout_width="157dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textViewTitle"
-        android:layout_marginTop="127dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/dosis_semibold"
         android:text="Your Oxygen Saturation: "
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPulseRate"
+        tools:layout_conversion_absoluteHeight="19dp"
+        tools:layout_conversion_absoluteWidth="157dp" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewPleaseEnterBelow"
-        android:layout_width="133dp"
-        android:layout_height="30dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textViewTitle"
-        android:layout_marginTop="166dp"
-        android:text="Please Enter Below"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/textViewPulseRate"
-        android:layout_width="121dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editTextPulseRate"
-        android:layout_alignStart="@+id/textViewTitle"
-        android:text="Your Pulse Rate:"
-        android:textColor="@android:color/black" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/dosis_extrabold"
+        android:text="Please enter the below information:"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOxygen"
+        tools:layout_conversion_absoluteHeight="30dp"
+        tools:layout_conversion_absoluteWidth="133dp" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/textViewPulseRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/dosis_semibold"
+        android:text="Your Pulse Rate:"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+        tools:layout_conversion_absoluteHeight="19dp"
+        tools:layout_conversion_absoluteWidth="121dp" />
+
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewDegreesCelcius"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textViewEnterTemperature"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="68dp"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/dosis"
         android:text="°C"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextEnterTemperature"
+        app:layout_constraintStart_toEndOf="@+id/editTextEnterTemperature"
+        tools:layout_conversion_absoluteHeight="19dp"
+        tools:layout_conversion_absoluteWidth="15dp" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/editTextEnterTemperature"
-        android:layout_width="54dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/textViewEnterTemperature"
-        android:layout_marginEnd="128dp"
-        android:layout_marginTop="-12dp"
-        android:ems="10"
+        android:layout_marginStart="8dp"
+        android:ems="5"
+        android:fontFamily="@font/dosis"
         android:singleLine="true"
-        android:textSize="12sp" />
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewEnterTemperature"
+        app:layout_constraintStart_toEndOf="@+id/textViewEnterTemperature"
+        tools:layout_conversion_absoluteHeight="37dp"
+        tools:layout_conversion_absoluteWidth="54dp" />
 
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/button"
-        android:layout_width="191dp"
-        android:layout_height="59dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:text="Submit" />
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="24dp"
+        android:background="@color/colorSecondary"
+        android:text="Submit"
+        android:textColor="@color/colorNeutral"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_conversion_absoluteHeight="59dp"
+        tools:layout_conversion_absoluteWidth="191dp" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/editTextRespiratoryRate"
-        android:layout_alignTop="@+id/textView6"
-        android:orientation="horizontal">
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBPDiastolic">
 
-        <RadioButton
+        <android.support.v7.widget.AppCompatRadioButton
             android:id="@+id/painScale1"
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:checked="true"
+            android:fontFamily="@font/dosis_extrabold"
             android:scaleX="0.5"
             android:scaleY="0.5"
             android:text="@string/painScale1"
-            android:checked="true"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
+            app:layout_constraintStart_toEndOf="@+id/textView6"
+            tools:layout_conversion_absoluteHeight="22dp"
+            tools:layout_conversion_absoluteWidth="40dp" />
 
-        <RadioButton
+        <android.support.v7.widget.AppCompatRadioButton
             android:id="@+id/painScale2"
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/dosis_extrabold"
             android:scaleX="0.5"
             android:scaleY="0.5"
             android:text="@string/painScale2"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/painScale1"
+            app:layout_constraintStart_toEndOf="@+id/painScale1"
+            tools:layout_conversion_absoluteHeight="22dp"
+            tools:layout_conversion_absoluteWidth="40dp" />
 
-        <RadioButton
-
+        <android.support.v7.widget.AppCompatRadioButton
             android:id="@+id/painScale3"
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/dosis_extrabold"
             android:scaleX="0.5"
             android:scaleY="0.5"
             android:text="@string/painScale3"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/painScale2"
+            app:layout_constraintStart_toEndOf="@+id/painScale2"
+            tools:layout_conversion_absoluteHeight="22dp"
+            tools:layout_conversion_absoluteWidth="40dp" />
 
-        <RadioButton
+        <android.support.v7.widget.AppCompatRadioButton
             android:id="@+id/painScale4"
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/dosis_extrabold"
             android:scaleX="0.5"
             android:scaleY="0.5"
             android:text="@string/painScale4"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/painScale3"
+            app:layout_constraintStart_toEndOf="@+id/painScale3"
+            tools:layout_conversion_absoluteHeight="22dp"
+            tools:layout_conversion_absoluteWidth="40dp" />
 
-        <RadioButton
+        <android.support.v7.widget.AppCompatRadioButton
             android:id="@+id/painScale5"
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/dosis_extrabold"
             android:scaleX="0.5"
             android:scaleY="0.5"
             android:text="@string/painScale5"
-            android:textColor="@android:color/black" />
-
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/painScale4"
+            app:layout_constraintStart_toEndOf="@+id/painScale4"
+            tools:layout_conversion_absoluteHeight="22dp"
+            tools:layout_conversion_absoluteWidth="40dp" />
     </RadioGroup>
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
