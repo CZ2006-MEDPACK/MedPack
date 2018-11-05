@@ -508,7 +508,7 @@ public class LocateClinicManager implements Serializable {
             }
             urlBuilder.deleteCharAt((urlBuilder.length() - 1));
             urlBuilder.append("&key=AIzaSyCkU5Dt6se9ziYISEEGXse6nxRAQud5awk");
-//            Log.d("ReturnResult", urlBuilder.toString());
+            Log.d("ReturnResult", urlBuilder.toString());
             HttpURLConnection urlConnection = null;
             try {
                 URL url = new URL(urlBuilder.toString());
