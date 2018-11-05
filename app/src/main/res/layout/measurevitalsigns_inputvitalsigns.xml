@@ -221,58 +221,49 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/painScale1"
             android:layout_width="wrap_content"
             android:layout_height="22dp"
-            android:layout_alignTop="@+id/radioButton4"
-            android:layout_toEndOf="@+id/textViewAnySymptoms"
             android:scaleX="0.5"
             android:scaleY="0.5"
-            android:text="1"
+            android:text="@string/painScale1"
+            android:checked="true"
             android:textColor="@android:color/black" />
 
         <RadioButton
-            android:id="@+id/radioButton3"
+            android:id="@+id/painScale2"
             android:layout_width="wrap_content"
             android:layout_height="22dp"
-            android:layout_alignTop="@+id/radioButton4"
-            android:layout_alignEnd="@+id/textViewTitle"
             android:scaleX="0.5"
             android:scaleY="0.5"
-            android:text="2"
+            android:text="@string/painScale2"
             android:textColor="@android:color/black" />
 
         <RadioButton
-            android:id="@+id/radioButton4"
+            android:id="@+id/painScale3"
             android:layout_width="wrap_content"
             android:layout_height="22dp"
-            android:layout_alignTop="@+id/radioButton6"
-            android:layout_toEndOf="@+id/textViewTitle"
             android:scaleX="0.5"
             android:scaleY="0.5"
-            android:text="3"
+            android:text="@string/painScale3"
             android:textColor="@android:color/black" />
 
         <RadioButton
-            android:id="@+id/radioButton5"
+            android:id="@+id/painScale4"
             android:layout_width="wrap_content"
             android:layout_height="22dp"
-            android:layout_alignTop="@+id/textView6"
-            android:layout_toEndOf="@+id/radioButton4"
             android:scaleX="0.5"
             android:scaleY="0.5"
-            android:text="4"
+            android:text="@string/painScale4"
             android:textColor="@android:color/black" />
 
         <RadioButton
-            android:id="@+id/radioButton6"
+            android:id="@+id/painScale5"
             android:layout_width="wrap_content"
             android:layout_height="22dp"
-            android:layout_alignTop="@+id/textView6"
-            android:layout_toEndOf="@+id/radioButton5"
             android:scaleX="0.5"
             android:scaleY="0.5"
-            android:text="5"
+            android:text="@string/painScale5"
             android:textColor="@android:color/black" />
 
     </RadioGroup>

@@ -46,4 +46,9 @@
         <item>No</item>
     </string-array>
 
+    <string name="painScale1">1</string>
+    <string name="painScale2">2</string>
+    <string name="painScale3">3</string>
+    <string name="painScale4">4</string>
+    <string name="painScale5">5</string>
 </resources>

@@ -17,8 +17,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import java.time.temporal.TemporalAccessor;
-
 /**
  * The type First fragment.
  */
@@ -26,10 +24,12 @@ public class VitalSignsFragment extends Fragment {
 
     EditText PulseRate, OxygenSaturation, Temperature;
     EditText BloodPressureSystolic, BloodPressureDiastolic, RespiratoryRate;
+    RadioGroup radioGroup;
     RadioButton radioButton;
     MeasureVitalSignsManager vs = new MeasureVitalSignsManager();
     LocateClinicManager clinicManager;
     ProgressDialog progressDialog;
+    int pain = 1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,23 +42,33 @@ public class VitalSignsFragment extends Fragment {
         BloodPressureDiastolic = (EditText) view.findViewById(R.id.editTextBPDiastolic);
         Temperature = (EditText) view.findViewById(R.id.editTextEnterTemperature);
         RespiratoryRate = (EditText) view.findViewById(R.id.editTextRespiratoryRate);
-        final RadioGroup radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
+        radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
 
-        radioGroup.setOnClickListener(new View.OnClickListener() {
-
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             @Override
-            public void onClick(View view) {
-
-                // get selected radio button from radioGroup
-                int selectedId = radioGroup.getCheckedRadioButtonId();
-                Log.d("tag","selectId" + selectedId);
-
-                // find the radiobutton by returned id
-                radioButton = (RadioButton) view.findViewById(selectedId);
-
-
+            public void onCheckedChanged(RadioGroup group, int checkedId){
+                if (checkedId == R.id.painScale1)
+                {
+                    pain = 1;
+                }
+                else if (checkedId == R.id.painScale2)
+                {
+                    pain = 2;
+                }
+                else if (checkedId == R.id.painScale3)
+                {
+                    pain = 3;
+                }
+                else if (checkedId == R.id.painScale4)
+                {
+                    pain = 4;
+                }
+                else if (checkedId == R.id.painScale5)
+                {
+                    pain = 5;
+                }
+                Log.d("ReturnResult", "pain: " + pain);
             }
-
         });
 
         progressDialog = new ProgressDialog(getActivity());
@@ -101,10 +111,11 @@ public class VitalSignsFragment extends Fragment {
                     float temperature = Float.valueOf(Temperature.getText().toString());
                     int respiratoryRate = Integer.parseInt(RespiratoryRate.getText().toString());
 
-                    int pain = Integer.parseInt(radioButton.getText().toString());
-
                     new VitalSigns(temperature, pulse, respiratoryRate, bloodPressure.toString(), oxygen, pain);
 
+                    Log.d("ReturnResult", "vitalSign value: " + VitalSigns.getBodyTemperature() + " | " + VitalSigns.getPulseRate()
+                    + " | " + VitalSigns.getRespiratoryRate() + " | " + VitalSigns.getBloodPressure() + " | " + VitalSigns.getOxygenSaturation()
+                    + " | " + VitalSigns.getPainScale());
 
                     Log.d("storeDATA", "entering user location");
                     Log.d("timeCheck", "timeStart");
