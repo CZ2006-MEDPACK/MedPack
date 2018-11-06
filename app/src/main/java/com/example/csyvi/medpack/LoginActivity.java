@@ -48,12 +48,12 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser user = fireBaseAuth.getCurrentUser();
         progressDialog = new ProgressDialog(this);
 
-        if (user != null) {
+        /*if (user != null) {
             finish();
             Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
             startActivity(intent);
             finish();
-        }
+        }*/
 
         userRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     progressDialog.dismiss();
                                     Toast.makeText(LoginActivity.this, "Login Successful! Redirecting ..", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } else {

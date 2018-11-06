@@ -90,15 +90,15 @@ public class RegistrationActivity extends AppCompatActivity {
                                 if(task.isSuccessful())
                                 {
                                     progressDialog.dismiss();
-                                    Toast.makeText(RegistrationActivity.this,"Registration Successful! Redirecting to Login Page ..",Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                                    Toast.makeText(RegistrationActivity.this,"Registration Successful! Redirecting to Profile Page ..",Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(RegistrationActivity.this, ProfileActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
 
                                 else
                                 {
-                                    Toast.makeText(RegistrationActivity.this,"Registration Failed!",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RegistrationActivity.this,"Registration Failed! Please enter correctly!",Toast.LENGTH_SHORT).show();
                                     progressDialog.dismiss();
                                 }
 

@@ -54,11 +54,6 @@ public class ProfileActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(!isFirstTimeUser())
-        {
-            startMainActivity();
-            finish();
-        }
         setContentView(R.layout.activity_enterprofile);
 
         et_nric = findViewById(R.id.et_nric);
