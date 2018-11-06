@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.csyvi.medpack.others.MainActivity"
+    tools:context="com.example.csyvi.medpack.MainActivity"
     tools:openDrawer="start">
 
     <LinearLayout

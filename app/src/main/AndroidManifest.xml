@@ -37,32 +37,39 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".others.WelcomeActivity">
+        <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".others.MainActivity"
+            android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".vitalsign.ScanVitalSignsActivity">
+            android:name=".ScanVitalSignsActivity">
         </activity>
         <activity
-        android:name=".vitalsign.MeasureVitalSignsActivity">
+        android:name=".MeasureVitalSignsActivity">
         </activity>
         <activity
-            android:name=".login.LoginActivity">
+            android:name=".LoginActivity">
         </activity>
         <activity
-            android:name=".login.RegistrationActivity">
+            android:name=".RegistrationActivity">
         </activity>
         <activity
-            android:name=".login.ProfileActivity">
+            android:name=".ProfileActivity">
         </activity>
+<<<<<<< HEAD
         <receiver
+<<<<<<< HEAD
+            android:name=".OnAlarmReceive" />
+=======
             android:name=".medicalprescription.OnAlarmReceive" />
+=======
+>>>>>>> parent of 88b9677... Merge branch 'PrettyPack' of https://github.com/CZ2006-MEDPACK/MedPack into PrettyPack
+>>>>>>> 7cacaa4625d030a6c5724137da3eeb8db731b2b0
     </application>
 </manifest>
