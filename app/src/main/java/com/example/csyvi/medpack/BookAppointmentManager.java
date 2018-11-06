@@ -60,12 +60,12 @@ public class BookAppointmentManager {
                 .append("~" + CurrentPatient.getChasInfo() + "};Hello")
                 .append(which.toString() + ";Hello")
                 .append(currentAppointment.toString() + ";Hello")
-                .append("VitalSignsInfo{" + VitalSigns.getPulseRate())
-                .append("~" + VitalSigns.getOxygenSaturation())
-                .append("~" + VitalSigns.getBloodPressure())
-                .append("~" + VitalSigns.getRespiratoryRate())
-                .append("~" + VitalSigns.getBodyTemperature())
-                .append("~" + VitalSigns.getPainScale()  + "}");
+                .append("VitalSignsInfo{" + PulseRate.getPulseRate())
+                .append("~" + OxygenSaturation.getOxygenSaturation())
+                .append("~" + BloodPressure.getBloodPressure())
+                .append("~" + RespiratoryRate.getRespiratoryRate())
+                .append("~" + Temperature.getBodyTemperature())
+                .append("~" + PainScale.getPainScale()  + "}");
 
         Log.d("testMsg", data.toString());
         BufferedWriter bufferedWriter = null;
