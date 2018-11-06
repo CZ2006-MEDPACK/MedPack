@@ -1,7 +1,9 @@
 package com.example.csyvi.medpack;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -37,6 +39,14 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*
+            if(!isFirstTimeUser)
+            {
+                finish();
+                startMainActivity();
+            }
+
+        */
         setContentView(R.layout.activity_login);
 
         loginEmail = findViewById(R.id.etEmail);
@@ -48,12 +58,12 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser user = fireBaseAuth.getCurrentUser();
         progressDialog = new ProgressDialog(this);
 
-        /*if (user != null) {
+        if (user != null) {
             finish();
-            Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
-        }*/
+        }
 
         userRegistration.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,4 +135,26 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+/*
+    private boolean isFirstTimeUser()
+    {
+        SharedPreferences ref = getApplicationContext().getSharedPreferences("MedPack", Context.MODE_PRIVATE);
+        return ref.getBoolean("FirstTimeStartFlag",true);
+    }
+
+    private void startMainActivity()
+    {
+        setFirstTimeUserStatus(false);
+        startActivity(new Intent(LoginActivity.this,MainActivity.class));
+        finish();
+    }
+
+    private void setFirstTimeUserStatus(boolean stt)
+    {
+        SharedPreferences ref = getApplicationContext().getSharedPreferences("MedPack", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = ref.edit();
+        editor.putBoolean("FirstTimeStartFlag", stt);
+        editor.commit();
+    }
+*/
 }
