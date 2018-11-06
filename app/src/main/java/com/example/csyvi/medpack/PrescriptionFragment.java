@@ -81,7 +81,7 @@ public class PrescriptionFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setTitle("Book Appointment").setMessage("Do you want to schedule your medication?")
+                builder.setTitle("Medication Scheduler").setMessage("Do you want to schedule your medication?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
