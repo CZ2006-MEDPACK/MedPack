@@ -84,7 +84,7 @@
         android:layout_marginStart="8dp"
         android:ems="3"
         android:fontFamily="@font/dosis"
-        android:text="100"
+        android:text="98"
         android:textSize="14sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/textViewOxygen"
         app:layout_constraintStart_toEndOf="@+id/textViewOxygen"
@@ -369,5 +369,65 @@
             tools:layout_conversion_absoluteHeight="22dp"
             tools:layout_conversion_absoluteWidth="40dp" />
     </RadioGroup>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/textView30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/dosis"
+        android:text="breaths/min"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextRespiratoryRate"
+        app:layout_constraintStart_toEndOf="@+id/editTextRespiratoryRate" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/textView31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/dosis"
+        android:text="mm Hg"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextBPSystolic"
+        app:layout_constraintStart_toEndOf="@+id/editTextBPSystolic" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/textView33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/dosis"
+        android:text="beats/minute"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextPulseRate"
+        app:layout_constraintStart_toEndOf="@+id/editTextPulseRate" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/textView34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/dosis"
+        android:text="%"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextOxygenSaturation"
+        app:layout_constraintStart_toEndOf="@+id/editTextOxygenSaturation" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/textView32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/dosis"
+        android:text="mm Hg"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/editTextBPDiastolic"
+        app:layout_constraintStart_toEndOf="@+id/editTextBPDiastolic" />
 
 </android.support.constraint.ConstraintLayout>

@@ -48,7 +48,7 @@ public class PrescriptionFragment extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup viewGroup) {
             View view = View.inflate(getActivity(),R.layout.medicalprescription_customlayout,null);
-
+            Log.d("medprescription","new test");
             textView_prescriptionId = view.findViewById(R.id.md_prescription);
             textView_medName = view.findViewById(R.id.md_medname);
             textView_medUse = view.findViewById(R.id.md_uses);
