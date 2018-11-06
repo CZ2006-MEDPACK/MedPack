@@ -37,32 +37,32 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".WelcomeActivity">
+        <activity android:name=".others.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".others.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name=".ScanVitalSignsActivity">
+            android:name=".vitalsign.ScanVitalSignsActivity">
         </activity>
         <activity
-        android:name=".MeasureVitalSignsActivity">
+        android:name=".vitalsign.MeasureVitalSignsActivity">
         </activity>
         <activity
-            android:name=".LoginActivity">
+            android:name=".login.LoginActivity">
         </activity>
         <activity
-            android:name=".RegistrationActivity">
+            android:name=".login.RegistrationActivity">
         </activity>
         <activity
-            android:name=".ProfileActivity">
+            android:name=".login.ProfileActivity">
         </activity>
         <receiver
-            android:name=".OnAlarmReceive" />
+            android:name=".medicalprescription.OnAlarmReceive" />
     </application>
 </manifest>
