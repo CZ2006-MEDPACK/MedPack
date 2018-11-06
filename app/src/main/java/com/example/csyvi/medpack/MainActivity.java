@@ -77,6 +77,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new AppointmentFragment()).commit();
                 break;
 
+            case R.id.med_scheduler:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new PrescriptionFragment()).commit();
+                break;
+
             case R.id.search_events:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new MedicalEventsFragment()).commit();

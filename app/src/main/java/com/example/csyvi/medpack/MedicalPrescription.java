@@ -4,7 +4,7 @@ package com.example.csyvi.medpack;
  * The type Medical prescription.
  */
 public class MedicalPrescription {
-    private int prescription_Id;
+    private String prescription_Id;
     private String name;
     private String uses;
     private String doses;
@@ -17,8 +17,8 @@ public class MedicalPrescription {
      * @param uses            the uses
      * @param doses           the doses
      */
-    public MedicalPrescription(int prescription_id, String name, String uses, String doses) {
-        prescription_Id = prescription_id;
+    public MedicalPrescription(String prescription_id, String name, String uses, String doses) {
+        this.prescription_Id = prescription_id;
         this.name = name;
         this.uses = uses;
         this.doses = doses;
@@ -29,7 +29,7 @@ public class MedicalPrescription {
      *
      * @return the prescription id
      */
-    public int getPrescription_Id() {
+    public String getPrescription_Id() {
         return prescription_Id;
     }
 
@@ -38,7 +38,7 @@ public class MedicalPrescription {
      *
      * @param prescription_Id the prescription id
      */
-    public void setPrescription_Id(int prescription_Id) {
+    public void setPrescription_Id(String prescription_Id) {
         this.prescription_Id = prescription_Id;
     }
 
@@ -94,5 +94,14 @@ public class MedicalPrescription {
      */
     public void setDoses(String doses) {
         this.doses = doses;
+    }
+
+    @Override
+    public String toString() {
+        return "MedicalPrescription{" +
+                "prescriptionId='" + prescription_Id +
+                ", name='" + name +
+                ", doses='" + doses +
+                '}';
     }
 }

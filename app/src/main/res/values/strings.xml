@@ -3,7 +3,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_main_activity">Main Activity</string>
     <string name="home_page">Book Appointment</string>
-    <string name="medication">Your Medication</string>
+    <string name="medication">Your Prescriptions</string>
     <string name="records">Your Records</string>
     <string name="events">Search Events</string>
     <string name="update_profile">Update Profile</string>

@@ -11,16 +11,16 @@
             android:id="@+id/update_profile"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/update_profile" />
-
-        <!--<item
-            android:id="@+id/medication_scheduler"
-            android:icon="@drawable/ic_local_pharmacy_black_24dp"
-            android:title="@string/medication" />-->
-
         <item
             android:id="@+id/show_records"
             android:icon="@drawable/ic_mail_black_24dp"
             android:title="@string/records" />
+
+        <item
+            android:id="@+id/med_scheduler"
+            android:icon="@drawable/ic_local_pharmacy_black_24dp"
+            android:title="@string/medication" />
+
         <item
             android:id="@+id/search_events"
             android:icon="@drawable/ic_local_hospital_black_24dp"
