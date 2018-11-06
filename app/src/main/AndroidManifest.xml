@@ -62,5 +62,7 @@
         <activity
             android:name=".ProfileActivity">
         </activity>
+        <receiver
+            android:name=".OnAlarmReceive" />
     </application>
 </manifest>
