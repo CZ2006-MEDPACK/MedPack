@@ -42,7 +42,6 @@ public class UpdateProfileFragment extends Fragment {
     FirebaseAuth mAuth;
     String userId;
     String s_nric, s_name, s_address, s_contactNo, s_dob, s_citizenship, s_gender, s_race, s_spokenlanguage, s_maritalstatus, s_chasinfo;
-    PatientManager pm = new PatientManager();
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -151,7 +150,7 @@ public class UpdateProfileFragment extends Fragment {
                 s_maritalstatus = spinner_maritalStatus.getSelectedItem().toString();
                 s_chasinfo = spinner_chasInfo.getSelectedItem().toString();
 
-                if (pm.validateUpdateProfile(s_address, s_contactNo, s_citizenship, s_maritalstatus, s_chasinfo))
+                if (validateProfile(s_address, s_contactNo, s_citizenship, s_maritalstatus, s_chasinfo))
                 {
                     // update to the database if the input is not empty
                     Patient patient = new Patient(s_nric,s_name,s_address,s_contactNo,s_dob,s_citizenship,s_gender,s_race,s_spokenlanguage,s_maritalstatus,s_chasinfo);
@@ -170,6 +169,23 @@ public class UpdateProfileFragment extends Fragment {
             });
 
                 return view;
+    }
+
+    public Boolean validateProfile(String address, String contactNo, String citizenship, String maritalStatus, String chas)
+    {
+        Boolean result;
+
+        if(address.isEmpty() || contactNo.isEmpty() || citizenship.isEmpty() ||  maritalStatus.isEmpty() || chas.isEmpty())
+        {
+            result = false;
+        }
+
+        else
+        {
+            result = true;
+        }
+
+        return result;
     }
 
 }

@@ -1,6 +1,6 @@
 package com.example.csyvi.medpack.patient;
 
-public class CurrentPatient{
+public class CurrentPatient {
     private static String nric;
     private static String name;
     private static String contactNo;

@@ -29,8 +29,8 @@ public class VitalSignsFragment extends Fragment {
     EditText PulseRate, OxygenSaturation, Temperature;
     EditText BloodPressureSystolic, BloodPressureDiastolic, RespiratoryRate;
     RadioGroup radioGroup;
-    MeasureVitalSignsManager vs = new MeasureVitalSignsManager();
     RadioButton radioButton;
+    MeasureVitalSignsManager vs = new MeasureVitalSignsManager();
     LocateClinicManager clinicManager;
     ProgressDialog progressDialog;
     int pain = 1;
@@ -86,10 +86,26 @@ public class VitalSignsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 boolean failFlag = false;
-                failFlag = vs.checkBloodPressureDiastolic(BloodPressureDiastolic);
-                failFlag = vs.checkBloodPressureSystolic(BloodPressureSystolic);
-                failFlag = vs.checkTemperature(Temperature);
-                failFlag = vs.checkRespiratoryRate(RespiratoryRate);
+                if (BloodPressureSystolic.getText().toString().trim().length() == 0 || Integer.parseInt((BloodPressureSystolic.getText().toString())) < 0 || Integer.parseInt(BloodPressureSystolic.getText().toString()) > 250)
+                {
+                    failFlag = true;
+                    BloodPressureSystolic.setError("Please enter a valid input from the range of 0 to 250");
+                }
+                if (BloodPressureDiastolic.getText().toString().trim().length() == 0 || Integer.parseInt(BloodPressureDiastolic.getText().toString()) < 0 || Integer.parseInt(BloodPressureDiastolic.getText().toString()) > 200)
+                {
+                    failFlag = true;
+                    BloodPressureDiastolic.setError("Please enter a valid input from the range of 0 to 200");
+                }
+                if (Temperature.getText().toString().trim().length() == 0 || Float.valueOf(Temperature.getText().toString()) < 10.0 || Float.valueOf(Temperature.getText().toString()) > 70.0)
+                {
+                    failFlag = true;
+                    Temperature.setError("Please enter a valid input from range of 24°C to 50°C");
+                }
+                if (RespiratoryRate.getText().toString().trim().length() == 0 || Integer.parseInt(RespiratoryRate.getText().toString()) < 10 || Integer.parseInt(RespiratoryRate.getText().toString()) > 25)
+                {
+                    failFlag = true;
+                    RespiratoryRate.setError("Please enter a valid input from range of 10 to 25");
+                }
                 if (failFlag == false) {
                     int pulse = 68;
                     double oxygen = 100;
@@ -100,18 +116,21 @@ public class VitalSignsFragment extends Fragment {
                     float temperature = Float.valueOf(Temperature.getText().toString());
                     int respiratoryRate = Integer.parseInt(RespiratoryRate.getText().toString());
 
-                    new Temperature(temperature);
-                    new PulseRate(pulse);
-                    new RespiratoryRate(respiratoryRate);
-                    new BloodPressure(bloodPressure.toString());
-                    new OxygenSaturation(oxygen);
-                    new PainScale(pain);
 
+                    new VitalSigns(temperature, pulse, respiratoryRate, bloodPressure.toString(), oxygen, pain);
+
+                    Log.d("ReturnResult", "vitalSign value: " + VitalSigns.getBodyTemperature() + " | " + VitalSigns.getPulseRate()
+                    + " | " + VitalSigns.getRespiratoryRate() + " | " + VitalSigns.getBloodPressure() + " | " + VitalSigns.getOxygenSaturation()
+                    + " | " + VitalSigns.getPainScale());
+
+                    Log.d("storeDATA", "entering user location");
+                    Log.d("timeCheck", "timeStart");
                     progressDialog.setMessage("Searching for nearby clinics. Please wait.");
                     progressDialog.show();
-
                     Log.d("chasClinic", "entering user location");
+
                     clinicManager.userLocation();
+                    //submitButton.setVisibility(View.INVISIBLE);
                 }
             }
         });

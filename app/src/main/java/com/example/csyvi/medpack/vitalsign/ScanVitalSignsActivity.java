@@ -89,11 +89,11 @@ public class ScanVitalSignsActivity extends AppCompatActivity  {
                     @Override
                     public void run()
                     {
-                        for(int i=0;i<100;i++)
+                        for(int i=0;i<100;i++) // TODO: Change back to 100
                         {
                             try
                             {
-                                Thread.sleep(100);
+                                Thread.sleep(100); //TODO 100
                                 myHandler.sendEmptyMessage(0);
                             }
 

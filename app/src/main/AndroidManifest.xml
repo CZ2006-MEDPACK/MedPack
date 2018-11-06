@@ -62,7 +62,10 @@
         <activity
             android:name=".login.ProfileActivity">
         </activity>
+<<<<<<< HEAD
         <receiver
             android:name=".medicalprescription.OnAlarmReceive" />
+=======
+>>>>>>> parent of 88b9677... Merge branch 'PrettyPack' of https://github.com/CZ2006-MEDPACK/MedPack into PrettyPack
     </application>
 </manifest>
