@@ -46,7 +46,7 @@ public class ProfileActivity extends AppCompatActivity{
     FirebaseDatabase database;
     FirebaseAuth mAuth;
     String userId;
-
+    PatientManager pm = new PatientManager();
     DatabaseReference databaseRef;
 
     String nric, name, address, contactNo, dob, race, citizenship, maritalStatus, gender, spokenLanguage, chas;
@@ -132,7 +132,7 @@ public class ProfileActivity extends AppCompatActivity{
                 spokenLanguage = spinner_languages.getSelectedItem().toString();
                 maritalStatus = spinner_maritalStatus.getSelectedItem().toString();
                 chas = spinner_chas.getSelectedItem().toString();
-                if(validateProfile(nric,name,address,contactNo,dob,citizenship,gender,race,spokenLanguage,maritalStatus,chas))
+                if(pm.validateInsertProfile(nric,name,address,contactNo,dob,citizenship,gender,race,spokenLanguage,maritalStatus,chas))
                 {
                     if(genderMale)
                     {
@@ -257,23 +257,5 @@ public class ProfileActivity extends AppCompatActivity{
 
             }
         });
-    }
-
-    public Boolean validateProfile(String nric, String name, String address, String contactNo, String dob, String citizenship, String gender, String race, String spokenLanguage, String maritalStatus, String chas)
-    {
-        Boolean result;
-
-        if(nric.isEmpty() || name.isEmpty() || address.isEmpty() || contactNo.isEmpty() || dob.isEmpty() ||
-                citizenship.isEmpty() || gender.isEmpty() || race.isEmpty() || spokenLanguage.isEmpty() || maritalStatus.isEmpty() || chas.isEmpty())
-        {
-            result = false;
-        }
-
-        else
-        {
-            result = true;
-        }
-
-        return result;
     }
 }

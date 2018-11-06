@@ -25,6 +25,7 @@ public class VitalSignsFragment extends Fragment {
     EditText PulseRate, OxygenSaturation, Temperature;
     EditText BloodPressureSystolic, BloodPressureDiastolic, RespiratoryRate;
     RadioGroup radioGroup;
+    MeasureVitalSignsManager vs = new MeasureVitalSignsManager();
     RadioButton radioButton;
     LocateClinicManager clinicManager;
     ProgressDialog progressDialog;
