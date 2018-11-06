@@ -1,254 +1,330 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout3"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/submitProfileButton"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorAccent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/colorSecondary"
         android:text="Confirm Profile"
-        android:textColor="#fff" />
+        android:textColor="#fff"
+        android:fontFamily="@font/dosis_semibold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_chas" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView14"
-        android:layout_below="@+id/textView11"
-        android:layout_marginTop="13dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/dosis_semibold"
         android:text="Date of Birth:"
-        android:textStyle="bold" />
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView15"
-        android:layout_below="@+id/et_dob"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/dosis_semibold"
         android:text="Citizenship:"
-        android:textStyle="bold" />
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
-        android:layout_height="33dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView11"
-        android:layout_marginBottom="194dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/dosis_semibold"
         android:text="Gender:"
-        android:textStyle="bold"/>
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView13"
-        android:layout_alignTop="@+id/spinner_languages"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/dosis_semibold"
         android:text="Spoken Language:"
-        android:textStyle="bold" />
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/spinner_chas"
-        android:layout_alignStart="@+id/textView13"
-        android:text="Do you have CHAS?"
-        android:textStyle="bold" />
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/dosis_semibold"
+        android:text="Are you eligible for CHAS?"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView13"
-        android:layout_alignTop="@+id/spinner_maritalstatus"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/dosis_semibold"
         android:text="Marital Status:"
-        android:textStyle="bold" />
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textView13"
-        android:layout_marginBottom="168dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/dosis_semibold"
         android:text="Race:"
-        android:textStyle="bold"/>
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textView11"
-        android:layout_width="116dp"
-        android:layout_height="40dp"
-        android:layout_alignBottom="@+id/et_contactnumber"
-        android:layout_alignStart="@+id/textViewTitle2"
-        android:layout_marginStart="13dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/dosis_semibold"
         android:text="Contact Number:"
-        android:textStyle="bold" />
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/textView13"
-        android:layout_marginTop="119dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/dosis_semibold"
         android:text="Name:"
-        android:textStyle="bold" />
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewTitle2"
-        android:layout_width="173dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="6dp"
-        android:text="   Enter Profile"
-        android:textColor="@android:color/holo_red_dark"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/dosis_extrabold"
+        android:text="Enter Profile"
+        android:textColor="@color/colorSecondaryDark"
         android:textSize="20sp"
-        android:textStyle="bold|italic"
-        android:typeface="sans" />
+        android:typeface="sans"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_alignStart="@+id/textView13"
-        android:layout_alignTop="@+id/et_address"
-        android:layout_marginTop="9dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/dosis_semibold"
         android:text="Address:"
-        android:textStyle="bold" />
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/et_contactnumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/et_name"
-        android:layout_marginTop="215dp"
+        android:layout_marginStart="8dp"
         android:ems="10"
-        android:inputType="number" />
+        android:fontFamily="@font/dosis"
+        android:inputType="number"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView11"
+        app:layout_constraintStart_toEndOf="@+id/textView11" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/et_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/et_contactnumber"
-        android:layout_marginTop="161dp"
+        android:layout_marginStart="8dp"
         android:ems="10"
-        android:inputType="textPostalAddress" />
+        android:fontFamily="@font/dosis"
+        android:inputType="textPostalAddress"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView8"
+        app:layout_constraintStart_toEndOf="@+id/textView8" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/et_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/et_nric"
-        android:layout_alignTop="@+id/textView10"
-        android:layout_marginTop="-16dp"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:layout_marginStart="8dp"
+        android:ems="12"
+        android:fontFamily="@font/dosis"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView10"
+        app:layout_constraintStart_toEndOf="@+id/textView10" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/et_dob"
         android:layout_width="217dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/et_contactnumber"
-        android:layout_centerVertical="true"
+        android:layout_marginStart="8dp"
         android:ems="10"
-        android:hint="pick the date" />
+        android:fontFamily="@font/dosis"
+        android:hint="pick the date"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView13"
+        app:layout_constraintStart_toEndOf="@+id/textView13" />
 
     <RadioGroup
         android:id="@+id/radio_gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/et_contactnumber"
-        android:layout_marginBottom="202dp"
-        android:orientation="horizontal">
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toEndOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/textView14">
 
         <RadioButton
             android:id="@+id/radio_male"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/spinner_race"
-            android:layout_centerHorizontal="true"
-            android:paddingRight="20dp"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
             android:text="Male"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <RadioButton
             android:id="@+id/radio_female"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/textView15"
-            android:layout_marginEnd="66dp"
+            android:scaleX="0.8"
+            android:scaleY="0.8"
             android:text="Female"
-            android:textSize="12sp" />
-
+            android:textSize="14sp" />
     </RadioGroup>
+
 
     <Spinner
         android:id="@+id/spinner_citizenship"
-        android:layout_width="213dp"
+        android:layout_width="217dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/et_contactnumber"
-        android:layout_alignTop="@+id/textView14" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <Spinner
         android:id="@+id/spinner_race"
-        android:layout_width="210dp"
+        android:layout_width="228dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView17"
-        android:layout_alignStart="@+id/et_contactnumber" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintStart_toEndOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <Spinner
         android:id="@+id/spinner_languages"
-        android:layout_width="210dp"
+        android:layout_width="228dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/et_contactnumber"
-        android:layout_marginBottom="136dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintStart_toEndOf="@+id/textView16"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <Spinner
         android:id="@+id/spinner_maritalstatus"
-        android:layout_width="211dp"
+        android:layout_width="222dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/et_contactnumber"
-        android:layout_marginBottom="102dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="14dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/textView19"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView13"
-        android:layout_alignTop="@+id/et_nric"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
+        android:fontFamily="@font/dosis_semibold"
         android:text="NRIC:"
-        android:textStyle="bold" />
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle2" />
 
-    <EditText
+    <android.support.v7.widget.AppCompatEditText
         android:id="@+id/et_nric"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/spinner_chas"
-        android:layout_marginTop="53dp"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:layout_marginStart="8dp"
+        android:ems="8"
+        android:fontFamily="@font/dosis"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorBlack"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView12"
+        app:layout_constraintStart_toEndOf="@+id/textView12" />
 
     <Spinner
         android:id="@+id/spinner_chas"
-        android:layout_width="122dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="66dp"
-        android:layout_marginEnd="103dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintStart_toEndOf="@+id/textView18"
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
