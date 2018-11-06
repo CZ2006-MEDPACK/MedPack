@@ -1,14 +1,7 @@
 package com.example.csyvi.medpack;
 
 import android.content.Context;
-import android.content.ContextWrapper;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Log;
-<<<<<<< HEAD:app/src/main/java/com/example/csyvi/medpack/BookAppointmentManager.java
-=======
-import android.widget.Toast;
->>>>>>> parent of c8a2adf... organize:app/src/main/java/com/example/csyvi/medpack/BookAppointmentManager.java
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -43,7 +36,7 @@ public class BookAppointmentManager {
     String test;
     String[] record;
     ArrayList<Record> recordList = new ArrayList<Record>();
-    String appointmentId, appointmentCreatedOn,clinicName, clinicLocation, clinicPostal, clinicAddress, clinicContactNo;
+    String appointmentId, appointmentCreatedOn, clinicName, clinicLocation, clinicPostal, clinicAddress, clinicContactNo;
 
     /**
      * This method will insert patient's info into the textfile database
@@ -63,12 +56,12 @@ public class BookAppointmentManager {
                 .append("~" + CurrentPatient.getChasInfo() + "};Hello")
                 .append(which.toString() + ";Hello")
                 .append(currentAppointment.toString() + ";Hello")
-                .append("VitalSignsInfo{" + VitalSigns.getPulseRate())
-                .append("~" + VitalSigns.getOxygenSaturation())
-                .append("~" + VitalSigns.getBloodPressure())
-                .append("~" + VitalSigns.getRespiratoryRate())
-                .append("~" + VitalSigns.getBodyTemperature())
-                .append("~" + VitalSigns.getPainScale()  + "}");
+                .append("VitalSignsInfo{" + PulseRate.getPulseRate())
+                .append("~" + OxygenSaturation.getOxygenSaturation())
+                .append("~" + BloodPressure.getBloodPressure())
+                .append("~" + RespiratoryRate.getRespiratoryRate())
+                .append("~" + Temperature.getBodyTemperature())
+                .append("~" + PainScale.getPainScale() + "}");
 
         Log.d("testMsg", data.toString());
         BufferedWriter bufferedWriter = null;
@@ -120,17 +113,17 @@ public class BookAppointmentManager {
                 appointmentId = appointment[0];
                 appointmentCreatedOn = appointment[1];
 
-                Log.d("testMsg","test1");
-                Log.d("testMsg",clinicName);
-                Log.d("testMsg",clinicAddress);
-                Log.d("testMsg",clinicPostal);
-                Log.d("testMsg",clinicContactNo);
-                Log.d("testMsg",clinicLocation);
-                Log.d("testMsg",appointmentId);
-                Log.d("testMsg",appointmentCreatedOn);
+                Log.d("testMsg", "test1");
+                Log.d("testMsg", clinicName);
+                Log.d("testMsg", clinicAddress);
+                Log.d("testMsg", clinicPostal);
+                Log.d("testMsg", clinicContactNo);
+                Log.d("testMsg", clinicLocation);
+                Log.d("testMsg", appointmentId);
+                Log.d("testMsg", appointmentCreatedOn);
 
-                recordList.add(new Record(appointmentId,appointmentCreatedOn,clinicName,clinicContactNo,clinicLocation));
-                Log.d("testMsg","test2");
+                recordList.add(new Record(appointmentId, appointmentCreatedOn, clinicName, clinicContactNo, clinicLocation));
+                Log.d("testMsg", "test2");
                 //sb.append(text).append("\n");
                 text = br.readLine();
             }
@@ -156,15 +149,15 @@ public class BookAppointmentManager {
     public String generateAppointmentID(Clinic clinic, String date) {
         StringBuilder appointmentId = new StringBuilder();
         String text = clinic.getName();
-        String uniqueA = text.substring(0,1);
-        String unqiueB = text.substring(3,4);
-        String unqiueC = text.substring(1,4);
+        String uniqueA = text.substring(0, 1);
+        String unqiueB = text.substring(3, 4);
+        String unqiueC = text.substring(1, 4);
         text = clinic.getAddress();
-        String uniqueD = text.substring(0,2);
-        String uniqueE = text.substring(3,4);
+        String uniqueD = text.substring(0, 2);
+        String uniqueE = text.substring(3, 4);
         text = date;
-        String unqiueF = text.substring(0,2);
-        String unqiueG = text.substring(3,5);
+        String unqiueF = text.substring(0, 2);
+        String unqiueG = text.substring(3, 5);
 
         appointmentId.append(unqiueF).append(unqiueB).append(uniqueD).append(unqiueG).append(uniqueA)
                 .append(unqiueC).append(uniqueE);

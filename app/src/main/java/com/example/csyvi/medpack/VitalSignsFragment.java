@@ -82,27 +82,14 @@ public class VitalSignsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 boolean failFlag = false;
-                if (BloodPressureSystolic.getText().toString().trim().length() == 0 || Integer.parseInt((BloodPressureSystolic.getText().toString())) < 0 || Integer.parseInt(BloodPressureSystolic.getText().toString()) > 250)
-                {
-                    failFlag = true;
-                    BloodPressureSystolic.setError("Please enter a valid input from the range of 0 to 250");
-                }
-                if (BloodPressureDiastolic.getText().toString().trim().length() == 0 || Integer.parseInt(BloodPressureDiastolic.getText().toString()) < 0 || Integer.parseInt(BloodPressureDiastolic.getText().toString()) > 200)
-                {
-                    failFlag = true;
-                    BloodPressureDiastolic.setError("Please enter a valid input from the range of 0 to 200");
-                }
-                if (Temperature.getText().toString().trim().length() == 0 || Float.valueOf(Temperature.getText().toString()) < 10.0 || Float.valueOf(Temperature.getText().toString()) > 70.0)
-                {
-                    failFlag = true;
-                    Temperature.setError("Please enter a valid input from range of 24°C to 50°C");
-                }
-                if (RespiratoryRate.getText().toString().trim().length() == 0 || Integer.parseInt(RespiratoryRate.getText().toString()) < 10 || Integer.parseInt(RespiratoryRate.getText().toString()) > 25)
-                {
-                    failFlag = true;
-                    RespiratoryRate.setError("Please enter a valid input from range of 10 to 25");
-                }
-                if (failFlag == false) {
+                failFlag = vs.checkTemperature(Temperature);
+                if (failFlag == false)
+                failFlag = vs.checkRespiratoryRate(RespiratoryRate);
+                if (failFlag == false)
+                failFlag = vs.checkBloodPressureSystolic(BloodPressureSystolic);
+                if (failFlag == false)
+                failFlag = vs.checkBloodPressureDiastolic(BloodPressureDiastolic);
+                if (failFlag == false){
                     int pulse = 68;
                     double oxygen = 100;
                     int bloodPressureSystolic = Integer.parseInt(BloodPressureSystolic.getText().toString());
@@ -112,21 +99,17 @@ public class VitalSignsFragment extends Fragment {
                     float temperature = Float.valueOf(Temperature.getText().toString());
                     int respiratoryRate = Integer.parseInt(RespiratoryRate.getText().toString());
 
+                    new PulseRate(pulse);
+                    new OxygenSaturation(oxygen);
+                    new BloodPressure(bloodPressure.toString());
+                    new Temperature(temperature);
+                    new RespiratoryRate(respiratoryRate);
 
-                    new VitalSigns(temperature, pulse, respiratoryRate, bloodPressure.toString(), oxygen, pain);
-
-                    Log.d("ReturnResult", "vitalSign value: " + VitalSigns.getBodyTemperature() + " | " + VitalSigns.getPulseRate()
-                    + " | " + VitalSigns.getRespiratoryRate() + " | " + VitalSigns.getBloodPressure() + " | " + VitalSigns.getOxygenSaturation()
-                    + " | " + VitalSigns.getPainScale());
-
-                    Log.d("storeDATA", "entering user location");
-                    Log.d("timeCheck", "timeStart");
                     progressDialog.setMessage("Searching for nearby clinics. Please wait.");
                     progressDialog.show();
                     Log.d("chasClinic", "entering user location");
 
                     clinicManager.userLocation();
-                    //submitButton.setVisibility(View.INVISIBLE);
                 }
             }
         });

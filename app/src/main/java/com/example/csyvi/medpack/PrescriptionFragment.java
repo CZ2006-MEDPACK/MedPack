@@ -1,10 +1,12 @@
 package com.example.csyvi.medpack;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,12 +16,12 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-<<<<<<< HEAD:app/src/main/java/com/example/csyvi/medpack/PrescriptionFragment.java
-=======
 import android.widget.Toast;
->>>>>>> parent of c8a2adf... organize:app/src/main/java/com/example/csyvi/medpack/PrescriptionFragment.java
 
 import java.util.ArrayList;
+import java.util.Calendar;
+
+import static android.content.Context.ALARM_SERVICE;
 
 /**
  * The type Second fragment.
@@ -51,8 +53,8 @@ public class PrescriptionFragment extends Fragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup viewGroup) {
-            View view = View.inflate(getActivity(),R.layout.medicalprescription_customlayout,null);
-            Log.d("medprescription","new test");
+            View view = View.inflate(getActivity(), R.layout.medicalprescription_customlayout, null);
+            Log.d("medprescription", "new test");
             textView_prescriptionId = view.findViewById(R.id.md_prescription);
             textView_medName = view.findViewById(R.id.md_medname);
             textView_medUse = view.findViewById(R.id.md_uses);
@@ -72,14 +74,45 @@ public class PrescriptionFragment extends Fragment {
         mContext = this.getActivity();
         MedicalPrescriptionManager medicalPrescriptionManager = new MedicalPrescriptionManager(mContext);
 
-        //prescriptionList = MedicalPrescriptionManager.loadPrescription();
-
-        //Log.d("testMsg",recordList.toString());
         View view = inflater.inflate(R.layout.activity_medicationscheduler, container, false);
 
         listView = view.findViewById(R.id.listViewPrescriptions);
-        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("Book Appointment").setMessage("Do you want to schedule your medication?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                                Intent intent = new Intent(getActivity(), OnAlarmReceive.class);
+                                PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                                        getActivity(), 0, intent,
+                                        PendingIntent.FLAG_UPDATE_CURRENT);
 
+
+                                // Getting current time and add the seconds in it
+                                Calendar cal = Calendar.getInstance();
+                                cal.add(Calendar.SECOND, 5);
+
+                                alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+
+                builder.create();
+                builder.show();
+
+            }
+        });
+        listView.setAdapter(adapter);
         return view;
     }
 }

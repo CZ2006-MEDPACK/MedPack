@@ -49,7 +49,7 @@ public class ScanVitalSignsActivity extends AppCompatActivity  {
                     ringProgressBar1.setProgress(progress);
                 }
 
-                if(progress == 100) //TODO: 100
+                if(progress == 100)
                 {
                     progress = 0;
                     ringProgressBar1.setProgress(0);
@@ -89,11 +89,11 @@ public class ScanVitalSignsActivity extends AppCompatActivity  {
                     @Override
                     public void run()
                     {
-                        for(int i=0;i<100;i++) // TODO: Change back to 100
+                        for(int i=0;i<100;i++)
                         {
                             try
                             {
-                                Thread.sleep(100); //TODO 100
+                                Thread.sleep(100);
                                 myHandler.sendEmptyMessage(0);
                             }
 

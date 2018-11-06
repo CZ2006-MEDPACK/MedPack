@@ -14,11 +14,6 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-<<<<<<< HEAD:app/src/main/java/com/example/csyvi/medpack/AppointmentFragment.java
-=======
-import java.lang.reflect.Array;
->>>>>>> parent of c8a2adf... organize:app/src/main/java/com/example/csyvi/medpack/AppointmentFragment.java
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,7 +49,7 @@ public class AppointmentFragment extends Fragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup viewGroup) {
-            View view = View.inflate(getActivity(),R.layout.medicalrecord_customlayout,null);
+            View view = View.inflate(getActivity(), R.layout.medicalrecord_customlayout, null);
 
             textView_appointmentid = view.findViewById(R.id.tv_appointmentid);
             textView_appointmentdate = view.findViewById(R.id.tv_appointmentdate);
@@ -81,7 +76,7 @@ public class AppointmentFragment extends Fragment {
         recordList = bookAppointmentManager.loadAppointment();
         //arrayList = Arrays.asList(test);
 
-        Log.d("testMsg",recordList.toString());
+        Log.d("testMsg", recordList.toString());
         View view = inflater.inflate(R.layout.medicalrecord, container, false);
 
         listView = view.findViewById(R.id.listViewRecord);
