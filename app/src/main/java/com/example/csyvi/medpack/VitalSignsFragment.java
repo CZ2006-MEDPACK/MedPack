@@ -26,7 +26,6 @@ public class VitalSignsFragment extends Fragment {
     EditText BloodPressureSystolic, BloodPressureDiastolic, RespiratoryRate;
     RadioGroup radioGroup;
     RadioButton radioButton;
-    MeasureVitalSignsManager vs = new MeasureVitalSignsManager();
     LocateClinicManager clinicManager;
     ProgressDialog progressDialog;
     int pain = 1;
