@@ -276,25 +276,4 @@ public class ProfileActivity extends AppCompatActivity{
 
         return result;
     }
-
-    private boolean isFirstTimeUser()
-    {
-        SharedPreferences ref = getApplicationContext().getSharedPreferences("MedPack", Context.MODE_PRIVATE);
-        return ref.getBoolean("FirstTimeStartFlag",true);
-    }
-
-    private void startMainActivity()
-    {
-        setFirstTimeUserStatus(false);
-        startActivity(new Intent(ProfileActivity.this,MainActivity.class));
-        finish();
-    }
-
-    private void setFirstTimeUserStatus(boolean stt)
-    {
-        SharedPreferences ref = getApplicationContext().getSharedPreferences("MedPack", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = ref.edit();
-        editor.putBoolean("FirstTimeStartFlag", stt);
-        editor.commit();
-    }
 }
