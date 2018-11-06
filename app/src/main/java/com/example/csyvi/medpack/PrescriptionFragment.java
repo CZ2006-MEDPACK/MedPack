@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,10 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+<<<<<<< HEAD:app/src/main/java/com/example/csyvi/medpack/PrescriptionFragment.java
+=======
+import android.widget.Toast;
+>>>>>>> parent of c8a2adf... organize:app/src/main/java/com/example/csyvi/medpack/PrescriptionFragment.java
 
 import java.util.ArrayList;
 
@@ -46,7 +51,7 @@ public class PrescriptionFragment extends Fragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup viewGroup) {
-            View view = View.inflate(getActivity(), R.layout.medicalprescription_customlayout,null);
+            View view = View.inflate(getActivity(),R.layout.medicalprescription_customlayout,null);
             Log.d("medprescription","new test");
             textView_prescriptionId = view.findViewById(R.id.md_prescription);
             textView_medName = view.findViewById(R.id.md_medname);

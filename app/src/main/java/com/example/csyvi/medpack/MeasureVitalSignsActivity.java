@@ -11,7 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
+<<<<<<< HEAD:app/src/main/java/com/example/csyvi/medpack/MeasureVitalSignsActivity.java
 
+=======
+>>>>>>> parent of c8a2adf... organize:app/src/main/java/com/example/csyvi/medpack/MeasureVitalSignsActivity.java
 import com.google.firebase.auth.*;
 //import com.google.firebase.auth.FirebaseAuth;
 
@@ -23,26 +26,26 @@ public class MeasureVitalSignsActivity extends AppCompatActivity implements Navi
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(com.example.csyvi.medpack.R.layout.activity_main);
+        setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(com.example.csyvi.medpack.R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawer = findViewById(com.example.csyvi.medpack.R.id.drawer_layout);
-        NavigationView navigationView = findViewById(com.example.csyvi.medpack.R.id.nav_view);
+        drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,toolbar,
-                com.example.csyvi.medpack.R.string.navigation_drawer_open, com.example.csyvi.medpack.R.string.navigation_drawer_close);
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         if(savedInstanceState == null) {
             // opens the VitalSignsFragment instead of HomeFragment to get to the InputVitalSigns UI
-            getSupportFragmentManager().beginTransaction().replace(com.example.csyvi.medpack.R.id.fragment_container,
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new VitalSignsFragment()).commit();
 
-            navigationView.setCheckedItem(com.example.csyvi.medpack.R.id.home_page);
+            navigationView.setCheckedItem(R.id.home_page);
         }
     }
 
@@ -50,33 +53,33 @@ public class MeasureVitalSignsActivity extends AppCompatActivity implements Navi
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch(menuItem.getItemId())
         {
-            case com.example.csyvi.medpack.R.id.home_page:
-                getSupportFragmentManager().beginTransaction().replace(com.example.csyvi.medpack.R.id.fragment_container,
+            case R.id.home_page:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new HomeFragment()).commit();
                 break;
 
-            case com.example.csyvi.medpack.R.id.update_profile:
-                getSupportFragmentManager().beginTransaction().replace(com.example.csyvi.medpack.R.id.fragment_container,
+            case R.id.update_profile:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new UpdateProfileFragment()).commit();
                 break;
 
-            case com.example.csyvi.medpack.R.id.show_records:
-                getSupportFragmentManager().beginTransaction().replace(com.example.csyvi.medpack.R.id.fragment_container,
+            case R.id.show_records:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new AppointmentFragment()).commit();
                 break;
 
-            case com.example.csyvi.medpack.R.id.search_events:
-                getSupportFragmentManager().beginTransaction().replace(com.example.csyvi.medpack.R.id.fragment_container,
+            case R.id.search_events:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new MedicalEventsFragment()).commit();
                 break;
 
-            case com.example.csyvi.medpack.R.id.settings:
-                getSupportFragmentManager().beginTransaction().replace(com.example.csyvi.medpack.R.id.fragment_container,
+            case R.id.settings:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new SettingFragment()).commit();
                 break;
 
-            case com.example.csyvi.medpack.R.id.help:
-                getSupportFragmentManager().beginTransaction().replace(com.example.csyvi.medpack.R.id.fragment_container,
+            case R.id.help:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new HelpFragment()).commit();
                 break;
 

@@ -1,6 +1,6 @@
 package com.example.csyvi.medpack;
 
-public class OxygenSaturation extends VitalSigns {
+public class OxygenSaturation extends VitalSigns{
     private static double oxygenSaturation;
 
     public OxygenSaturation(double oxygenSaturation){

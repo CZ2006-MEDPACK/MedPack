@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.example.csyvi.medpack.R;
-
 /**
  * The type Third fragment.
  */

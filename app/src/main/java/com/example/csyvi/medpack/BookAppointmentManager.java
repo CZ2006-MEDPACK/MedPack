@@ -1,19 +1,32 @@
 package com.example.csyvi.medpack;
 
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
+<<<<<<< HEAD:app/src/main/java/com/example/csyvi/medpack/BookAppointmentManager.java
+=======
+import android.widget.Toast;
+>>>>>>> parent of c8a2adf... organize:app/src/main/java/com/example/csyvi/medpack/BookAppointmentManager.java
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.Buffer;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The type Book appointment manager.

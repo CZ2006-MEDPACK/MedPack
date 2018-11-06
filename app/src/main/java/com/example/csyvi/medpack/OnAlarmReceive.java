@@ -1,11 +1,25 @@
 package com.example.csyvi.medpack;
 
+import android.app.AlarmManager;
+import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+<<<<<<< HEAD:app/src/main/java/com/example/csyvi/medpack/OnAlarmReceive.java
+=======
+import java.util.Calendar;
+
+import static android.content.Context.ALARM_SERVICE;
+
+>>>>>>> parent of c8a2adf... organize:app/src/main/java/com/example/csyvi/medpack/OnAlarmReceive.java
 public class OnAlarmReceive extends BroadcastReceiver {
     Intent i;
     @Override

@@ -1,17 +1,27 @@
 package com.example.csyvi.medpack;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+<<<<<<< HEAD:app/src/main/java/com/example/csyvi/medpack/AppointmentFragment.java
+=======
+import java.lang.reflect.Array;
+>>>>>>> parent of c8a2adf... organize:app/src/main/java/com/example/csyvi/medpack/AppointmentFragment.java
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * The type Second fragment.
@@ -44,7 +54,7 @@ public class AppointmentFragment extends Fragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup viewGroup) {
-            View view = View.inflate(getActivity(), R.layout.medicalrecord_customlayout,null);
+            View view = View.inflate(getActivity(),R.layout.medicalrecord_customlayout,null);
 
             textView_appointmentid = view.findViewById(R.id.tv_appointmentid);
             textView_appointmentdate = view.findViewById(R.id.tv_appointmentdate);

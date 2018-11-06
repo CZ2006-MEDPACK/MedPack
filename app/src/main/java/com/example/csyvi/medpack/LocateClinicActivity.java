@@ -3,18 +3,41 @@ package com.example.csyvi.medpack;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+<<<<<<< HEAD:app/src/main/java/com/example/csyvi/medpack/LocateClinicActivity.java
+=======
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+>>>>>>> parent of c8a2adf... organize:app/src/main/java/com/example/csyvi/medpack/LocateClinicActivity.java
 import java.util.ArrayList;
 
 /**
@@ -50,7 +73,7 @@ public class LocateClinicActivity extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup viewGroup) {
             Log.d("chasClinic", "testACtivity4");
-            View view = View.inflate(getActivity(), R.layout.locateclinic_customlayout,null);
+            View view = View.inflate(getActivity(),R.layout.locateclinic_customlayout,null);
 
             TextView textView_clinicname = view.findViewById(R.id.clinicName);
             TextView textView_clinicaddress = view.findViewById(R.id.clinicAddress);
