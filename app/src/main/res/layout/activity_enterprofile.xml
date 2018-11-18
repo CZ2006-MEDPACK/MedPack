@@ -146,14 +146,13 @@
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewTitle2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="31dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/dosis_extrabold"
         android:text="Enter Profile"
         android:textColor="@color/colorSecondaryDark"
-        android:textSize="20sp"
-        android:typeface="sans"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -296,7 +295,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/dosis_semibold"
         android:text="NRIC:"
         android:textColor="@color/colorBlack"
